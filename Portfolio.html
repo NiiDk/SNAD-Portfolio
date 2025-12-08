@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samuel Nii Amu Darko - Educator & Designer Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background-color: #0d9488; /* Teal-600 */
+            bottom: 0;
+            left: 25%;
+            border-radius: 9999px;
+        }
+        .tab-button.active {
+            background-color: #0d9488; /* Teal-600 */
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .gallery-item {
+            display: none;
+        }
+        .gallery-item.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-teal-600">Samuel N. A. Darko</div>
+            <nav class="hidden md:flex space-x-8 font-medium">
+                <a href="#about" class="text-gray-600 hover:text-teal-600 transition duration-300">About</a>
+                <a href="#experience" class="text-gray-600 hover:text-teal-600 transition duration-300">Experience</a>
+                <a href="#projects" class="text-gray-600 hover:text-teal-600 transition duration-300">Reports & Data</a>
+                <a href="#gallery" class="text-gray-600 hover:text-teal-600 transition duration-300">Design Gallery</a>
+                <a href="#contact" class="text-gray-600 hover:text-teal-600 transition duration-300">Contact</a>
+            </nav>
+            <!-- Mobile Menu Placeholder -->
+            <button class="md:hidden text-gray-600 hover:text-teal-600 transition duration-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="bg-teal-50 py-16 sm:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
+                <p class="text-xl text-teal-600 font-medium mb-2">Hello, I'm</p>
+                <h1 class="text-5xl sm:text-7xl font-extrabold text-gray-900 leading-tight">Samuel Nii Amu Darko</h1>
+                <p class="text-2xl text-gray-600 mt-4">Educator, Designer, and Academic Data Analyst</p>
+                <div class="mt-8 flex justify-center md:justify-start space-x-4">
+                    <a href="#gallery" class="bg-teal-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:bg-teal-700 transition duration-300 transform hover:scale-105">View My Design Work</a>
+                    <a href="#contact" class="bg-white text-teal-600 border border-teal-600 px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-teal-50 transition duration-300 transform hover:scale-105">Get in Touch</a>
+                </div>
+            </div>
+            <div class="md:w-1/3 flex justify-center">
+                <!-- Using DSC_7193.jpg as the profile image -->
+                <img src="Professional Photo.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x400/0d9488/ffffff?text=Professional+Photo';" alt="Samuel Nii Amu Darko Profile" class="w-64 h-64 sm:w-80 sm:h-80 object-cover rounded-full shadow-2xl border-4 border-white">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 sm:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold section-title mb-12">About Me</h2>
+            <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6">
+                <p>I am an experienced Computing and Mathematics teacher dedicated to inspiring student success and integrating technology into the learning process. With over 12 years in education, I excel at designing engaging lessons and creating visual teaching materials.</p>
+                <p>My skills extend beyond the classroom into graphic and web design, as well as **academic data analysis**, where I use tools like Excel and Google Sheets to guide institutional decision-making and improve learning outcomes. I focus on practical teaching, visual communication, and data-driven academic support.</p>
+                <!-- CV Link Integration -->
+                <p class="pt-4 font-semibold">
+                    <a href="Nii Amu_CV.pdf" target="_blank" class="text-teal-600 hover:text-teal-800 underline transition duration-300 flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download My Full Curriculum Vitae (Nii Amu_CV.pdf)
+                    </a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience/Skills Section (Condensed from CV) -->
+    <section id="experience" class="py-16 sm:py-20 bg-teal-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold section-title mx-auto text-center mb-12">Key Experience & Skills</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Experience Card 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-teal-600">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Computing Teacher - JHS</h3>
+                    <p class="text-sm text-teal-600 font-medium mb-4">Bediako Memorial Institute (Nov 2024 - Present)</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>Delivered GES Computing Curriculum.</li>
+                        <li>Designed interactive presentations and guided coding projects.</li>
+                    </ul>
+                </div>
+
+                <!-- Experience Card 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-teal-600">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Academic Supervisor</h3>
+                    <p class="text-sm text-teal-600 font-medium mb-4">Blessed Home Academy (July 2024 - Oct 2024)</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>Supervised academic performance and teacher mentoring.</li>
+                        <li>Created lesson resources and visual aids to improve teaching and learning.</li>
+                    </ul>
+                </div>
+
+                <!-- Skills Card - Updated Competencies -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-teal-600">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Core Competencies</h3>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <span class="bg-teal-200 text-teal-800 text-xs font-medium px-3 py-1 rounded-full">Academic Data Analysis</span>
+                        <span class="bg-teal-200 text-teal-800 text-xs font-medium px-3 py-1 rounded-full">Graphic & Web Design</span>
+                        <span class="bg-teal-200 text-teal-800 text-xs font-medium px-3 py-1 rounded-full">Academic Reporting</span>
+                        <span class="bg-teal-200 text-teal-800 text-xs font-medium px-3 py-1 rounded-full">Computing & Maths Education</span>
+                        <span class="bg-teal-200 text-teal-800 text-xs font-medium px-3 py-1 rounded-full">Programming</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section (For reports/data) -->
+    <section id="projects" class="py-16 sm:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold section-title mx-auto text-center mb-12">Academic Reports & Data Analysis</h2>
+            <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6">
+                <p>This section highlights my proficiency in handling, processing, and presenting student performance data to drive institutional strategy and improve educational outcomes.</p>
+                <div class="grid sm:grid-cols-2 gap-6 mt-8">
+                    <!-- Report Example 1: Data Analysis -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-semibold text-teal-600 mb-2">Raw Performance Data & Analysis</h3>
+                        <p class="text-sm text-gray-600">The Excel files contain records for student grades and class rankings, essential for generating strategic insights and visualizing academic progress.</p>
+                        <!-- Example link to a raw data file -->
+                        <a href="Basic 9 T1_25_26 DATA.xlsx" target="_blank" class="mt-3 inline-block text-sm text-gray-500 hover:text-teal-600 underline">View Sample Data File (Excel)</a>
+                    </div>
+                    <!-- Report Example 2: Formal Reporting -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-semibold text-teal-600 mb-2">Formal Academic Reporting</h3>
+                        <p class="text-sm text-gray-600">I prepare detailed, formal reports to clearly communicate performance, trends, and next steps to parents and management.</p>
+                        <!-- Example link to a final report -->
+                        <a href="BASIC 9 REPORT.pdf" target="_blank" class="mt-3 inline-block text-sm text-gray-500 hover:text-teal-600 underline">View Sample Final Report (PDF)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Gallery Section (Categorized) -->
+    <section id="gallery" class="py-16 sm:py-20 bg-teal-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold section-title mx-auto text-center mb-8">Graphic Design Portfolio</h2>
+            <p class="text-center text-lg mb-10 text-gray-700 max-w-4xl mx-auto">Explore my visual communication work, organized by category, including promotional flyers and mockups for educational and business purposes.</p>
+
+            <!-- Tabs/Filter Navigation -->
+            <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-10">
+                <button data-category="Flyers" class="tab-button active bg-teal-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition duration-200 mb-2 sm:mb-0">Flyers (12)</button>
+                <button data-category="Mockups" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold hover:bg-teal-100 transition duration-200 mb-2 sm:mb-0">Mockups (10)</button>
+                <button data-category="BookCovers" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold hover:bg-teal-100 transition duration-200 mb-2 sm:mb-0">Book Covers (4)</button>
+                <button data-category="Logos" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold hover:bg-teal-100 transition duration-200 mb-2 sm:mb-0">Logos (5)</button>
+                <button data-category="Catalogues" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold hover:bg-teal-100 transition duration-200 mb-2 sm:mb-0">Product Catalogue Design (1)</button>
+                <button data-category="Proposals" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold hover:bg-teal-100 transition duration-200 mb-2 sm:mb-0">Proposals (1)</button>
+            </div>
+
+            <!-- Image Grid Container -->
+            <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+
+                <!-- BOOK COVERS (4 Images) -->
+                <div data-category="BookCovers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Practice Maths2.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x400/10b981/ffffff?text=Book+Cover+1';" alt="Sample Book Cover Design 1" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Mathematics Workbook Cover</div>
+                </div>
+                <div data-category="BookCovers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Practice Maths1.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x400/10b981/ffffff?text=Book+Cover+2';" alt="Sample Book Cover Design 2" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Past Questions Cover</div>
+                </div>
+                <div data-category="BookCovers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Sellux Cover.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x400/10b981/ffffff?text=Book+Cover+3';" alt="Sample Book Cover Design 3" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Product Catalogue Cover</div>
+                </div>
+                <div data-category="BookCovers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="The Overall Look.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x400/10b981/ffffff?text=Book+Cover+3';" alt="Sample Book Cover Design 3" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Graphic Design Book Cover</div>
+                </div>
+
+                <!-- LOGOS (5 Images) -->
+                <div data-category="Logos" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Q1.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x400/10b981/ffffff?text=Logos+1';" alt="Logos 1" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Logo 1</div>
+                </div>
+                <div data-category="Logos" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="DKlassics.png" onerror="this.onerror=null;this.src='https://placehold.co/300x400/10b981/ffffff?text=Logos+2';" alt="Logos 2" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Logo 2</div>
+                </div>
+                <div data-category="Logos" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Final1.png" onerror="this.onerror=null;this.src='https://placehold.co/300x400/10b981/ffffff?text=Logos+3';" alt="Logos 3" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Logo 3</div>
+                </div>
+                <div data-category="Logos" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="g52.png" onerror="this.onerror=null;this.src='https://placehold.co/300x400/10b981/ffffff?text=Logos+3';" alt="Logos 3" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Logo 4</div>
+                </div>
+                <div data-category="Logos" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Best.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x400/10b981/ffffff?text=Logos+3';" alt="Logos 3" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Logo 5</div>
+                </div>
+                <div data-category="Logos" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="IMG-20250517-WA0023.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x400/10b981/ffffff?text=Logos+3';" alt="Logos 3" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Logo 6</div>
+                </div>
+
+                <!-- Product Catalogue Design (1 file) -->
+                <div data-category="Catalogues" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+
+    <!-- Thumbnail image that opens the PDF -->
+    <a href="Sellux Plaster Catalogue.pdf" target="_blank">
+        <img src="Sellux Cover.jpg"
+             onerror="this.onerror=null;this.src='https://placehold.co/300x400/10b981/ffffff?text=Catalogue';"
+             alt="Sellux Plaster Catalogue"
+             class="w-full h-48 object-cover">
+    </a>
+
+    <!-- Text + PDF link -->
+    <div class="p-3 text-sm font-semibold text-center">
+        Product Catalogue Design  
+        <a href="Sellux Plaster Catalogue.pdf" target="_blank"
+           class="block text-teal-600 underline hover:text-teal-800 mt-1">
+            View Full Catalogue (PDF)
+        </a>
+    </div>
+
+</div>
+                 <!-- PROPOSAL DOCUMENT -->
+<div data-category="Proposals" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+
+    <!-- Thumbnail image for Proposal -->
+    <a href="Proposal.pdf" target="_blank">
+        <img src="IMG-20250517-WA0023.jpg"
+             onerror="this.onerror=null;this.src='https://placehold.co/300x400/0d9488/ffffff?text=Proposal';"
+             alt="Proposal Document"
+             class="w-full h-48 object-cover">
+    </a>
+
+    <div class="p-3 text-sm font-semibold text-center">
+        Project Proposal  
+        <a href="Proposal.pdf" target="_blank"
+           class="block text-teal-600 underline hover:text-teal-800 mt-1">
+            View Full Proposal (PDF)
+        </a>
+    </div>
+
+</div>
+
+
+                <!-- FLYERS (12 Images) -->
+                <!-- Image Card 1 -->
+                <div data-category="Flyers" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Beginner1.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Flyer+2';" alt="Workshop Ad Flyer" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Workshop Ad</div>
+                </div>
+                <!-- Image Card 2 -->
+                <div data-category="Flyers" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="FB_IMG_1762892741072.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Flyer+3';" alt="Promotional Flyer 1" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Notice</div>
+                </div>
+                <!-- Image Card 3 -->
+                <div data-category="Flyers" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="FB_IMG_1762892752613.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Flyer+4';" alt="Promotional Flyer 2" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Notice</div>
+                </div>
+                <!-- Image Card 4 -->
+                <div data-category="Flyers" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="3M Final2.png" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Flyer+5';" alt="Promotional Flyer 3" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Promotional Flyer 1</div>
+                </div>
+                <!-- Image Card 5 -->
+                <div data-category="Flyers" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="FB_IMG_1762892805105.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Flyer+6';" alt="Promotional Flyer 4" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Notice</div>
+                </div>
+                <!-- Image Card 6 -->
+                <div data-category="Flyers" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Queenzlook Sept3.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Flyer+7';" alt="General Flyer Example" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Promotional Flyer 2</div>
+                </div>
+                <!-- Image Card 7 -->
+                <div data-category="Flyers" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Queenzlook flyer.png" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Flyer+8';" alt="Hiring Ad Design" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Promotional Flyer 3</div>
+                </div>
+                <!-- Image Card 8 -->
+                <div data-category="Flyers" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Flyer.png" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Flyer+8';" alt="Hiring Ad Design" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Promotional Flyer 4</div>
+                </div>
+                <!-- Image Card 9 -->
+                <div data-category="Flyers" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Queenzlook.png" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Flyer+8';" alt="Hiring Ad Design" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Promotional Flyer 5</div>
+                </div>
+                    <!-- Image Card 10 -->
+                <div data-category="Flyers" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Kasoa2.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Flyer+8';" alt="Hiring Ad Design" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Interview Ad</div>
+                </div>
+                <!-- Image Card 11 -->
+                <div data-category="Flyers" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Hiring1.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Flyer+8';" alt="Hiring Ad Design" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Hiring Ad Design</div>
+                </div>
+                <!-- Image Card 12 -->
+                <div data-category="Flyers" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="PriceListA4.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Flyer+8';" alt="Hiring Ad Design" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Price List</div>
+                </div>
+
+                <!-- MOCKUPS (10 Images) -->
+                <!-- Image Card 1 -->
+                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="3M Final Share2.png" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Mockup+1';" alt="3M Final Share 2" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 1</div>
+                </div>
+                <!-- Image Card 2 -->
+                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Braid Mockup.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Mockup+2';" alt="3M Final 2" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 2</div>
+                </div>
+                <!-- Image Card 3 -->
+                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Mockup.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Mockup+2';" alt="3M Final 2" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 3</div>
+                </div>
+                <!-- Image Card 4 -->
+                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Q.JPEG" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Mockup+2';" alt="3M Final 2" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 4</div>
+                </div>
+                <!-- Image Card 5 -->
+                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Q1.JPEG" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Mockup+2';" alt="3M Final 2" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 5</div>
+                </div>
+                <!-- Image Card 6 -->
+                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Q2.JPEG" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Mockup+2';" alt="3M Final 2" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 6</div>
+                </div>
+                <!-- Image Card 7 -->
+                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Q1@3x.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Mockup+2';" alt="3M Final 2" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 7</div>
+                </div>
+                <!-- Image Card 8 -->
+                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Q2@3x.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Mockup+2';" alt="3M Final 2" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 8</div>
+                </div>
+                <!-- Image Card 9 -->
+                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Q3@3x.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Mockup+2';" alt="3M Final 2" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 9</div>
+                </div>
+                <!-- Image Card 10 -->
+                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <img src="Q3.JPEG" onerror="this.onerror=null;this.src='https://placehold.co/300x300/4c4c4c/ffffff?text=Mockup+2';" alt="3M Final 2" class="w-full h-48 object-cover">
+                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 10</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 sm:py-20 bg-white">
+        <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold section-title mb-12">Get In Touch</h2>
+            <p class="text-lg text-gray-700 mb-8">Ready to discuss your next project or teaching opportunity? Feel free to reach out directly.</p>
+            <div class="flex flex-col space-y-4 font-semibold">
+                <a href="mailto:your.email@example.com" class="text-xl p-4 rounded-xl border border-teal-600 text-teal-600 hover:bg-teal-50 transition duration-300">
+                    <span class="mr-2">📧</span> Email Me
+                </a>
+                <a href="tel:+233542232515" class="text-xl p-4 rounded-xl bg-teal-600 text-white shadow-lg hover:bg-teal-700 transition duration-300">
+                    <span class="mr-2">📞</span> Call Me: (+233) 542232515
+                </a>
+                <a href="https://wa.me/233542232515" target="_blank" class="text-xl p-4 rounded-xl border border-green-500 text-green-700 hover:bg-green-50 transition duration-300">
+                    <span class="mr-2">💬</span> WhatsApp: (+233) 542232515
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p>&copy; 2025 Samuel Nii Amu Darko. All rights reserved.</p>
+            <p class="mt-2 text-gray-400">Built as a single-file, responsive portfolio.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Gallery Filtering Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const galleryGrid = document.getElementById('gallery-grid');
+
+            function filterGallery(category) {
+                // Hide all items and placeholders
+                galleryItems.forEach(item => item.style.display = 'none');
+                
+                // Show items belonging to the active category
+                const activeItems = document.querySelectorAll(`.gallery-item[data-category="${category}"]`);
+                
+                if (activeItems.length > 0) {
+                    // If there are items, set the grid layout and display them
+                    galleryGrid.classList.remove('grid-cols-1');
+                    galleryGrid.classList.add('grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4');
+
+                    activeItems.forEach(item => {
+                        // Check if the item is a placeholder (col-span-full)
+                        if (item.classList.contains('col-span-full')) {
+                            item.style.display = 'block';
+                            // If it's a placeholder, remove grid columns and use single column layout
+                            galleryGrid.classList.remove('grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4');
+                            galleryGrid.classList.add('grid-cols-1');
+                        } else {
+                            item.style.display = 'block';
+                        }
+                    });
+
+                } else {
+                    // This case should ideally not happen for categories with known images, 
+                    // but for safety, we revert to single column view.
+                    galleryGrid.classList.remove('grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4');
+                    galleryGrid.classList.add('grid-cols-1');
+                }
+            }
+
+            // Event listener for tab clicks
+            tabButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const category = e.currentTarget.getAttribute('data-category');
+
+                    // Update active button state
+                    tabButtons.forEach(btn => btn.classList.remove('active', 'bg-teal-600', 'text-white'));
+                    tabButtons.forEach(btn => {
+                        if (btn !== e.currentTarget) {
+                            btn.classList.add('bg-white', 'text-teal-600', 'border', 'border-teal-600', 'hover:bg-teal-100');
+                        }
+                    });
+                    e.currentTarget.classList.add('active', 'bg-teal-600', 'text-white');
+                    e.currentTarget.classList.remove('bg-white', 'text-teal-600', 'border', 'border-teal-600', 'hover:bg-teal-100');
+
+
+                    // Filter the gallery
+                    filterGallery(category);
+                });
+            });
+
+            // Initialize the gallery to show the "Flyers" tab content
+            filterGallery('Flyers');
+        });
+    </script>
+
+</body>
+</html>
