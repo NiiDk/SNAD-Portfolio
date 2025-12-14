@@ -67,8 +67,8 @@ function initMobileMenu() {
         mobileMenuBtn.addEventListener('click', function (e) {
             e.stopPropagation();
             mobileMenu.style.transform = 'translateX(0)';
-            mobileOverlay.style.display = 'block';
-            mobileOverlay.style.opacity = '1';
+            // show overlay by removing hidden class (CSS controls display/opacity)
+            mobileOverlay.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         });
 
@@ -101,10 +101,8 @@ function initMobileMenu() {
 
     function closeDrawer() {
         mobileMenu.style.transform = 'translateX(100%)';
-        mobileOverlay.style.opacity = '0';
-        setTimeout(() => {
-            mobileOverlay.style.display = 'none';
-        }, 300);
+        // hide overlay by adding hidden class
+        mobileOverlay.classList.add('hidden');
         document.body.style.overflow = 'auto';
     }
 }
