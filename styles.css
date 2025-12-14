@@ -286,37 +286,33 @@ nav a:hover::after {
     width: 100%;
 }
 
-/* Mobile Menu Styles */
+/* Mobile Menu Styles - Drawer */
 .mobile-menu {
-    animation: slideDownRight 0.3s ease-out;
+    transition: transform 0.3s ease-out;
 }
 
-.mobile-menu:not(.hidden) {
-    display: flex !important;
+.mobile-menu.translate-x-full {
+    transform: translateX(100%);
 }
 
-.mobile-menu.hidden {
+.mobile-overlay {
+    transition: opacity 0.3s ease-out;
+}
+
+.mobile-overlay.hidden {
     display: none !important;
+    opacity: 0;
+    pointer-events: none;
 }
 
-@keyframes slideDownRight {
-    from {
-        opacity: 0;
-        transform: translateY(-10px) translateX(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) translateX(0);
-    }
+.mobile-overlay:not(.hidden) {
+    display: block !important;
+    opacity: 1;
 }
 
-/* Hover effects for mobile menu items */
-.mobile-menu a {
-    position: relative;
-}
-
-.mobile-menu a::after {
-    display: none;
+/* Prevent scroll when drawer is open */
+body.drawer-open {
+    overflow: hidden;
 }
 
 /* ==================== ICONS & EMOJIS ==================== */
