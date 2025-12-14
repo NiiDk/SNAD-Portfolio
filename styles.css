@@ -288,22 +288,35 @@ nav a:hover::after {
 
 /* Mobile Menu Styles */
 .mobile-menu {
-    animation: slideDown 0.3s ease-out;
+    animation: slideDownRight 0.3s ease-out;
 }
 
 .mobile-menu:not(.hidden) {
-    display: flex;
+    display: flex !important;
 }
 
-@keyframes slideDown {
+.mobile-menu.hidden {
+    display: none !important;
+}
+
+@keyframes slideDownRight {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-10px) translateX(20px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) translateX(0);
     }
+}
+
+/* Hover effects for mobile menu items */
+.mobile-menu a {
+    position: relative;
+}
+
+.mobile-menu a::after {
+    display: none;
 }
 
 /* ==================== ICONS & EMOJIS ==================== */
