@@ -58,10 +58,29 @@ function initGalleryFilter() {
  */
 function initMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function () {
-            console.log('Mobile menu clicked');
-            // Add mobile menu toggle logic here if needed
+    const nav = document.querySelector('nav');
+    
+    if (mobileMenuBtn && nav) {
+        mobileMenuBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            nav.classList.toggle('hidden');
+            mobileMenuBtn.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                nav.classList.add('hidden');
+                mobileMenuBtn.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!nav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                nav.classList.add('hidden');
+                mobileMenuBtn.classList.remove('active');
+            }
         });
     }
 }
