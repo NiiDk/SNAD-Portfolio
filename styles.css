@@ -299,6 +299,23 @@ nav a:hover::after {
     transform: translateX(0);
 }
 
+/* Ensure drawer sits above overlay and its content is visible */
+.mobile-menu {
+    z-index: 9999;
+    background: #ffffff;
+}
+
+/* Make sure links are visible and tappable */
+.mobile-menu a {
+    color: #1f2937 !important; /* enforce dark text */
+    z-index: 10000;
+    display: block;
+}
+
+.mobile-menu .flex-1 {
+    -webkit-overflow-scrolling: touch;
+}
+
 .mobile-overlay {
     transition: opacity 0.3s ease-out;
 }
