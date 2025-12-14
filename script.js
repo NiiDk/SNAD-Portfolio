@@ -66,9 +66,9 @@ function initMobileMenu() {
         // Open menu
         mobileMenuBtn.addEventListener('click', function (e) {
             e.stopPropagation();
-            mobileMenu.classList.remove('-translate-x-full');
-            mobileMenu.classList.add('translate-x-0');
-            mobileOverlay.classList.remove('hidden');
+            mobileMenu.style.transform = 'translateX(0)';
+            mobileOverlay.style.display = 'block';
+            mobileOverlay.style.opacity = '1';
             document.body.style.overflow = 'hidden';
         });
 
@@ -93,16 +93,18 @@ function initMobileMenu() {
 
         // Close on escape key
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && !mobileMenu.classList.contains('-translate-x-full')) {
+            if (e.key === 'Escape') {
                 closeDrawer();
             }
         });
     }
 
     function closeDrawer() {
-        mobileMenu.classList.add('-translate-x-full');
-        mobileMenu.classList.remove('translate-x-0');
-        mobileOverlay.classList.add('hidden');
+        mobileMenu.style.transform = 'translateX(100%)';
+        mobileOverlay.style.opacity = '0';
+        setTimeout(() => {
+            mobileOverlay.style.display = 'none';
+        }, 300);
         document.body.style.overflow = 'auto';
     }
 }
