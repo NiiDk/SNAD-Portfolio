@@ -291,8 +291,12 @@ nav a:hover::after {
     transition: transform 0.3s ease-out;
 }
 
-.mobile-menu.translate-x-full {
+.mobile-menu.-translate-x-full {
     transform: translateX(100%);
+}
+
+.mobile-menu.translate-x-0 {
+    transform: translateX(0);
 }
 
 .mobile-overlay {
@@ -308,11 +312,6 @@ nav a:hover::after {
 .mobile-overlay:not(.hidden) {
     display: block !important;
     opacity: 1;
-}
-
-/* Prevent scroll when drawer is open */
-body.drawer-open {
-    overflow: hidden;
 }
 
 /* ==================== ICONS & EMOJIS ==================== */
