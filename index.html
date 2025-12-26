@@ -17,27 +17,30 @@
             min-height: 100vh;
         }
 
-        /* Fixed Mobile Menu Styles */
+        /* Fixed Mobile Menu Styles to prevent shadow issue */
         #mobile-menu {
             transition: transform 0.3s ease-in-out;
             transform: translateX(100%);
-            z-index: 1000;
+            visibility: hidden; /* Ensure it doesn't block anything when closed */
         }
         #mobile-menu.open {
             transform: translateX(0);
+            visibility: visible;
         }
         #mobile-overlay {
             transition: opacity 0.3s ease-in-out;
             opacity: 0;
             pointer-events: none;
-            z-index: 999;
+            visibility: hidden;
         }
         #mobile-overlay.open {
             opacity: 1;
             pointer-events: auto;
+            visibility: visible;
         }
 
-        /* Component Styles */
+        h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+
         .section-title {
             position: relative;
             display: inline-block;
@@ -77,6 +80,17 @@
             display: block;
         }
 
+        .card-experience {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-experience:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(13, 148, 136, 0.2);
+        }
+
         .webapp-card {
             background: white;
             border: 1px solid #e5e7eb;
@@ -95,6 +109,19 @@
             transform: translateY(-4px);
             box-shadow: 0 10px 15px -3px rgba(13, 148, 136, 0.15);
         }
+
+        .webapp-link {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .webapp-link-live { background-color: #0d9488; color: white; }
+        .webapp-link-repo { background-color: #f3f4f6; color: #4b5563; }
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -121,11 +148,11 @@
         </div>
     </header>
 
-    <!-- Mobile Menu Drawer (Properly Hidden) -->
-    <nav id="mobile-menu" class="fixed inset-y-0 right-0 w-72 bg-white shadow-2xl md:hidden flex flex-col">
+    <!-- Mobile Menu Drawer -->
+    <nav id="mobile-menu" class="fixed inset-y-0 right-0 w-72 bg-white shadow-2xl z-[1000] flex flex-col md:hidden">
         <div class="flex justify-between items-center p-6 border-b border-gray-100">
             <h2 class="text-2xl font-bold text-teal-600">Menu</h2>
-            <button id="close-menu-btn" class="text-gray-500 hover:text-teal-600">
+            <button id="close-menu-btn" class="text-gray-500 hover:text-teal-600 transition duration-300">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
@@ -137,10 +164,12 @@
             <a href="#gallery" class="block text-xl font-semibold text-gray-700">Project Gallery</a>
             <a href="#contact" class="block text-xl font-semibold text-gray-700">Contact</a>
         </div>
+        <div class="p-6 border-t border-gray-100 bg-teal-50">
+            <p class="text-sm text-gray-500">© 2025 SNAD Portfolio</p>
+        </div>
     </nav>
-    <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm md:hidden"></div>
+    <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[999] md:hidden"></div>
 
-    <!-- Hero Section -->
     <section id="hero" class="bg-gradient-to-br from-teal-50 via-blue-50 to-cyan-50 py-16 sm:py-32 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between relative z-10">
             <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
@@ -153,7 +182,7 @@
                     <a href="#contact" class="bg-white text-teal-600 border-2 border-teal-600 px-8 py-4 rounded-xl font-bold shadow-md hover:bg-teal-50 transition duration-300 transform hover:scale-105">Get in Touch</a>
                 </div>
             </div>
-            <div class="md:w-1/3 flex justify-center">
+            <div class="hero-image md:w-1/3 flex justify-center">
                 <div class="relative">
                     <div class="absolute inset-0 bg-gradient-to-r from-teal-400 to-cyan-400 rounded-full opacity-40 blur-lg"></div>
                     <img src="Professional Photo.JPG" onerror="this.onerror=null;this.src='https://placehold.co/400x400/0d9488/ffffff?text=Photo';" alt="Samuel Nii Amu Darko Profile" class="relative w-64 h-64 sm:w-80 sm:h-80 object-cover rounded-full shadow-2xl border-4 border-white">
@@ -162,13 +191,12 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="py-16 sm:py-24 bg-white relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-bold section-title mx-auto text-center mb-16">About Me</h2>
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="text-lg text-gray-700 space-y-6 leading-relaxed">
-                    <p>I am an experienced Computing and Mathematics educator with over 12 years of experience dedicated to inspiring student success and integrating technology into meaningful learning experiences. I excel at delivering engaging lessons and preparing students for the digital world.</p>
+                    <p>I am an experienced Computing and Mathematics educator with over 12 years of experience dedicated to inspiring student success and integrating technology into meaningful learning experiences.</p>
                     <p>My expertise extends into <span class="font-bold text-teal-600">graphic & web design</span>, <span class="font-bold text-teal-600">academic data analysis</span>, and <span class="font-bold text-teal-600">full-stack development</span>.</p>
                     <div class="bg-teal-50 p-4 rounded-xl border-l-4 border-teal-600 text-sm italic">
                         <strong>Languages:</strong> English, Twi, Ga
@@ -193,113 +221,94 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
     <section id="experience" class="py-16 sm:py-24 bg-gradient-to-br from-teal-50 to-cyan-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-bold section-title mx-auto text-center mb-16">Work Experience</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Bediako Memorial -->
                 <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
                     <h3 class="text-xl font-bold text-gray-900 mb-1">Computing Teacher (JHS)</h3>
                     <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">Bediako Memorial Institute</p>
                     <p class="text-xs text-gray-500 mb-4">Nov 2024 - Present</p>
-                    <p class="text-sm text-gray-700">Teach Computing based on GES Curriculum, design interactive presentations, and guide hands-on coding projects.</p>
+                    <p class="text-sm text-gray-700">GES Curriculum Delivery, interactive projects, and coding mentorship.</p>
                 </div>
-                <!-- Blessed Home (2024) -->
                 <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
                     <h3 class="text-xl font-bold text-gray-900 mb-1">Academic Supervisor</h3>
                     <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">Blessed Home Academy</p>
                     <p class="text-xs text-gray-500 mb-4">July 2024 - Oct 2024</p>
-                    <p class="text-sm text-gray-700">Supervised academic performance and created lesson resources/visual aids.</p>
+                    <p class="text-sm text-gray-700">Supervising performance and creating resources/visual aids.</p>
                 </div>
-                <!-- Freelance -->
                 <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
                     <h3 class="text-xl font-bold text-gray-900 mb-1">Presentation Designer</h3>
                     <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">Freelance (Remote)</p>
                     <p class="text-xs text-gray-500 mb-4">2022 - 2024</p>
-                    <p class="text-sm text-gray-700">Created corporate PowerPoint presentations, infographics, and pitch decks using PowerPoint, Canva, and Inkscape.</p>
+                    <p class="text-sm text-gray-700">Corporate presentations and infographics using PowerPoint & Canva.</p>
                 </div>
-                <!-- FEFO -->
                 <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
                     <h3 class="text-xl font-bold text-gray-900 mb-1">Training Facilitator</h3>
                     <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">FEFO Ghana</p>
                     <p class="text-xs text-gray-500 mb-4">2019 - 2021</p>
-                    <p class="text-sm text-gray-700">Prepared training decks and trained staff in Microsoft Office tools (PowerPoint and Excel).</p>
+                    <p class="text-sm text-gray-700">Staff training in MS Office tools and consulting-style workshop decks.</p>
                 </div>
-                <!-- Blessed Home (2015-2023) -->
                 <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">Academic supervisor & ICT/Math Teacher</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">ICT/Mathematics Teacher</h3>
                     <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">Blessed Home Academy</p>
                     <p class="text-xs text-gray-500 mb-4">2015 - 2023</p>
-                    <p class="text-sm text-gray-700">Taught JHS Computing & Math, designed teaching materials, mentored teachers, and conducted performance data analysis.</p>
+                    <p class="text-sm text-gray-700">Teaching, data analysis, and educational resource design.</p>
                 </div>
-                <!-- St. Mary's -->
                 <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
                     <h3 class="text-xl font-bold text-gray-900 mb-1">Computing Teacher</h3>
-                    <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">St. Mary's Anglican Primary & JHS C</p>
-                    <p class="text-xs text-gray-500 mb-4">Nov 2023 - Jul 2024</p>
-                    <p class="text-sm text-gray-700">Taught JHS Computing, designed presentation resources, and guided practical ICT activities.</p>
+                    <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">St. Mary's Anglican</p>
+                    <p class="text-xs text-gray-500 mb-4">2023 - 2024</p>
+                    <p class="text-sm text-gray-700">JHS level instruction and guidance in practical ICT activities.</p>
                 </div>
-                <!-- De-Best -->
                 <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
                     <h3 class="text-xl font-bold text-gray-900 mb-1">Teacher</h3>
-                    <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">De-Best Happy Home Educational Centre</p>
+                    <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">De-Best Happy Home</p>
                     <p class="text-xs text-gray-500 mb-4">2013 - 2015</p>
-                    <p class="text-sm text-gray-700">Delivered ICT and Mathematics lessons and developed lesson plans.</p>
+                    <p class="text-sm text-gray-700">Delivering ICT and Mathematics lessons and reporting.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Education Section -->
     <section id="education" class="py-16 sm:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-bold section-title mx-auto text-center mb-16">Education & Certifications</h2>
             <div class="max-w-4xl mx-auto space-y-6">
-                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100">
                     <div><h3 class="text-xl font-bold text-gray-900">BSc. Mathematics Education</h3><p class="text-teal-600 font-semibold">University of Education, Winneba</p></div>
-                    <div class="text-gray-500 font-medium md:text-right mt-2 md:mt-0">2019 - 2023</div>
+                    <div class="text-gray-500 font-medium">2019 - 2023</div>
                 </div>
-                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100">
                     <div><h3 class="text-xl font-bold text-gray-900">Diploma in Data Analysis</h3><p class="text-teal-600 font-semibold">Alison (Online)</p></div>
-                    <div class="text-gray-500 font-medium md:text-right mt-2 md:mt-0">2023 - 2024</div>
+                    <div class="text-gray-500 font-medium">2023 - 2024</div>
                 </div>
-                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100">
                     <div><h3 class="text-xl font-bold text-gray-900">Certificate in Website Design</h3><p class="text-teal-600 font-semibold">Agape Harvest Institute</p></div>
-                    <div class="text-gray-500 font-medium md:text-right mt-2 md:mt-0">2016 - 2017</div>
-                </div>
-                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 shadow-sm">
-                    <div><h3 class="text-xl font-bold text-gray-900">In-service Training</h3><p class="text-teal-600 font-semibold">FEFO Ghana (Kasoa)</p></div>
-                    <div class="text-gray-500 font-medium md:text-right mt-2 md:mt-0">2018</div>
-                </div>
-                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 shadow-sm">
-                    <div><h3 class="text-xl font-bold text-gray-900">WASSCE</h3><p class="text-teal-600 font-semibold">Obrakyire Senior High School</p></div>
-                    <div class="text-gray-500 font-medium md:text-right mt-2 md:mt-0">2009 - 2012</div>
+                    <div class="text-gray-500 font-medium">2016 - 2017</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Reports & Data Section -->
     <section id="projects" class="py-16 sm:py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl font-bold section-title mx-auto text-center mb-12">Academic Reports & Data Analysis</h2>
+            <h2 class="text-4xl font-bold section-title mx-auto text-center mb-12">Academic Reports & Data</h2>
             <div class="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
                 <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h3 class="text-xl font-semibold text-teal-600 mb-2">Raw Performance Analysis</h3>
-                    <p class="text-sm text-gray-600 mb-4">Excel records for grades and class rankings, essential for strategic insights and academic progress visualization.</p>
-                    <a href="Basic 9 T1_25_26 DATA.xlsx" target="_blank" class="text-sm text-teal-600 underline font-bold">View Sample Data (Excel)</a>
+                    <h3 class="text-xl font-semibold text-teal-600 mb-2">Raw Performance Data</h3>
+                    <p class="text-sm text-gray-600 mb-4">Sample performance records processed using Excel for strategic insights.</p>
+                    <a href="Basic 9 T1_25_26 DATA.xlsx" target="_blank" class="text-teal-600 underline font-bold">View Excel Data</a>
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h3 class="text-xl font-semibold text-teal-600 mb-2">Formal Academic Reporting</h3>
-                    <p class="text-sm text-gray-600 mb-4">Detailed formal reports used to clearly communicate performance trends and next steps to parents and management.</p>
-                    <a href="BASIC 9 REPORT.pdf" target="_blank" class="text-sm text-teal-600 underline font-bold">View Sample Report (PDF)</a>
+                    <h3 class="text-xl font-semibold text-teal-600 mb-2">Final Academic Reports</h3>
+                    <p class="text-sm text-gray-600 mb-4">Formal reports presented to management and parents summarizing results.</p>
+                    <a href="BASIC 9 REPORT.pdf" target="_blank" class="text-teal-600 underline font-bold">View PDF Report</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Full Project Gallery -->
     <section id="gallery" class="py-16 sm:py-20 bg-teal-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-bold section-title mx-auto text-center mb-8">Project Gallery</h2>
@@ -315,27 +324,42 @@
 
             <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                 <!-- Web Apps -->
-                <div data-category="WebApps" class="gallery-item active"><div class="webapp-card"><div><h3 class="text-xl font-bold mb-2">InsiightPrep</h3><p class="text-sm text-gray-600">Educational insight platform for students.</p></div><div class="flex gap-2 mt-4"><a href="https://insiightPrep.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live</a><a href="https://github.com/NiiDk/InsiightPrep" target="_blank" class="webapp-link webapp-link-repo">Code</a></div></div></div>
-                <div data-category="WebApps" class="gallery-item active"><div class="webapp-card"><div><h3 class="text-xl font-bold mb-2">Sellux Plaster</h3><p class="text-sm text-gray-600">Inventory and product management system.</p></div><div class="flex gap-2 mt-4"><a href="https://sellux-plaster.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live</a><a href="https://github.com/NiiDk/sellux_plaster" target="_blank" class="webapp-link webapp-link-repo">Code</a></div></div></div>
-                <div data-category="WebApps" class="gallery-item active"><div class="webapp-card"><div><h3 class="text-xl font-bold mb-2">Aplus Publications</h3><p class="text-sm text-gray-600">Digital library management system.</p></div><div class="flex gap-2 mt-4"><a href="https://aplus-publications.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live</a><a href="https://github.com/NiiDk/Aplus_Publications" target="_blank" class="webapp-link webapp-link-repo">Code</a></div></div></div>
+                <div data-category="WebApps" class="gallery-item active">
+                    <div class="webapp-card">
+                        <div><h3 class="text-xl font-bold mb-2">InsiightPrep</h3><p class="text-sm text-gray-600">Educational insight platform for students.</p></div>
+                        <div class="flex gap-2 mt-4"><a href="https://insiightPrep.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live Site</a><a href="https://github.com/NiiDk/InsiightPrep" target="_blank" class="webapp-link webapp-link-repo">Code</a></div>
+                    </div>
+                </div>
+                <div data-category="WebApps" class="gallery-item active">
+                    <div class="webapp-card">
+                        <div><h3 class="text-xl font-bold mb-2">Sellux Plaster</h3><p class="text-sm text-gray-600">Inventory management system.</p></div>
+                        <div class="flex gap-2 mt-4"><a href="https://sellux-plaster.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live Site</a><a href="https://github.com/NiiDk/sellux_plaster" target="_blank" class="webapp-link webapp-link-repo">Code</a></div>
+                    </div>
+                </div>
+                <div data-category="WebApps" class="gallery-item active">
+                    <div class="webapp-card">
+                        <div><h3 class="text-xl font-bold mb-2">Aplus Publications</h3><p class="text-sm text-gray-600">Digital library system.</p></div>
+                        <div class="flex gap-2 mt-4"><a href="https://aplus-publications.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live Site</a><a href="https://github.com/NiiDk/Aplus_Publications" target="_blank" class="webapp-link webapp-link-repo">Code</a></div>
+                    </div>
+                </div>
 
                 <!-- Book Covers -->
-                <div data-category="BookCovers" class="gallery-item"><a href="Practice Maths2.jpg" target="_blank"><img src="Practice Maths2.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Math Workbook</div></div>
-                <div data-category="BookCovers" class="gallery-item"><a href="Practice Maths1.jpg" target="_blank"><img src="Practice Maths1.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Past Questions</div></div>
-                <div data-category="BookCovers" class="gallery-item"><a href="Sellux Cover.jpg" target="_blank"><img src="Sellux Cover.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Sellux Catalogue Cover</div></div>
-                <div data-category="BookCovers" class="gallery-item"><a href="The Overall Look.jpg" target="_blank"><img src="The Overall Look.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Design Book Cover</div></div>
+                <div data-category="BookCovers" class="gallery-item"><a href="Practice Maths2.jpg" target="_blank"><img src="Practice Maths2.jpg" class="w-full h-48 object-cover rounded-lg"></a><p class="p-2 text-xs font-bold text-center">Math Workbook</p></div>
+                <div data-category="BookCovers" class="gallery-item"><a href="Practice Maths1.jpg" target="_blank"><img src="Practice Maths1.jpg" class="w-full h-48 object-cover rounded-lg"></a><p class="p-2 text-xs font-bold text-center">Past Questions</p></div>
+                <div data-category="BookCovers" class="gallery-item"><a href="Sellux Cover.jpg" target="_blank"><img src="Sellux Cover.jpg" class="w-full h-48 object-cover rounded-lg"></a><p class="p-2 text-xs font-bold text-center">Catalogue Cover</p></div>
+                <div data-category="BookCovers" class="gallery-item"><a href="The Overall Look.jpg" target="_blank"><img src="The Overall Look.jpg" class="w-full h-48 object-cover rounded-lg"></a><p class="p-2 text-xs font-bold text-center">Design Book Cover</p></div>
 
                 <!-- Logos -->
-                <div data-category="Logos" class="gallery-item"><a href="Q1.jpg" target="_blank"><img src="Q1.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Logo 1</div></div>
-                <div data-category="Logos" class="gallery-item"><a href="DKlassics.PNG" target="_blank"><img src="DKlassics.PNG" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">DKlassics Logo</div></div>
-                <div data-category="Logos" class="gallery-item"><a href="Final1.png" target="_blank"><img src="Final1.png" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Final Logo</div></div>
-                <div data-category="Logos" class="gallery-item"><a href="g52.png" target="_blank"><img src="g52.png" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">G52 Logo</div></div>
-                <div data-category="Logos" class="gallery-item"><a href="Best.jpg" target="_blank"><img src="Best.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Best Logo</div></div>
-                <div data-category="Logos" class="gallery-item"><a href="IMG-20250517-WA0023.jpg" target="_blank"><img src="IMG-20250517-WA0023.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Logo 6</div></div>
+                <div data-category="Logos" class="gallery-item"><a href="Q1.jpg" target="_blank"><img src="Q1.jpg" class="w-full h-48 object-cover rounded-lg"></a><p class="p-2 text-xs font-bold text-center">Logo 1</p></div>
+                <div data-category="Logos" class="gallery-item"><a href="DKlassics.PNG" target="_blank"><img src="DKlassics.PNG" class="w-full h-48 object-cover rounded-lg"></a><p class="p-2 text-xs font-bold text-center">DKlassics</p></div>
+                <div data-category="Logos" class="gallery-item"><a href="Final1.png" target="_blank"><img src="Final1.png" class="w-full h-48 object-cover rounded-lg"></a><p class="p-2 text-xs font-bold text-center">Final Logo</p></div>
+                <div data-category="Logos" class="gallery-item"><a href="g52.png" target="_blank"><img src="g52.png" class="w-full h-48 object-cover rounded-lg"></a><p class="p-2 text-xs font-bold text-center">G52</p></div>
+                <div data-category="Logos" class="gallery-item"><a href="Best.jpg" target="_blank"><img src="Best.jpg" class="w-full h-48 object-cover rounded-lg"></a><p class="p-2 text-xs font-bold text-center">Best Logo</p></div>
+                <div data-category="Logos" class="gallery-item"><a href="IMG-20250517-WA0023.jpg" target="_blank"><img src="IMG-20250517-WA0023.jpg" class="w-full h-48 object-cover rounded-lg"></a><p class="p-2 text-xs font-bold text-center">Logo 6</p></div>
 
                 <!-- Catalogues & Proposals -->
-                <div data-category="Catalogues" class="gallery-item"><a href="Sellux Plaster Catalogue.pdf" target="_blank"><img src="Sellux Cover.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Product Catalogue (PDF)</div></div>
-                <div data-category="Proposals" class="gallery-item"><a href="Proposal.pdf" target="_blank"><img src="IMG-20250517-WA0023.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Project Proposal (PDF)</div></div>
+                <div data-category="Catalogues" class="gallery-item"><a href="Sellux Plaster Catalogue.pdf" target="_blank"><img src="Sellux Cover.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="webapp-card text-center p-2"><a href="Sellux Plaster Catalogue.pdf" target="_blank" class="text-teal-600 underline text-xs font-bold">Product Catalogue (PDF)</a></div></div>
+                <div data-category="Proposals" class="gallery-item"><a href="Proposal.pdf" target="_blank"><img src="IMG-20250517-WA0023.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="webapp-card text-center p-2"><a href="Proposal.pdf" target="_blank" class="text-teal-600 underline text-xs font-bold">Project Proposal (PDF)</a></div></div>
 
                 <!-- Flyers -->
                 <div data-category="Flyers" class="gallery-item"><img src="Beginner1.jpg" class="w-full h-48 object-cover rounded-lg"></div>
@@ -367,17 +391,17 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 sm:py-24 bg-gray-900 relative text-center text-white">
-        <div class="max-w-xl mx-auto px-4 relative z-10">
+    <section id="contact" class="py-16 sm:py-24 bg-gray-900 text-white text-center">
+        <div class="max-w-xl mx-auto px-4">
             <h2 class="text-4xl font-bold mb-6">Get In Touch</h2>
-            <p class="text-lg text-gray-300 mb-8">Located in Akweley-Kasoa. Ready for collaboration or teaching opportunities.</p>
+            <p class="text-lg text-gray-300 mb-8">Located in Akweley-Kasoa. Reach out for projects or teaching roles.</p>
             <div class="space-y-4 max-w-sm mx-auto">
-                <div class="bg-white bg-opacity-10 border border-white border-opacity-20 p-4 rounded-xl shadow-lg"><a href="mailto:darkosammy2@gmail.com" class="flex justify-center font-semibold">📧 darkosammy2@gmail.com</a></div>
-                <div class="bg-white bg-opacity-10 border border-white border-opacity-20 p-4 rounded-xl shadow-lg"><a href="tel:+233542232515" class="flex justify-center font-semibold">📱 (+233) 542 232 515</a></div>
-                <div class="bg-white bg-opacity-10 border border-white border-opacity-20 p-4 rounded-xl shadow-lg"><a href="https://wa.me/233542232515" target="_blank" class="flex justify-center font-semibold text-xl">💬 Send WhatsApp Message</a></div>
+                <a href="mailto:darkosammy2@gmail.com" class="block p-4 bg-white bg-opacity-10 border border-white border-opacity-20 rounded-xl">📧 darkosammy2@gmail.com</a>
+                <a href="tel:+233542232515" class="block p-4 bg-white bg-opacity-10 border border-white border-opacity-20 rounded-xl">📱 (+233) 542 232 515</a>
+                <a href="https://wa.me/233542232515" target="_blank" class="block p-4 bg-white bg-opacity-10 border border-white border-opacity-20 rounded-xl text-xl">💬 WhatsApp Message</a>
             </div>
             <div class="mt-12 pt-8 border-t border-white border-opacity-20 flex justify-center gap-6">
-                <a href="https://github.com/NiiDk" target="_blank" class="text-3xl hover:text-teal-400"><i class="fab fa-github"></i></a>
+                <a href="https://github.com/NiiDk" target="_blank" class="text-3xl hover:text-teal-400 transition"><i class="fab fa-github"></i></a>
             </div>
         </div>
     </section>
