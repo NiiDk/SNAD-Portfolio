@@ -286,51 +286,6 @@ nav a:hover::after {
     width: 100%;
 }
 
-/* Mobile Menu Styles - Drawer */
-.mobile-menu {
-    transition: transform 0.3s ease-out;
-}
-
-.mobile-menu.-translate-x-full {
-    transform: translateX(100%);
-}
-
-.mobile-menu.translate-x-0 {
-    transform: translateX(0);
-}
-
-/* Ensure drawer sits above overlay and its content is visible */
-.mobile-menu {
-    z-index: 9999;
-    background: #ffffff;
-}
-
-/* Make sure links are visible and tappable */
-.mobile-menu a {
-    color: #1f2937 !important; /* enforce dark text */
-    z-index: 10000;
-    display: block;
-}
-
-.mobile-menu .flex-1 {
-    -webkit-overflow-scrolling: touch;
-}
-
-.mobile-overlay {
-    transition: opacity 0.3s ease-out;
-}
-
-.mobile-overlay.hidden {
-    display: none !important;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.mobile-overlay:not(.hidden) {
-    display: block !important;
-    opacity: 1;
-}
-
 /* ==================== ICONS & EMOJIS ==================== */
 
 .emoji-icon {
