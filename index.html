@@ -314,78 +314,78 @@
     </section>
 
     <!-- Gallery -->
-<section id="gallery" class="py-16 sm:py-20 bg-teal-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold section-title mx-auto text-center mb-8">Project Gallery</h2>
-        <div class="flex flex-wrap justify-center gap-2 mb-10">
-            <button data-category="WebApps" class="tab-button active bg-teal-600 text-white px-4 py-2 rounded-full text-xs font-bold">Web Apps</button>
-            <button data-category="Flyers" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Flyers (12)</button>
-            <button data-category="Mockups" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Mockups (10)</button>
-            <button data-category="BookCovers" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Book Covers (4)</button>
-            <button data-category="Logos" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Logos (6)</button>
-            <button data-category="Catalogues" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Catalogues (1)</button>
-            <button data-category="Proposals" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Proposals (1)</button>
+    <section id="gallery" class="py-16 sm:py-20 bg-teal-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold section-title mx-auto text-center mb-8">Project Gallery</h2>
+            <div class="flex flex-wrap justify-center gap-2 mb-10">
+                <button data-category="WebApps" class="tab-button active bg-teal-600 text-white px-4 py-2 rounded-full text-xs font-bold">Web Apps</button>
+                <button data-category="Flyers" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Flyers (12)</button>
+                <button data-category="Mockups" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Mockups (10)</button>
+                <button data-category="BookCovers" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Book Covers (4)</button>
+                <button data-category="Logos" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Logos (6)</button>
+                <button data-category="Catalogues" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Catalogues (1)</button>
+                <button data-category="Proposals" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Proposals (1)</button>
+            </div>
+
+            <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Web Apps -->
+                <div data-category="WebApps" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
+                    <div class="webapp-card"><h3 class="font-bold text-sm">InsiightPrep</h3><div class="flex gap-2 mt-2"><a href="https://insiightPrep.onrender.com/" target="_blank" class="webapp-link bg-teal-600 text-white text-[10px] p-1 rounded">Live</a><a href="https://github.com/NiiDk/InsiightPrep" target="_blank" class="webapp-link bg-gray-100 text-gray-600 text-[10px] p-1 rounded">Code</a></div></div>
+                </div>
+                <div data-category="WebApps" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
+                    <div class="webapp-card"><h3 class="font-bold text-sm">Sellux Plaster</h3><div class="flex gap-2 mt-2"><a href="https://sellux-plaster.onrender.com/" target="_blank" class="webapp-link bg-teal-600 text-white text-[10px] p-1 rounded">Live</a><a href="https://github.com/NiiDk/sellux_plaster" target="_blank" class="webapp-link bg-gray-100 text-gray-600 text-[10px] p-1 rounded">Code</a></div></div>
+                </div>
+                <div data-category="WebApps" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
+                    <div class="webapp-card"><h3 class="font-bold text-sm">Aplus Publications</h3><div class="flex gap-2 mt-2"><a href="https://aplus-publications.onrender.com/" target="_blank" class="webapp-link bg-teal-600 text-white text-[10px] p-1 rounded">Live</a><a href="https://github.com/NiiDk/Aplus_Publications" target="_blank" class="webapp-link bg-gray-100 text-gray-600 text-[10px] p-1 rounded">Code</a></div></div>
+                </div>
+
+                <!-- Small Cute File Tiles -->
+                <!-- Book Covers -->
+                <div data-category="BookCovers" class="gallery-item cute-tile"><a href="Practice Maths2.jpg" target="_blank"><img src="Practice Maths2.jpg"></a><p class="p-1 text-[10px] text-center truncate">Math Workbook</p></div>
+                <div data-category="BookCovers" class="gallery-item cute-tile"><a href="Practice Maths1.jpg" target="_blank"><img src="Practice Maths1.jpg"></a><p class="p-1 text-[10px] text-center truncate">Past Questions</p></div>
+                <div data-category="BookCovers" class="gallery-item cute-tile"><a href="Sellux Cover.jpg" target="_blank"><img src="Sellux Cover.jpg"></a><p class="p-1 text-[10px] text-center truncate">Catalogue Cover</p></div>
+                <div data-category="BookCovers" class="gallery-item cute-tile"><a href="The Overall Look.jpg" target="_blank"><img src="The Overall Look.jpg"></a><p class="p-1 text-[10px] text-center truncate">Design Book</p></div>
+
+                <!-- Logos -->
+                <div data-category="Logos" class="gallery-item cute-tile"><a href="Q1.jpg" target="_blank"><img src="Q1.jpg"></a><p class="p-1 text-[10px] text-center truncate">Logo 1</p></div>
+                <div data-category="Logos" class="gallery-item cute-tile"><a href="DKlassics.PNG" target="_blank"><img src="DKlassics.PNG"></a><p class="p-1 text-[10px] text-center truncate">DKlassics</p></div>
+                <div data-category="Logos" class="gallery-item cute-tile"><a href="Final1.png" target="_blank"><img src="Final1.png"></a><p class="p-1 text-[10px] text-center truncate">Final Logo</p></div>
+                <div data-category="Logos" class="gallery-item cute-tile"><a href="g52.png" target="_blank"><img src="g52.png"></a><p class="p-1 text-[10px] text-center truncate">G52</p></div>
+                <div data-category="Logos" class="gallery-item cute-tile"><a href="Best.jpg" target="_blank"><img src="Best.jpg"></a><p class="p-1 text-[10px] text-center truncate">Best Logo</p></div>
+                <div data-category="Logos" class="gallery-item cute-tile"><a href="IMG-20250517-WA0023.jpg" target="_blank"><img src="IMG-20250517-WA0023.jpg"></a><p class="p-1 text-[10px] text-center truncate">Logo 6</p></div>
+
+                <!-- Catalogues & Proposals -->
+                <div data-category="Catalogues" class="gallery-item cute-tile"><a href="Sellux Plaster Catalogue.pdf" target="_blank"><img src="Sellux Cover.jpg"></a><p class="p-1 text-[10px] text-center truncate">Catalogue PDF</p></div>
+                <div data-category="Proposals" class="gallery-item cute-tile"><a href="Proposal.pdf" target="_blank"><img src="IMG-20250517-WA0023.jpg"></a><p class="p-1 text-[10px] text-center truncate">Proposal PDF</p></div>
+
+                <!-- Flyers -->
+                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Beginner1.jpg" target="_blank"><img src="Beginner1.jpg"></a></div>
+                <div data-category="Flyers" class="gallery-item cute-tile"><a href="FB_IMG_1762892741072.jpg" target="_blank"><img src="FB_IMG_1762892741072.jpg"></a></div>
+                <div data-category="Flyers" class="gallery-item cute-tile"><a href="FB_IMG_1762892752613.jpg" target="_blank"><img src="FB_IMG_1762892752613.jpg"></a></div>
+                <div data-category="Flyers" class="gallery-item cute-tile"><a href="3M Final2.png" target="_blank"><img src="3M Final2.png"></a></div>
+                <div data-category="Flyers" class="gallery-item cute-tile"><a href="FB_IMG_1762892805105.jpg" target="_blank"><img src="FB_IMG_1762892805105.jpg"></a></div>
+                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Queenzlook Sept3.jpg" target="_blank"><img src="Queenzlook Sept3.jpg"></a></div>
+                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Queenzlook flyer.png" target="_blank"><img src="Queenzlook flyer.png"></a></div>
+                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Flyer.png" target="_blank"><img src="Flyer.png"></a></div>
+                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Queenzlook.png" target="_blank"><img src="Queenzlook.png"></a></div>
+                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Kasoa2.jpg" target="_blank"><img src="Kasoa2.jpg"></a></div>
+                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Hiring1.jpg" target="_blank"><img src="Hiring1.jpg"></a></div>
+                <div data-category="Flyers" class="gallery-item cute-tile"><a href="PriceListA4.jpg" target="_blank"><img src="PriceListA4.jpg"></a></div>
+
+                <!-- Mockups -->
+                <div data-category="Mockups" class="gallery-item cute-tile"><a href="3M Final Share2.png" target="_blank"><img src="3M Final Share2.png"></a></div>
+                <div data-category="Mockups" class="gallery-item cute-tile"><a href="Braid Mockup.jpg" target="_blank"><img src="Braid Mockup.jpg"></a></div>
+                <div data-category="Mockups" class="gallery-item cute-tile"><a href="Mockup.jpg" target="_blank"><img src="Mockup.jpg"></a></div>
+                <div data-category="Mockups" class="gallery-item cute-tile"><a href="Q.jpeg" target="_blank"><img src="Q.jpeg"></a></div>
+                <div data-category="Mockups" class="gallery-item cute-tile"><a href="Q1.jpeg" target="_blank"><img src="Q1.jpeg"></a></div>
+                <div data-category="Mockups" class="gallery-item cute-tile"><a href="Q2.jpeg" target="_blank"><img src="Q2.jpeg"></a></div>
+                <div data-category="Mockups" class="gallery-item cute-tile"><a href="Q1@3x.jpg" target="_blank"><img src="Q1@3x.jpg"></a></div>
+                <div data-category="Mockups" class="gallery-item cute-tile"><a href="Q2@3x.jpg" target="_blank"><img src="Q2@3x.jpg"></a></div>
+                <div data-category="Mockups" class="gallery-item cute-tile"><a href="Q3@3x.jpg" target="_blank"><img src="Q3@3x.jpg"></a></div>
+                <div data-category="Mockups" class="gallery-item cute-tile"><a href="Q3.jpeg" target="_blank"><img src="Q3.jpeg"></a></div>
+            </div>
         </div>
-
-        <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            <!-- Web Apps -->
-            <div data-category="WebApps" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
-                <div class="webapp-card"><h3 class="font-bold text-sm">InsiightPrep</h3><div class="flex gap-2 mt-2"><a href="https://insiightPrep.onrender.com/" target="_blank" class="webapp-link bg-teal-600 text-white text-[10px] p-1 rounded">Live</a><a href="https://github.com/NiiDk/InsiightPrep" target="_blank" class="webapp-link bg-gray-100 text-gray-600 text-[10px] p-1 rounded">Code</a></div></div>
-            </div>
-            <div data-category="WebApps" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
-                <div class="webapp-card"><h3 class="font-bold text-sm">Sellux Plaster</h3><div class="flex gap-2 mt-2"><a href="https://sellux-plaster.onrender.com/" target="_blank" class="webapp-link bg-teal-600 text-white text-[10px] p-1 rounded">Live</a><a href="https://github.com/NiiDk/sellux_plaster" target="_blank" class="webapp-link bg-gray-100 text-gray-600 text-[10px] p-1 rounded">Code</a></div></div>
-            </div>
-            <div data-category="WebApps" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
-                <div class="webapp-card"><h3 class="font-bold text-sm">Aplus Publications</h3><div class="flex gap-2 mt-2"><a href="https://aplus-publications.onrender.com/" target="_blank" class="webapp-link bg-teal-600 text-white text-[10px] p-1 rounded">Live</a><a href="https://github.com/NiiDk/Aplus_Publications" target="_blank" class="webapp-link bg-gray-100 text-gray-600 text-[10px] p-1 rounded">Code</a></div></div>
-            </div>
-
-            <!-- Small Cute File Tiles -->
-            <!-- Book Covers -->
-            <div data-category="BookCovers" class="gallery-item cute-tile"><a href="Practice Maths2.jpg" target="_blank"><img src="Practice Maths2.jpg" onerror="this.src='https://placehold.co/300x400/0d9488/white?text=Book+Cover'"></a><p class="p-1 text-[10px] text-center truncate">Math Workbook</p></div>
-            <div data-category="BookCovers" class="gallery-item cute-tile"><a href="Practice Maths1.jpg" target="_blank"><img src="Practice Maths1.jpg" onerror="this.src='https://placehold.co/300x400/0d9488/white?text=Book+Cover'"></a><p class="p-1 text-[10px] text-center truncate">Past Questions</p></div>
-            <div data-category="BookCovers" class="gallery-item cute-tile"><a href="Sellux Cover.jpg" target="_blank"><img src="Sellux Cover.jpg" onerror="this.src='https://placehold.co/300x400/0d9488/white?text=Cover'"></a><p class="p-1 text-[10px] text-center truncate">Catalogue Cover</p></div>
-            <div data-category="BookCovers" class="gallery-item cute-tile"><a href="The Overall Look.jpg" target="_blank"><img src="The Overall Look.jpg" onerror="this.src='https://placehold.co/300x400/0d9488/white?text=Design+Book'"></a><p class="p-1 text-[10px] text-center truncate">Design Book</p></div>
-
-            <!-- Logos -->
-            <div data-category="Logos" class="gallery-item cute-tile"><a href="Q1.jpg" target="_blank"><img src="Q1.jpg" onerror="this.src='https://placehold.co/300x300/0d9488/white?text=Logo'"></a><p class="p-1 text-[10px] text-center truncate">Logo 1</p></div>
-            <div data-category="Logos" class="gallery-item cute-tile"><a href="DKlassics.PNG" target="_blank"><img src="DKlassics.PNG" onerror="this.src='https://placehold.co/300x300/0d9488/white?text=DKlassics'"></a><p class="p-1 text-[10px] text-center truncate">DKlassics</p></div>
-            <div data-category="Logos" class="gallery-item cute-tile"><a href="Final1.png" target="_blank"><img src="Final1.png" onerror="this.src='https://placehold.co/300x300/0d9488/white?text=Final+Logo'"></a><p class="p-1 text-[10px] text-center truncate">Final Logo</p></div>
-            <div data-category="Logos" class="gallery-item cute-tile"><a href="g52.png" target="_blank"><img src="g52.png" onerror="this.src='https://placehold.co/300x300/0d9488/white?text=G52'"></a><p class="p-1 text-[10px] text-center truncate">G52</p></div>
-            <div data-category="Logos" class="gallery-item cute-tile"><a href="Best.jpg" target="_blank"><img src="Best.jpg" onerror="this.src='https://placehold.co/300x300/0d9488/white?text=Best+Logo'"></a><p class="p-1 text-[10px] text-center truncate">Best Logo</p></div>
-            <div data-category="Logos" class="gallery-item cute-tile"><a href="IMG-20250517-WA0023.jpg" target="_blank"><img src="IMG-20250517-WA0023.jpg" onerror="this.src='https://placehold.co/300x300/0d9488/white?text=Logo'"></a><p class="p-1 text-[10px] text-center truncate">Logo 6</p></div>
-
-            <!-- Catalogues & Proposals -->
-            <div data-category="Catalogues" class="gallery-item cute-tile"><a href="Sellux Plaster Catalogue.pdf" target="_blank"><img src="Sellux Cover.jpg" onerror="this.src='https://placehold.co/300x400/0d9488/white?text=Catalogue+PDF'"></a><p class="p-1 text-[10px] text-center truncate">Catalogue PDF</p></div>
-            <div data-category="Proposals" class="gallery-item cute-tile"><a href="Proposal.pdf" target="_blank"><img src="IMG-20250517-WA0023.jpg" onerror="this.src='https://placehold.co/300x400/0d9488/white?text=Proposal+PDF'"></a><p class="p-1 text-[10px] text-center truncate">Proposal PDF</p></div>
-
-            <!-- Flyers -->
-            <div data-category="Flyers" class="gallery-item cute-tile"><a href="Beginner1.jpg" target="_blank"><img src="Beginner1.jpg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Flyer'"></a></div>
-            <div data-category="Flyers" class="gallery-item cute-tile"><a href="FB_IMG_1762892741072.jpg" target="_blank"><img src="FB_IMG_1762892741072.jpg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Flyer'"></a></div>
-            <div data-category="Flyers" class="gallery-item cute-tile"><a href="FB_IMG_1762892752613.jpg" target="_blank"><img src="FB_IMG_1762892752613.jpg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Flyer'"></a></div>
-            <div data-category="Flyers" class="gallery-item cute-tile"><a href="3M Final2.png" target="_blank"><img src="3M Final2.png" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Flyer'"></a></div>
-            <div data-category="Flyers" class="gallery-item cute-tile"><a href="FB_IMG_1762892805105.jpg" target="_blank"><img src="FB_IMG_1762892805105.jpg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Flyer'"></a></div>
-            <div data-category="Flyers" class="gallery-item cute-tile"><a href="Queenzlook Sept3.jpg" target="_blank"><img src="Queenzlook Sept3.jpg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Flyer'"></a></div>
-            <div data-category="Flyers" class="gallery-item cute-tile"><a href="Queenzlook flyer.png" target="_blank"><img src="Queenzlook flyer.png" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Flyer'"></a></div>
-            <div data-category="Flyers" class="gallery-item cute-tile"><a href="Flyer.png" target="_blank"><img src="Flyer.png" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Flyer'"></a></div>
-            <div data-category="Flyers" class="gallery-item cute-tile"><a href="Queenzlook.png" target="_blank"><img src="Queenzlook.png" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Flyer'"></a></div>
-            <div data-category="Flyers" class="gallery-item cute-tile"><a href="Kasoa2.jpg" target="_blank"><img src="Kasoa2.jpg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Flyer'"></a></div>
-            <div data-category="Flyers" class="gallery-item cute-tile"><a href="Hiring1.jpg" target="_blank"><img src="Hiring1.jpg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Flyer'"></a></div>
-            <div data-category="Flyers" class="gallery-item cute-tile"><a href="PriceListA4.jpg" target="_blank"><img src="PriceListA4.jpg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Price+List'"></a></div>
-
-            <!-- Mockups -->
-            <div data-category="Mockups" class="gallery-item cute-tile"><a href="3M Final Share2.png" target="_blank"><img src="3M Final Share2.png" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Mockup'"></a></div>
-            <div data-category="Mockups" class="gallery-item cute-tile"><a href="Braid Mockup.jpg" target="_blank"><img src="Braid Mockup.jpg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Mockup'"></a></div>
-            <div data-category="Mockups" class="gallery-item cute-tile"><a href="Mockup.jpg" target="_blank"><img src="Mockup.jpg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Mockup'"></a></div>
-            <div data-category="Mockups" class="gallery-item cute-tile"><a href="Q.jpeg" target="_blank"><img src="Q.jpeg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Mockup'"></a></div>
-            <div data-category="Mockups" class="gallery-item cute-tile"><a href="Q1.jpeg" target="_blank"><img src="Q1.jpeg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Mockup'"></a></div>
-            <div data-category="Mockups" class="gallery-item cute-tile"><a href="Q2.jpeg" target="_blank"><img src="Q2.jpeg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Mockup'"></a></div>
-            <div data-category="Mockups" class="gallery-item cute-tile"><a href="Q1@3x.jpg" target="_blank"><img src="Q1@3x.jpg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Mockup'"></a></div>
-            <div data-category="Mockups" class="gallery-item cute-tile"><a href="Q2@3x.jpg" target="_blank"><img src="Q2@3x.jpg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Mockup'"></a></div>
-            <div data-category="Mockups" class="gallery-item cute-tile"><a href="Q3@3x.jpg" target="_blank"><img src="Q3@3x.jpg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Mockup'"></a></div>
-            <div data-category="Mockups" class="gallery-item cute-tile"><a href="Q3.jpeg" target="_blank"><img src="Q3.jpeg" onerror="this.src='https://placehold.co/400x300/0d9488/white?text=Mockup'"></a></div>
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- Contact -->
     <section id="contact" class="py-16 sm:py-24 bg-gray-900 text-white text-center">
