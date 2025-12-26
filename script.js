@@ -59,16 +59,15 @@ function initGalleryFilter() {
 function initMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const closeMenuBtn = document.getElementById('close-menu-btn');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const mobileOverlay = document.querySelector('.mobile-overlay');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileOverlay = document.getElementById('mobile-overlay');
     
     if (mobileMenuBtn && mobileMenu && mobileOverlay) {
         // Open menu
         mobileMenuBtn.addEventListener('click', function (e) {
             e.stopPropagation();
-            mobileMenu.style.transform = 'translateX(0)';
-            // show overlay by removing hidden class (CSS controls display/opacity)
-            mobileOverlay.classList.remove('hidden');
+            mobileMenu.classList.add('open');
+            mobileOverlay.classList.add('open');
             document.body.style.overflow = 'hidden';
         });
 
@@ -85,7 +84,7 @@ function initMobileMenu() {
         });
 
         // Close menu when clicking a link
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
             link.addEventListener('click', function () {
                 closeDrawer();
             });
@@ -97,12 +96,18 @@ function initMobileMenu() {
                 closeDrawer();
             }
         });
+
+        // Close menu when window is resized to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) {
+                closeDrawer();
+            }
+        });
     }
 
     function closeDrawer() {
-        mobileMenu.style.transform = 'translateX(100%)';
-        // hide overlay by adding hidden class
-        mobileOverlay.classList.add('hidden');
+        if (mobileMenu) mobileMenu.classList.remove('open');
+        if (mobileOverlay) mobileOverlay.classList.remove('open');
         document.body.style.overflow = 'auto';
     }
 }
