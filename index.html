@@ -266,6 +266,60 @@
         .mobile-overlay.open {
             display: block;
         }
+
+        /* Web App Tab Styling */
+        .webapp-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .webapp-card:hover {
+            border-color: #0d9488;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(13, 148, 136, 0.15);
+        }
+
+        .webapp-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .webapp-link {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .webapp-link-live {
+            background-color: #0d9488;
+            color: white;
+        }
+
+        .webapp-link-live:hover {
+            background-color: #0f766e;
+        }
+
+        .webapp-link-repo {
+            background-color: #f3f4f6;
+            color: #4b5563;
+        }
+
+        .webapp-link-repo:hover {
+            background-color: #e5e7eb;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -470,47 +524,47 @@
                 <button data-category="Catalogues" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold hover:bg-teal-100 transition duration-200 mb-2 sm:mb-0">Catalogues (1)</button>
             </div>
 
-            <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
 
-                <!-- Web Applications -->
-                <div data-category="WebApps" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="https://insiightPrep.onrender.com/" target="_blank">
-                        <img src="Insight Down Blue.png" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0d9488/ffffff?text=InsiightPrep';" alt="InsiightPrep Web App" class="w-full h-48 object-cover">
-                    </a>
-                    <div class="p-3 text-sm font-semibold text-center">
-                        InsiightPrep
-                        <div class="flex flex-col gap-1 mt-1">
-                            <a href="https://insiightPrep.onrender.com/" target="_blank" class="text-teal-600 underline hover:text-teal-800 text-xs font-bold">Live Site</a>
-                            <a href="https://github.com/NiiDk/InsiightPrep" target="_blank" class="text-gray-500 underline hover:text-teal-600 text-[10px]">View Source</a>
+                <!-- Web Applications (Nice Tab List Style) -->
+                <div data-category="WebApps" class="gallery-item active">
+                    <div class="webapp-card">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">InsiightPrep</h3>
+                            <p class="text-sm text-gray-600">Educational preparation and insight platform for students and teachers.</p>
+                        </div>
+                        <div class="webapp-links">
+                            <a href="https://insiightPrep.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live Site</a>
+                            <a href="https://github.com/NiiDk/InsiightPrep" target="_blank" class="webapp-link webapp-link-repo">GitHub</a>
                         </div>
                     </div>
                 </div>
-                <div data-category="WebApps" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="https://sellux-plaster.onrender.com/" target="_blank">
-                        <img src="Sellux Cover.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0d9488/ffffff?text=Sellux+Plaster';" alt="Sellux Plaster Web App" class="w-full h-48 object-cover">
-                    </a>
-                    <div class="p-3 text-sm font-semibold text-center">
-                        Sellux Plaster App
-                        <div class="flex flex-col gap-1 mt-1">
-                            <a href="https://sellux-plaster.onrender.com/" target="_blank" class="text-teal-600 underline hover:text-teal-800 text-xs font-bold">Live Site</a>
-                            <a href="https://github.com/NiiDk/sellux_plaster" target="_blank" class="text-gray-500 underline hover:text-teal-600 text-[10px]">View Source</a>
+                <div data-category="WebApps" class="gallery-item active">
+                    <div class="webapp-card">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Sellux Plaster</h3>
+                            <p class="text-sm text-gray-600">Inventory and catalog management system for product distribution.</p>
+                        </div>
+                        <div class="webapp-links">
+                            <a href="https://sellux-plaster.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live Site</a>
+                            <a href="https://github.com/NiiDk/sellux_plaster" target="_blank" class="webapp-link webapp-link-repo">GitHub</a>
                         </div>
                     </div>
                 </div>
-                <div data-category="WebApps" class="gallery-item active bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="https://aplus-publications.onrender.com/" target="_blank">
-                        <img src="Practice Maths.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0d9488/ffffff?text=Aplus+Publications';" alt="Aplus Publications Web App" class="w-full h-48 object-cover">
-                    </a>
-                    <div class="p-3 text-sm font-semibold text-center">
-                        Aplus Publications
-                        <div class="flex flex-col gap-1 mt-1">
-                            <a href="https://aplus-publications.onrender.com/" target="_blank" class="text-teal-600 underline hover:text-teal-800 text-xs font-bold">Live Site</a>
-                            <a href="https://github.com/NiiDk/Aplus_Publications" target="_blank" class="text-gray-500 underline hover:text-teal-600 text-[10px]">View Source</a>
+                <div data-category="WebApps" class="gallery-item active">
+                    <div class="webapp-card">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Aplus Publications</h3>
+                            <p class="text-sm text-gray-600">Digital library and publication management for educational resources.</p>
+                        </div>
+                        <div class="webapp-links">
+                            <a href="https://aplus-publications.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live Site</a>
+                            <a href="https://github.com/NiiDk/Aplus_Publications" target="_blank" class="webapp-link webapp-link-repo">GitHub</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Graphic Design Items -->
+                <!-- Graphic Design Items (Original Style) -->
                 <div data-category="BookCovers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
                     <a href="Practice Maths2.jpg" target="_blank">
                         <img src="Practice Maths2.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x400/10b981/ffffff?text=Book+Cover+1';" alt="Sample Book Cover Design 1" class="w-full h-48 object-cover">
