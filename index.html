@@ -17,28 +17,27 @@
             min-height: 100vh;
         }
 
-        /* Hero Section Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Fixed Mobile Menu Styles */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+            z-index: 1000;
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+        #mobile-overlay {
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 999;
+        }
+        #mobile-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
         }
 
-        @keyframes slideInFromLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes bounce-subtle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        h1, h2, h3 { font-family: 'Poppins', sans-serif; }
-
-        .hero-title { animation: fadeInUp 0.8s ease-out; }
-        .hero-subtitle { animation: fadeInUp 0.8s ease-out 0.2s both; }
-        .hero-buttons { animation: fadeInUp 0.8s ease-out 0.4s both; }
-
+        /* Component Styles */
         .section-title {
             position: relative;
             display: inline-block;
@@ -60,13 +59,6 @@
             bottom: 0;
             left: 20%;
             border-radius: 9999px;
-            animation: slideInFromLeft 0.8s ease-out;
-        }
-
-        .tab-button {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
 
         .tab-button.active {
@@ -81,17 +73,8 @@
             animation: fadeInUp 0.5s ease-out;
         }
 
-        .gallery-item.active { display: block; }
-
-        .card-experience {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-experience:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(13, 148, 136, 0.2);
+        .gallery-item.active {
+            display: block;
         }
 
         .webapp-card {
@@ -100,10 +83,10 @@
             border-radius: 12px;
             padding: 20px;
             transition: all 0.3s ease;
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100%;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
@@ -113,31 +96,10 @@
             box-shadow: 0 10px 15px -3px rgba(13, 148, 136, 0.15);
         }
 
-        .webapp-link {
-            flex: 1;
-            text-align: center;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            transition: all 0.2s ease;
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        .webapp-link-live { background-color: #0d9488; color: white; }
-        .webapp-link-repo { background-color: #f3f4f6; color: #4b5563; }
-
-        /* Mobile Menu Transitions */
-        .mobile-menu {
-            transition: transform 0.3s ease-in-out;
-            transform: translateX(100%);
-        }
-        .mobile-menu.open { transform: translateX(0); }
-        .mobile-overlay {
-            transition: opacity 0.3s ease-in-out;
-            opacity: 0;
-            pointer-events: none;
-        }
-        .mobile-overlay.open { opacity: 1; pointer-events: auto; }
     </style>
 </head>
 <body class="text-gray-800">
@@ -149,6 +111,7 @@
                 <a href="#about" class="text-gray-600 hover:text-teal-600 transition duration-300">About</a>
                 <a href="#experience" class="text-gray-600 hover:text-teal-600 transition duration-300">Experience</a>
                 <a href="#education" class="text-gray-600 hover:text-teal-600 transition duration-300">Education</a>
+                <a href="#projects" class="text-gray-600 hover:text-teal-600 transition duration-300">Reports</a>
                 <a href="#gallery" class="text-gray-600 hover:text-teal-600 transition duration-300">Project Gallery</a>
                 <a href="#contact" class="text-gray-600 hover:text-teal-600 transition duration-300">Contact</a>
             </nav>
@@ -158,11 +121,11 @@
         </div>
     </header>
 
-    <!-- Mobile Menu Drawer -->
-    <nav class="mobile-menu fixed inset-y-0 right-0 w-72 bg-white shadow-2xl md:hidden flex flex-col z-[100]">
+    <!-- Mobile Menu Drawer (Properly Hidden) -->
+    <nav id="mobile-menu" class="fixed inset-y-0 right-0 w-72 bg-white shadow-2xl md:hidden flex flex-col">
         <div class="flex justify-between items-center p-6 border-b border-gray-100">
             <h2 class="text-2xl font-bold text-teal-600">Menu</h2>
-            <button id="close-menu-btn" class="text-gray-500 hover:text-teal-600 transition duration-300">
+            <button id="close-menu-btn" class="text-gray-500 hover:text-teal-600">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
@@ -170,25 +133,27 @@
             <a href="#about" class="block text-xl font-semibold text-gray-700">About</a>
             <a href="#experience" class="block text-xl font-semibold text-gray-700">Experience</a>
             <a href="#education" class="block text-xl font-semibold text-gray-700">Education</a>
+            <a href="#projects" class="block text-xl font-semibold text-gray-700">Reports</a>
             <a href="#gallery" class="block text-xl font-semibold text-gray-700">Project Gallery</a>
             <a href="#contact" class="block text-xl font-semibold text-gray-700">Contact</a>
         </div>
     </nav>
-    <div id="mobile-overlay" class="mobile-overlay fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[90] md:hidden"></div>
+    <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm md:hidden"></div>
 
+    <!-- Hero Section -->
     <section id="hero" class="bg-gradient-to-br from-teal-50 via-blue-50 to-cyan-50 py-16 sm:py-32 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between relative z-10">
             <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
-                <p class="hero-subtitle text-xl text-teal-600 font-semibold mb-2 uppercase tracking-wide">Welcome to my portfolio</p>
-                <h1 class="hero-title text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 leading-tight">Samuel <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-cyan-600">Nii Amu</span> Darko</h1>
-                <p class="hero-subtitle text-xl sm:text-2xl text-gray-600 mt-4">Educator • Designer • Web Developer</p>
+                <p class="text-xl text-teal-600 font-semibold mb-2 uppercase tracking-wide">Welcome to my portfolio</p>
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 leading-tight">Samuel <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-cyan-600">Nii Amu</span> Darko</h1>
+                <p class="text-xl sm:text-2xl text-gray-600 mt-4">Educator • Designer • Web Developer</p>
                 <p class="text-gray-700 mt-6 leading-relaxed max-w-md">12+ years of inspiring student success through innovative teaching, stunning design, and robust web applications.</p>
-                <div class="hero-buttons mt-10 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-                    <a href="#gallery" class="btn-primary bg-gradient-to-r from-teal-600 to-teal-700 text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-105 inline-flex items-center justify-center">View My Work</a>
+                <div class="mt-10 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
+                    <a href="#gallery" class="bg-gradient-to-r from-teal-600 to-teal-700 text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-105 inline-flex items-center justify-center">View My Work</a>
                     <a href="#contact" class="bg-white text-teal-600 border-2 border-teal-600 px-8 py-4 rounded-xl font-bold shadow-md hover:bg-teal-50 transition duration-300 transform hover:scale-105">Get in Touch</a>
                 </div>
             </div>
-            <div class="hero-image md:w-1/3 flex justify-center">
+            <div class="md:w-1/3 flex justify-center">
                 <div class="relative">
                     <div class="absolute inset-0 bg-gradient-to-r from-teal-400 to-cyan-400 rounded-full opacity-40 blur-lg"></div>
                     <img src="Professional Photo.JPG" onerror="this.onerror=null;this.src='https://placehold.co/400x400/0d9488/ffffff?text=Photo';" alt="Samuel Nii Amu Darko Profile" class="relative w-64 h-64 sm:w-80 sm:h-80 object-cover rounded-full shadow-2xl border-4 border-white">
@@ -197,12 +162,13 @@
         </div>
     </section>
 
+    <!-- About Section -->
     <section id="about" class="py-16 sm:py-24 bg-white relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-bold section-title mx-auto text-center mb-16">About Me</h2>
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="text-lg text-gray-700 space-y-6 leading-relaxed">
-                    <p>I am an experienced Computing and Mathematics educator with over 12 years of experience dedicated to inspiring student success and integrating technology into meaningful learning experiences.</p>
+                    <p>I am an experienced Computing and Mathematics educator with over 12 years of experience dedicated to inspiring student success and integrating technology into meaningful learning experiences. I excel at delivering engaging lessons and preparing students for the digital world.</p>
                     <p>My expertise extends into <span class="font-bold text-teal-600">graphic & web design</span>, <span class="font-bold text-teal-600">academic data analysis</span>, and <span class="font-bold text-teal-600">full-stack development</span>.</p>
                     <div class="bg-teal-50 p-4 rounded-xl border-l-4 border-teal-600 text-sm italic">
                         <strong>Languages:</strong> English, Twi, Ga
@@ -227,50 +193,65 @@
         </div>
     </section>
 
+    <!-- Experience Section -->
     <section id="experience" class="py-16 sm:py-24 bg-gradient-to-br from-teal-50 to-cyan-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-bold section-title mx-auto text-center mb-16">Work Experience</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Bediako Memorial -->
                 <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
                     <h3 class="text-xl font-bold text-gray-900 mb-1">Computing Teacher (JHS)</h3>
                     <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">Bediako Memorial Institute</p>
                     <p class="text-xs text-gray-500 mb-4">Nov 2024 - Present</p>
-                    <ul class="text-sm space-y-1"><li>✓ GES Computing Curriculum</li><li>✓ Interactive coding instruction</li></ul>
+                    <p class="text-sm text-gray-700">Teach Computing based on GES Curriculum, design interactive presentations, and guide hands-on coding projects.</p>
                 </div>
+                <!-- Blessed Home (2024) -->
                 <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
                     <h3 class="text-xl font-bold text-gray-900 mb-1">Academic Supervisor</h3>
                     <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">Blessed Home Academy</p>
                     <p class="text-xs text-gray-500 mb-4">July 2024 - Oct 2024</p>
-                    <ul class="text-sm space-y-1"><li>✓ Performance supervision</li><li>✓ Teacher mentoring</li></ul>
+                    <p class="text-sm text-gray-700">Supervised academic performance and created lesson resources/visual aids.</p>
                 </div>
+                <!-- Freelance -->
                 <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
                     <h3 class="text-xl font-bold text-gray-900 mb-1">Presentation Designer</h3>
                     <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">Freelance (Remote)</p>
                     <p class="text-xs text-gray-500 mb-4">2022 - 2024</p>
-                    <ul class="text-sm space-y-1"><li>✓ Corporate pitch decks</li><li>✓ PowerPoint, Canva, Inkscape</li></ul>
+                    <p class="text-sm text-gray-700">Created corporate PowerPoint presentations, infographics, and pitch decks using PowerPoint, Canva, and Inkscape.</p>
                 </div>
+                <!-- FEFO -->
                 <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
                     <h3 class="text-xl font-bold text-gray-900 mb-1">Training Facilitator</h3>
                     <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">FEFO Ghana</p>
                     <p class="text-xs text-gray-500 mb-4">2019 - 2021</p>
-                    <ul class="text-sm space-y-1"><li>✓ Consulting-style training</li><li>✓ Microsoft Office workshops</li></ul>
+                    <p class="text-sm text-gray-700">Prepared training decks and trained staff in Microsoft Office tools (PowerPoint and Excel).</p>
                 </div>
+                <!-- Blessed Home (2015-2023) -->
                 <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">Academic Lead & Teacher</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">Academic supervisor & ICT/Math Teacher</h3>
                     <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">Blessed Home Academy</p>
                     <p class="text-xs text-gray-500 mb-4">2015 - 2023</p>
-                    <ul class="text-sm space-y-1"><li>✓ JHS Computing & Math</li><li>✓ Data-driven decision making</li></ul>
+                    <p class="text-sm text-gray-700">Taught JHS Computing & Math, designed teaching materials, mentored teachers, and conducted performance data analysis.</p>
                 </div>
+                <!-- St. Mary's -->
                 <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
                     <h3 class="text-xl font-bold text-gray-900 mb-1">Computing Teacher</h3>
-                    <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">St. Mary's Anglican (Kasoa)</p>
+                    <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">St. Mary's Anglican Primary & JHS C</p>
                     <p class="text-xs text-gray-500 mb-4">Nov 2023 - Jul 2024</p>
-                    <ul class="text-sm space-y-1"><li>✓ Taught JHS level Computing</li><li>✓ Practical ICT guided activities</li></ul>
+                    <p class="text-sm text-gray-700">Taught JHS Computing, designed presentation resources, and guided practical ICT activities.</p>
+                </div>
+                <!-- De-Best -->
+                <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">Teacher</h3>
+                    <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">De-Best Happy Home Educational Centre</p>
+                    <p class="text-xs text-gray-500 mb-4">2013 - 2015</p>
+                    <p class="text-sm text-gray-700">Delivered ICT and Mathematics lessons and developed lesson plans.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Education Section -->
     <section id="education" class="py-16 sm:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-bold section-title mx-auto text-center mb-16">Education & Certifications</h2>
@@ -288,6 +269,10 @@
                     <div class="text-gray-500 font-medium md:text-right mt-2 md:mt-0">2016 - 2017</div>
                 </div>
                 <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 shadow-sm">
+                    <div><h3 class="text-xl font-bold text-gray-900">In-service Training</h3><p class="text-teal-600 font-semibold">FEFO Ghana (Kasoa)</p></div>
+                    <div class="text-gray-500 font-medium md:text-right mt-2 md:mt-0">2018</div>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 shadow-sm">
                     <div><h3 class="text-xl font-bold text-gray-900">WASSCE</h3><p class="text-teal-600 font-semibold">Obrakyire Senior High School</p></div>
                     <div class="text-gray-500 font-medium md:text-right mt-2 md:mt-0">2009 - 2012</div>
                 </div>
@@ -295,204 +280,109 @@
         </div>
     </section>
 
+    <!-- Reports & Data Section -->
     <section id="projects" class="py-16 sm:py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl font-bold section-title mx-auto text-center mb-12">Academic Reports & Data</h2>
-            <div class="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                <div class="bg-white p-6 rounded-xl shadow-md text-left border border-gray-100">
+            <h2 class="text-4xl font-bold section-title mx-auto text-center mb-12">Academic Reports & Data Analysis</h2>
+            <div class="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
                     <h3 class="text-xl font-semibold text-teal-600 mb-2">Raw Performance Analysis</h3>
-                    <p class="text-sm text-gray-600 mb-4">Processing student grades and rankings to generate strategic insights.</p>
-                    <a href="Basic 9 T1_25_26 DATA.xlsx" target="_blank" class="text-sm text-teal-600 underline">View Data (Excel)</a>
+                    <p class="text-sm text-gray-600 mb-4">Excel records for grades and class rankings, essential for strategic insights and academic progress visualization.</p>
+                    <a href="Basic 9 T1_25_26 DATA.xlsx" target="_blank" class="text-sm text-teal-600 underline font-bold">View Sample Data (Excel)</a>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-md text-left border border-gray-100">
-                    <h3 class="text-xl font-semibold text-teal-600 mb-2">Academic Reporting</h3>
-                    <p class="text-sm text-gray-600 mb-4">Detailed formal reports communicated to parents and management.</p>
-                    <a href="BASIC 9 REPORT.pdf" target="_blank" class="text-sm text-teal-600 underline">View Report (PDF)</a>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h3 class="text-xl font-semibold text-teal-600 mb-2">Formal Academic Reporting</h3>
+                    <p class="text-sm text-gray-600 mb-4">Detailed formal reports used to clearly communicate performance trends and next steps to parents and management.</p>
+                    <a href="BASIC 9 REPORT.pdf" target="_blank" class="text-sm text-teal-600 underline font-bold">View Sample Report (PDF)</a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Full Project Gallery -->
     <section id="gallery" class="py-16 sm:py-20 bg-teal-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-bold section-title mx-auto text-center mb-8">Project Gallery</h2>
             <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-10">
-                <button data-category="WebApps" class="tab-button active bg-teal-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition duration-200 mb-2 sm:mb-0">Web Apps</button>
-                <button data-category="Flyers" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold hover:bg-teal-100 transition duration-200 mb-2 sm:mb-0">Flyers (12)</button>
-                <button data-category="Mockups" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold hover:bg-teal-100 transition duration-200 mb-2 sm:mb-0">Mockups (10)</button>
-                <button data-category="BookCovers" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold hover:bg-teal-100 transition duration-200 mb-2 sm:mb-0">Book Covers (4)</button>
-                <button data-category="Logos" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold hover:bg-teal-100 transition duration-200 mb-2 sm:mb-0">Logos (6)</button>
-                <button data-category="Catalogues" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold hover:bg-teal-100 transition duration-200 mb-2 sm:mb-0">Catalogues (1)</button>
+                <button data-category="WebApps" class="tab-button active bg-teal-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition mb-2">Web Apps</button>
+                <button data-category="Flyers" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold mb-2">Flyers (12)</button>
+                <button data-category="Mockups" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold mb-2">Mockups (10)</button>
+                <button data-category="BookCovers" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold mb-2">Book Covers (4)</button>
+                <button data-category="Logos" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold mb-2">Logos (6)</button>
+                <button data-category="Catalogues" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold mb-2">Catalogues (1)</button>
+                <button data-category="Proposals" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-sm font-semibold mb-2">Proposals (1)</button>
             </div>
 
             <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-                <!-- Web Apps (Tab List Style) -->
-                <div data-category="WebApps" class="gallery-item active"><div class="webapp-card"><div><h3 class="text-xl font-bold text-gray-900 mb-2">InsiightPrep</h3><p class="text-sm text-gray-600">Educational preparation and insight platform.</p></div><div class="flex gap-2 mt-4"><a href="https://insiightPrep.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live</a><a href="https://github.com/NiiDk/InsiightPrep" target="_blank" class="webapp-link webapp-link-repo">Code</a></div></div></div>
-                <div data-category="WebApps" class="gallery-item active"><div class="webapp-card"><div><h3 class="text-xl font-bold text-gray-900 mb-2">Sellux Plaster</h3><p class="text-sm text-gray-600">Inventory and catalog management system.</p></div><div class="flex gap-2 mt-4"><a href="https://sellux-plaster.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live</a><a href="https://github.com/NiiDk/sellux_plaster" target="_blank" class="webapp-link webapp-link-repo">Code</a></div></div></div>
-                <div data-category="WebApps" class="gallery-item active"><div class="webapp-card"><div><h3 class="text-xl font-bold text-gray-900 mb-2">Aplus Publications</h3><p class="text-sm text-gray-600">Digital library and publication management.</p></div><div class="flex gap-2 mt-4"><a href="https://aplus-publications.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live</a><a href="https://github.com/NiiDk/Aplus_Publications" target="_blank" class="webapp-link webapp-link-repo">Code</a></div></div></div>
+                <!-- Web Apps -->
+                <div data-category="WebApps" class="gallery-item active"><div class="webapp-card"><div><h3 class="text-xl font-bold mb-2">InsiightPrep</h3><p class="text-sm text-gray-600">Educational insight platform for students.</p></div><div class="flex gap-2 mt-4"><a href="https://insiightPrep.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live</a><a href="https://github.com/NiiDk/InsiightPrep" target="_blank" class="webapp-link webapp-link-repo">Code</a></div></div></div>
+                <div data-category="WebApps" class="gallery-item active"><div class="webapp-card"><div><h3 class="text-xl font-bold mb-2">Sellux Plaster</h3><p class="text-sm text-gray-600">Inventory and product management system.</p></div><div class="flex gap-2 mt-4"><a href="https://sellux-plaster.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live</a><a href="https://github.com/NiiDk/sellux_plaster" target="_blank" class="webapp-link webapp-link-repo">Code</a></div></div></div>
+                <div data-category="WebApps" class="gallery-item active"><div class="webapp-card"><div><h3 class="text-xl font-bold mb-2">Aplus Publications</h3><p class="text-sm text-gray-600">Digital library management system.</p></div><div class="flex gap-2 mt-4"><a href="https://aplus-publications.onrender.com/" target="_blank" class="webapp-link webapp-link-live">Live</a><a href="https://github.com/NiiDk/Aplus_Publications" target="_blank" class="webapp-link webapp-link-repo">Code</a></div></div></div>
 
                 <!-- Book Covers -->
-                <div data-category="BookCovers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Practice Maths2.jpg" target="_blank"><img src="Practice Maths2.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Math Workbook Cover</div>
-                </div>
-                <div data-category="BookCovers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Practice Maths1.jpg" target="_blank"><img src="Practice Maths1.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Past Questions Cover</div>
-                </div>
-                <div data-category="BookCovers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Sellux Cover.jpg" target="_blank"><img src="Sellux Cover.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Product Catalogue Cover</div>
-                </div>
-                <div data-category="BookCovers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="The Overall Look.jpg" target="_blank"><img src="The Overall Look.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Graphic Design Book Cover</div>
-                </div>
+                <div data-category="BookCovers" class="gallery-item"><a href="Practice Maths2.jpg" target="_blank"><img src="Practice Maths2.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Math Workbook</div></div>
+                <div data-category="BookCovers" class="gallery-item"><a href="Practice Maths1.jpg" target="_blank"><img src="Practice Maths1.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Past Questions</div></div>
+                <div data-category="BookCovers" class="gallery-item"><a href="Sellux Cover.jpg" target="_blank"><img src="Sellux Cover.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Sellux Catalogue Cover</div></div>
+                <div data-category="BookCovers" class="gallery-item"><a href="The Overall Look.jpg" target="_blank"><img src="The Overall Look.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Design Book Cover</div></div>
 
                 <!-- Logos -->
-                <div data-category="Logos" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Q1.jpg" target="_blank"><img src="Q1.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Logo 1</div>
-                </div>
-                <div data-category="Logos" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="DKlassics.PNG" target="_blank"><img src="DKlassics.PNG" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Logo 2</div>
-                </div>
-                <div data-category="Logos" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Final1.png" target="_blank"><img src="Final1.png" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Logo 3</div>
-                </div>
-                <div data-category="Logos" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="g52.png" target="_blank"><img src="g52.png" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Logo 4</div>
-                </div>
-                <div data-category="Logos" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Best.jpg" target="_blank"><img src="Best.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Logo 5</div>
-                </div>
-                <div data-category="Logos" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="IMG-20250517-WA0023.jpg" target="_blank"><img src="IMG-20250517-WA0023.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Logo 6</div>
-                </div>
+                <div data-category="Logos" class="gallery-item"><a href="Q1.jpg" target="_blank"><img src="Q1.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Logo 1</div></div>
+                <div data-category="Logos" class="gallery-item"><a href="DKlassics.PNG" target="_blank"><img src="DKlassics.PNG" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">DKlassics Logo</div></div>
+                <div data-category="Logos" class="gallery-item"><a href="Final1.png" target="_blank"><img src="Final1.png" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Final Logo</div></div>
+                <div data-category="Logos" class="gallery-item"><a href="g52.png" target="_blank"><img src="g52.png" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">G52 Logo</div></div>
+                <div data-category="Logos" class="gallery-item"><a href="Best.jpg" target="_blank"><img src="Best.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Best Logo</div></div>
+                <div data-category="Logos" class="gallery-item"><a href="IMG-20250517-WA0023.jpg" target="_blank"><img src="IMG-20250517-WA0023.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Logo 6</div></div>
 
-                <!-- Catalogues -->
-                <div data-category="Catalogues" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Sellux Plaster Catalogue.pdf" target="_blank"><img src="Sellux Cover.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Sellux Plaster Catalogue (PDF)</div>
-                </div>
+                <!-- Catalogues & Proposals -->
+                <div data-category="Catalogues" class="gallery-item"><a href="Sellux Plaster Catalogue.pdf" target="_blank"><img src="Sellux Cover.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Product Catalogue (PDF)</div></div>
+                <div data-category="Proposals" class="gallery-item"><a href="Proposal.pdf" target="_blank"><img src="IMG-20250517-WA0023.jpg" class="w-full h-48 object-cover rounded-lg"></a><div class="p-2 text-xs font-bold text-center">Project Proposal (PDF)</div></div>
 
                 <!-- Flyers -->
-                <div data-category="Flyers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Beginner1.jpg" target="_blank"><img src="Beginner1.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Workshop Ad</div>
-                </div>
-                <div data-category="Flyers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="FB_IMG_1762892741072.jpg" target="_blank"><img src="FB_IMG_1762892741072.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Notice 1</div>
-                </div>
-                <div data-category="Flyers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="FB_IMG_1762892752613.jpg" target="_blank"><img src="FB_IMG_1762892752613.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Notice 2</div>
-                </div>
-                <div data-category="Flyers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="3M Final2.png" target="_blank"><img src="3M Final2.png" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Promotional Flyer 1</div>
-                </div>
-                <div data-category="Flyers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="FB_IMG_1762892805105.jpg" target="_blank"><img src="FB_IMG_1762892805105.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Notice 3</div>
-                </div>
-                <div data-category="Flyers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Queenzlook Sept3.jpg" target="_blank"><img src="Queenzlook Sept3.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Promotional Flyer 2</div>
-                </div>
-                <div data-category="Flyers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Queenzlook flyer.png" target="_blank"><img src="Queenzlook flyer.png" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Promotional Flyer 3</div>
-                </div>
-                <div data-category="Flyers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Flyer.png" target="_blank"><img src="Flyer.png" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Promotional Flyer 4</div>
-                </div>
-                <div data-category="Flyers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Queenzlook.png" target="_blank"><img src="Queenzlook.png" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Promotional Flyer 5</div>
-                </div>
-                <div data-category="Flyers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Kasoa2.jpg" target="_blank"><img src="Kasoa2.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Interview Ad</div>
-                </div>
-                <div data-category="Flyers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Hiring1.jpg" target="_blank"><img src="Hiring1.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Hiring Ad Design</div>
-                </div>
-                <div data-category="Flyers" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="PriceListA4.jpg" target="_blank"><img src="PriceListA4.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Price List</div>
-                </div>
+                <div data-category="Flyers" class="gallery-item"><img src="Beginner1.jpg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Flyers" class="gallery-item"><img src="FB_IMG_1762892741072.jpg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Flyers" class="gallery-item"><img src="FB_IMG_1762892752613.jpg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Flyers" class="gallery-item"><img src="3M Final2.png" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Flyers" class="gallery-item"><img src="FB_IMG_1762892805105.jpg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Flyers" class="gallery-item"><img src="Queenzlook Sept3.jpg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Flyers" class="gallery-item"><img src="Queenzlook flyer.png" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Flyers" class="gallery-item"><img src="Flyer.png" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Flyers" class="gallery-item"><img src="Queenzlook.png" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Flyers" class="gallery-item"><img src="Kasoa2.jpg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Flyers" class="gallery-item"><img src="Hiring1.jpg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Flyers" class="gallery-item"><img src="PriceListA4.jpg" class="w-full h-48 object-cover rounded-lg"></div>
 
                 <!-- Mockups -->
-                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="3M Final Share2.png" target="_blank"><img src="3M Final Share2.png" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 1</div>
-                </div>
-                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Braid Mockup.jpg" target="_blank"><img src="Braid Mockup.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 2</div>
-                </div>
-                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Mockup.jpg" target="_blank"><img src="Mockup.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 3</div>
-                </div>
-                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Q.JPEG" target="_blank"><img src="Q.JPEG" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 4</div>
-                </div>
-                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Q1.JPEG" target="_blank"><img src="Q1.JPEG" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 5</div>
-                </div>
-                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Q2.JPEG" target="_blank"><img src="Q2.JPEG" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 6</div>
-                </div>
-                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Q1@3x.jpg" target="_blank"><img src="Q1@3x.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 7</div>
-                </div>
-                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Q2@3x.jpg" target="_blank"><img src="Q2@3x.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 8</div>
-                </div>
-                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Q3@3x.jpg" target="_blank"><img src="Q3@3x.jpg" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 9</div>
-                </div>
-                <div data-category="Mockups" class="gallery-item bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <a href="Q3.JPEG" target="_blank"><img src="Q3.JPEG" class="w-full h-48 object-cover"></a>
-                    <div class="p-3 text-sm font-semibold text-center truncate">Mockup 10</div>
-                </div>
+                <div data-category="Mockups" class="gallery-item"><img src="3M Final Share2.png" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Mockups" class="gallery-item"><img src="Braid Mockup.jpg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Mockups" class="gallery-item"><img src="Mockup.jpg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Mockups" class="gallery-item"><img src="Q.jpeg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Mockups" class="gallery-item"><img src="Q1.jpeg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Mockups" class="gallery-item"><img src="Q2.jpeg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Mockups" class="gallery-item"><img src="Q1@3x.jpg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Mockups" class="gallery-item"><img src="Q2@3x.jpg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Mockups" class="gallery-item"><img src="Q3@3x.jpg" class="w-full h-48 object-cover rounded-lg"></div>
+                <div data-category="Mockups" class="gallery-item"><img src="Q3.jpeg" class="w-full h-48 object-cover rounded-lg"></div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-16 sm:py-24 bg-gradient-to-br from-gray-900 via-teal-900 to-gray-900 relative overflow-hidden text-center text-white">
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 sm:py-24 bg-gray-900 relative text-center text-white">
         <div class="max-w-xl mx-auto px-4 relative z-10">
             <h2 class="text-4xl font-bold mb-6">Get In Touch</h2>
-            <p class="text-lg text-gray-300 mb-8 leading-relaxed">Located in Akweley-Kasoa. Ready for collaboration or teaching opportunities.</p>
+            <p class="text-lg text-gray-300 mb-8">Located in Akweley-Kasoa. Ready for collaboration or teaching opportunities.</p>
             <div class="space-y-4 max-w-sm mx-auto">
-                <div class="bg-white bg-opacity-10 border border-white border-opacity-20 p-4 rounded-xl shadow-2xl hover:bg-opacity-20 transition duration-300"><a href="mailto:darkosammy2@gmail.com" class="flex items-center justify-center font-semibold text-lg">📧 darkosammy2@gmail.com</a></div>
-                <div class="bg-white bg-opacity-10 border border-white border-opacity-20 p-4 rounded-xl shadow-2xl hover:bg-opacity-20 transition duration-300"><a href="tel:+233542232515" class="flex items-center justify-center font-semibold text-lg">📱 (+233) 542 232 515</a></div>
-                <div class="bg-white bg-opacity-10 border border-white border-opacity-20 p-4 rounded-xl shadow-2xl hover:bg-opacity-20 transition duration-300"><a href="https://wa.me/233542232515" target="_blank" class="flex items-center justify-center font-semibold text-lg text-xl">💬 Send WhatsApp Message</a></div>
+                <div class="bg-white bg-opacity-10 border border-white border-opacity-20 p-4 rounded-xl shadow-lg"><a href="mailto:darkosammy2@gmail.com" class="flex justify-center font-semibold">📧 darkosammy2@gmail.com</a></div>
+                <div class="bg-white bg-opacity-10 border border-white border-opacity-20 p-4 rounded-xl shadow-lg"><a href="tel:+233542232515" class="flex justify-center font-semibold">📱 (+233) 542 232 515</a></div>
+                <div class="bg-white bg-opacity-10 border border-white border-opacity-20 p-4 rounded-xl shadow-lg"><a href="https://wa.me/233542232515" target="_blank" class="flex justify-center font-semibold text-xl">💬 Send WhatsApp Message</a></div>
             </div>
             <div class="mt-12 pt-8 border-t border-white border-opacity-20 flex justify-center gap-6">
-                <a href="https://github.com/NiiDk" target="_blank" class="text-white hover:text-teal-400 transition duration-300 text-2xl"><i class="fab fa-github"></i></a>
-                <a href="#" class="text-white hover:text-teal-400 transition duration-300 text-2xl"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/NiiDk" target="_blank" class="text-3xl hover:text-teal-400"><i class="fab fa-github"></i></a>
             </div>
         </div>
     </section>
 
-    <footer class="bg-gray-900 text-gray-300 py-8 border-t border-gray-700 text-center"><p class="font-semibold">© 2025 Samuel Nii Amu Darko. All rights reserved.</p></footer>
+    <footer class="bg-gray-900 text-gray-400 py-8 border-t border-gray-800 text-center"><p>© 2025 Samuel Nii Amu Darko. All rights reserved.</p></footer>
 
     <script src="script.js"></script>
 </body>
