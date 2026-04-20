@@ -19,6 +19,10 @@ function initGalleryFilter() {
     const tabButtons = document.querySelectorAll('.tab-button');
     const galleryItems = document.querySelectorAll('.gallery-item');
 
+    if (!tabButtons.length || !galleryItems.length) {
+        return;
+    }
+
     function filterGallery(category) {
         // Hide all items first
         galleryItems.forEach(item => {
@@ -48,8 +52,12 @@ function initGalleryFilter() {
         });
     });
 
-    // Initial filter to show "Flyers"
-    filterGallery('Flyers');
+    const defaultButton = document.querySelector('.tab-button.active') || tabButtons[0];
+    const defaultCategory = defaultButton.getAttribute('data-category');
+
+    tabButtons.forEach(btn => btn.classList.remove('active'));
+    defaultButton.classList.add('active');
+    filterGallery(defaultCategory);
 }
 
 /**
