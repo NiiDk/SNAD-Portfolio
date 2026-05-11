@@ -122,6 +122,19 @@
             font-weight: 600;
         }
 
+        /* Social Media Cards */
+        .tiktok-card {
+            border-top: 4px solid #000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tiktok-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+        .tiktok-card i {
+            font-size: 1.2rem;
+        }
+
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -227,6 +240,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-bold section-title mx-auto text-center mb-16">Work Experience</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Social Media Management</h3>
+                    <p class="text-sm text-gray-700">Strategic content creation, audience engagement, and brand identity management across multiple social platforms.</p>
+                </div>
                 <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600">
                     <div class="text-4xl mb-4">💻</div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Web Development</h3>
@@ -338,6 +356,7 @@
             <h2 class="text-4xl font-bold section-title mx-auto text-center mb-8">Project Gallery</h2>
             <div class="flex flex-wrap justify-center gap-2 mb-10">
                 <button data-category="WebApps" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Web Apps (4)</button>
+                <button data-category="SocialMedia" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Social Media (3)</button>
                 <button data-category="Flyers" class="tab-button active bg-teal-600 text-white px-4 py-2 rounded-full text-xs font-bold">Flyers (57)</button>
                 <button data-category="BookCovers" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Book Covers (5)</button>
                 <button data-category="Logos" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Logos (10)</button>
@@ -389,6 +408,65 @@
                         </div>
                         <div class="flex gap-2 mt-4">
                             <a href="https://defrimps.com/" target="_blank" rel="noopener noreferrer" class="webapp-link bg-teal-600 text-white text-[10px] p-1 rounded">Live</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media Accounts -->
+                <div data-category="SocialMedia" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
+                    <div class="webapp-card social-card tiktok-card">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white">
+                                <i class="fab fa-tiktok"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-sm">Kasoa_Boy</h3>
+                                <p class="text-[10px] text-gray-500">TikTok Account Management</p>
+                            </div>
+                        </div>
+                        <p class="text-xs leading-relaxed text-gray-600">Managing content strategy, engagement, and growth for the Kasoa_Boy TikTok channel.</p>
+                        <div class="flex gap-2 mt-4">
+                            <a href="https://www.tiktok.com/@kasoa_boy?_r=1&_t=ZS-96HMBKDxe56" target="_blank" rel="noopener noreferrer" class="webapp-link bg-black text-white text-[10px] p-2 rounded flex items-center justify-center gap-2">
+                                <i class="fab fa-tiktok"></i> View Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div data-category="SocialMedia" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
+                    <div class="webapp-card social-card tiktok-card">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-gradient-to-tr from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white">
+                                <i class="fab fa-tiktok"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-sm">Queenzlook Beauty Parlour</h3>
+                                <p class="text-[10px] text-gray-500">Beauty & Wellness Management</p>
+                            </div>
+                        </div>
+                        <p class="text-xs leading-relaxed text-gray-600">Digital presence and social media marketing for Queenzlook Beauty Parlour.</p>
+                        <div class="flex gap-2 mt-4">
+                            <a href="https://www.tiktok.com/@queenzlookbeautyparlour" target="_blank" rel="noopener noreferrer" class="webapp-link bg-black text-white text-[10px] p-2 rounded flex items-center justify-center gap-2">
+                                <i class="fab fa-tiktok"></i> View Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div data-category="SocialMedia" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
+                    <div class="webapp-card social-card tiktok-card">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                                <i class="fab fa-tiktok"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-sm">Nanasei_shugaboy</h3>
+                                <p class="text-[10px] text-gray-500">Influencer Account Management</p>
+                            </div>
+                        </div>
+                        <p class="text-xs leading-relaxed text-gray-600">Content production and audience interaction for Nanasei_shugaboy.</p>
+                        <div class="flex gap-2 mt-4">
+                            <a href="https://www.tiktok.com/@nanasei_shugaboy?_r=1&_t=ZS-96HM8a5OEBY" target="_blank" rel="noopener noreferrer" class="webapp-link bg-black text-white text-[10px] p-2 rounded flex items-center justify-center gap-2">
+                                <i class="fab fa-tiktok"></i> View Profile
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -479,7 +557,7 @@
 
     <!-- Contact -->
     <section id="contact" class="py-16 sm:py-24 bg-gray-900 text-white text-center">
-        <div class="max-w-xl mx-auto px-4">
+        <div class="max-xl mx-auto px-4">
             <h2 class="text-4xl font-bold mb-6">Get In Touch</h2>
             <p class="text-lg text-gray-300 mb-8">Located in Akweley-Kasoa.</p>
             <div class="space-y-4 max-w-sm mx-auto">
