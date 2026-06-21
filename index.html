@@ -1,578 +1,821 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Samuel Nii Amu Darko - Educator, Designer & Web Developer Portfolio">
-    <meta name="theme-color" content="#0d9488">
-    <title>Samuel Nii Amu Darko - Educator, Designer & Web Developer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nii Darko — Full-Stack Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#06060a;
+    --bg-1:#0b0c14;
+    --bg-2:#10121c;
+    --glass:rgba(255,255,255,0.045);
+    --glass-strong:rgba(255,255,255,0.07);
+    --border:rgba(255,255,255,0.09);
+    --border-bright:rgba(255,255,255,0.18);
+    --blue:#3fd8ff;
+    --purple:#a657ff;
+    --magenta:#ff4fc9;
+    --text-0:#f3f4f8;
+    --text-1:#aab0c2;
+    --text-2:#666d80;
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+  }
 
-        /* Fixed Mobile Menu Styles to prevent shadow issue */
-        #mobile-menu {
-            transition: transform 0.3s ease-in-out;
-            transform: translateX(100%);
-            visibility: hidden;
-        }
-        #mobile-menu.open {
-            transform: translateX(0);
-            visibility: visible;
-        }
-        #mobile-overlay {
-            transition: opacity 0.3s ease-in-out;
-            opacity: 0;
-            pointer-events: none;
-            visibility: hidden;
-        }
-        #mobile-overlay.open {
-            opacity: 1;
-            pointer-events: auto;
-            visibility: visible;
-        }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg-0);
+    color:var(--text-0);
+    font-family:var(--font-body);
+    overflow-x:hidden;
+    line-height:1.5;
+  }
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  img,svg{display:block;}
 
-        h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+  ::selection{background:var(--purple);color:#fff;}
 
-        .section-title {
-            position: relative;
-            display: inline-block;
-            padding-bottom: 12px;
-            font-size: 2.25rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+  *:focus-visible{
+    outline:2px solid var(--blue);
+    outline-offset:3px;
+    border-radius:4px;
+  }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 60%;
-            height: 5px;
-            background: linear-gradient(90deg, #0d9488, #10b981);
-            bottom: 0;
-            left: 20%;
-            border-radius: 9999px;
-        }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
 
-        .tab-button.active {
-            background: linear-gradient(135deg, #0d9488, #0f766e);
-            color: white;
-            box-shadow: 0 8px 16px rgba(13, 148, 136, 0.3);
-            transform: translateY(-2px);
-        }
+  /* ===== LAYERED BACKGROUND SYSTEM ===== */
+  .layer-bg{
+    position:fixed; inset:0; z-index:-3;
+    background:var(--bg-0);
+  }
+  .layer-gradient{
+    position:fixed; inset:-10%; z-index:-2;
+    background:
+      radial-gradient(45% 35% at 15% 20%, rgba(63,216,255,0.16), transparent 60%),
+      radial-gradient(40% 40% at 85% 15%, rgba(166,87,255,0.18), transparent 60%),
+      radial-gradient(50% 45% at 50% 90%, rgba(255,79,201,0.10), transparent 60%);
+    filter:blur(40px);
+    animation:driftGradient 24s ease-in-out infinite alternate;
+  }
+  @keyframes driftGradient{
+    0%{ transform:translate3d(0,0,0) scale(1); }
+    100%{ transform:translate3d(-2%,3%,0) scale(1.08); }
+  }
+  #particles{
+    position:fixed; inset:0; z-index:-1;
+    width:100%; height:100%;
+    opacity:0.85;
+  }
 
-        .gallery-item {
-            display: none;
-            animation: fadeInUp 0.5s ease-out;
-        }
+  /* ===== NAV ===== */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 6vw;
+    transition:background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
+    border-bottom:1px solid transparent;
+  }
+  nav.scrolled{
+    background:rgba(6,6,10,0.7);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+  }
+  .logo{
+    font-family:var(--font-display);
+    font-weight:700; font-size:1.15rem; letter-spacing:0.02em;
+  }
+  .logo span{ color:var(--blue); }
+  .nav-links{ display:flex; gap:34px; font-size:0.92rem; color:var(--text-1); }
+  .nav-links a{ transition:color .2s ease; position:relative; }
+  .nav-links a:hover{ color:var(--text-0); }
+  .nav-cta{
+    font-family:var(--font-mono); font-size:0.8rem;
+    padding:9px 18px; border:1px solid var(--border-bright); border-radius:100px;
+    transition:all .25s ease;
+  }
+  .nav-cta:hover{ background:var(--text-0); color:var(--bg-0); border-color:var(--text-0); }
+  .nav-toggle{ display:none; background:none; border:none; color:var(--text-0); font-size:1.5rem; cursor:pointer; }
 
-        .gallery-item.active {
-            display: block;
-        }
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed; top:64px; right:6vw; left:6vw;
+      flex-direction:column; gap:18px;
+      background:rgba(10,11,18,0.95); backdrop-filter:blur(20px);
+      border:1px solid var(--border); border-radius:16px;
+      padding:24px; transform:translateY(-12px); opacity:0; pointer-events:none;
+      transition:all .25s ease;
+    }
+    .nav-links.open{ transform:translateY(0); opacity:1; pointer-events:auto; }
+    .nav-cta{ display:none; }
+    .nav-toggle{ display:block; }
+  }
 
-        /* Small Cute Tiles */
-        .cute-tile {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            background: white;
-            border: 1px solid #f1f5f9;
-        }
-        .cute-tile:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 15px rgba(13, 148, 136, 0.1);
-        }
-        .cute-tile img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-        }
+  /* ===== LAYOUT UTILS ===== */
+  .section{ position:relative; padding:130px 6vw; max-width:1280px; margin:0 auto; }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.12em;
+    color:var(--blue); text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:''; width:7px; height:7px; border-radius:50%;
+    background:var(--blue); box-shadow:0 0 12px var(--blue);
+  }
+  h2.headline{
+    font-family:var(--font-display); font-weight:600;
+    font-size:clamp(1.8rem,3.4vw,2.7rem); letter-spacing:-0.01em;
+    margin-bottom:18px; max-width:680px;
+  }
+  .lede{ color:var(--text-1); font-size:1.05rem; max-width:620px; margin-bottom:50px; }
 
-        .webapp-card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
 
-        .webapp-link {
-            flex: 1;
-            text-align: center;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-        }
+  /* ===== GLASS CARD ===== */
+  .glass{
+    background:var(--glass);
+    border:1px solid var(--border);
+    border-radius:18px;
+    backdrop-filter:blur(14px);
+    position:relative;
+    transition:transform .35s ease, border-color .35s ease, background .35s ease;
+  }
+  .glass::before{
+    content:''; position:absolute; inset:0; border-radius:18px; padding:1px;
+    background:linear-gradient(135deg, rgba(63,216,255,0.0), rgba(166,87,255,0.0));
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude;
+    opacity:0; transition:opacity .35s ease;
+    pointer-events:none;
+  }
+  .glass:hover{ transform:translateY(-4px); border-color:var(--border-bright); background:var(--glass-strong); }
+  .glass:hover::before{
+    opacity:1;
+    background:linear-gradient(135deg, var(--blue), var(--purple));
+  }
 
-        /* Social Media Cards */
-        .tiktok-card {
-            border-top: 4px solid #000;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .tiktok-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
-        }
-        .tiktok-card i {
-            font-size: 1.2rem;
-        }
+  /* ===== HERO ===== */
+  .hero{
+    min-height:100vh; display:flex; align-items:center;
+    padding-top:90px;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.3fr 0.7fr; gap:60px; align-items:center; width:100%;
+  }
+  .hero h1{
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(2.4rem,5.4vw,4.4rem); line-height:1.05; letter-spacing:-0.02em;
+    margin-bottom:24px;
+  }
+  .hero h1 .grad{
+    background:linear-gradient(100deg,var(--blue),var(--purple) 55%,var(--magenta));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p{ color:var(--text-1); font-size:1.1rem; max-width:540px; margin-bottom:36px; }
+  .hero-ctas{ display:flex; gap:16px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--font-mono); font-size:0.85rem; padding:14px 26px;
+    border-radius:100px; transition:all .25s ease; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{ background:linear-gradient(100deg,var(--blue),var(--purple)); color:#06060a; font-weight:500; }
+  .btn-primary:hover{ box-shadow:0 0 28px rgba(166,87,255,0.45); transform:translateY(-2px); }
+  .btn-ghost{ border:1px solid var(--border-bright); color:var(--text-0); }
+  .btn-ghost:hover{ background:var(--glass-strong); }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+  .status-panel{
+    padding:24px; font-family:var(--font-mono); font-size:0.78rem; color:var(--text-1);
+  }
+  .status-panel .dot-row{ display:flex; align-items:center; gap:8px; margin-bottom:16px; }
+  .status-panel .dot{ width:8px; height:8px; border-radius:50%; background:#3fff8f; box-shadow:0 0 10px #3fff8f; }
+  .status-panel .line{ display:flex; justify-content:space-between; padding:9px 0; border-top:1px solid var(--border); }
+  .status-panel .line:first-of-type{ border-top:none; }
+  .status-panel .line b{ color:var(--text-0); font-weight:500; }
+
+  @media (max-width:900px){
+    .hero-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ===== ABOUT ===== */
+  .about-grid{ display:grid; grid-template-columns:1.4fr 1fr; gap:50px; }
+  .about-grid p{ color:var(--text-1); margin-bottom:18px; font-size:1.02rem; }
+  .about-grid strong{ color:var(--text-0); }
+  .facts{ padding:30px; display:flex; flex-direction:column; gap:22px; }
+  .fact{ display:flex; flex-direction:column; gap:4px; }
+  .fact .num{ font-family:var(--font-display); font-size:1.6rem; font-weight:600; color:var(--text-0); }
+  .fact .label{ font-family:var(--font-mono); font-size:0.74rem; color:var(--text-2); letter-spacing:0.05em; text-transform:uppercase; }
+  @media (max-width:900px){ .about-grid{ grid-template-columns:1fr; } }
+
+  /* ===== STACK / SKILLS ===== */
+  .stack-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+  .stack-card{ padding:28px; }
+  .stack-card h3{ font-family:var(--font-display); font-size:1.05rem; margin-bottom:20px; color:var(--text-0); }
+  .skill-row{ margin-bottom:16px; }
+  .skill-row:last-child{ margin-bottom:0; }
+  .skill-top{ display:flex; justify-content:space-between; font-size:0.84rem; margin-bottom:7px; color:var(--text-1); }
+  .skill-top span:last-child{ font-family:var(--font-mono); color:var(--text-2); }
+  .bar-track{ height:5px; border-radius:4px; background:rgba(255,255,255,0.06); overflow:hidden; }
+  .bar-fill{
+    height:100%; border-radius:4px; width:0%;
+    background:linear-gradient(90deg,var(--blue),var(--purple));
+    transition:width 1.1s cubic-bezier(.16,1,.3,1);
+  }
+  @media (max-width:900px){ .stack-grid{ grid-template-columns:1fr; } }
+
+  /* ===== SERVICES ===== */
+  .services-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .service-card{ padding:30px 26px; }
+  .service-icon{
+    width:42px; height:42px; border-radius:11px; margin-bottom:20px;
+    background:linear-gradient(135deg, rgba(63,216,255,0.16), rgba(166,87,255,0.16));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .service-card h3{ font-family:var(--font-display); font-size:1.02rem; margin-bottom:10px; }
+  .service-card p{ font-size:0.9rem; color:var(--text-1); }
+  @media (max-width:1000px){ .services-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:600px){ .services-grid{ grid-template-columns:1fr; } }
+
+  /* ===== PROJECTS ===== */
+  .projects-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .project-card{ padding:0; overflow:hidden; display:flex; flex-direction:column; }
+  .project-top{
+    height:130px; position:relative;
+    background:linear-gradient(135deg, rgba(63,216,255,0.14), rgba(166,87,255,0.14));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .project-top .badge{
+    position:absolute; top:14px; right:14px;
+    font-family:var(--font-mono); font-size:0.66rem; padding:5px 11px;
+    border-radius:100px; border:1px solid var(--border-bright); color:var(--text-1);
+    background:rgba(6,6,10,0.5);
+  }
+  .project-top .mark{ font-family:var(--font-display); font-size:1.8rem; font-weight:700; color:rgba(255,255,255,0.7); }
+  .project-body{ padding:26px; display:flex; flex-direction:column; flex:1; }
+  .project-body h3{ font-family:var(--font-display); font-size:1.1rem; margin-bottom:10px; }
+  .project-body p{ font-size:0.9rem; color:var(--text-1); margin-bottom:18px; flex:1; }
+  .tags{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:18px; }
+  .tag{ font-family:var(--font-mono); font-size:0.68rem; padding:5px 10px; border-radius:100px; background:rgba(255,255,255,0.06); color:var(--text-1); }
+  .project-link{ font-family:var(--font-mono); font-size:0.82rem; color:var(--blue); display:inline-flex; align-items:center; gap:6px; }
+  .project-link:hover{ text-decoration:underline; }
+  @media (max-width:1000px){ .projects-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:650px){ .projects-grid{ grid-template-columns:1fr; } }
+
+  /* ===== DESIGN GALLERY ===== */
+  .design-tabs{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:36px; }
+  .design-tab{
+    font-family:var(--font-mono); font-size:0.78rem; padding:9px 16px;
+    border-radius:100px; border:1px solid var(--border-bright); color:var(--text-1);
+    background:transparent; cursor:pointer; transition:all .2s ease;
+  }
+  .design-tab span{ color:var(--text-2); }
+  .design-tab:hover{ border-color:var(--blue); color:var(--text-0); }
+  .design-tab.active{
+    background:linear-gradient(100deg,var(--blue),var(--purple));
+    color:#06060a; border-color:transparent;
+  }
+  .design-tab.active span{ color:rgba(6,6,10,0.6); }
+  .design-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));
+    gap:14px;
+  }
+  .design-tile{
+    display:none;
+    border-radius:12px; overflow:hidden; border:1px solid var(--border);
+    background:var(--glass); transition:transform .25s ease, border-color .25s ease;
+    position:relative;
+  }
+  .design-tile.show{ display:block; }
+  .design-tile:hover{ transform:translateY(-3px); border-color:var(--border-bright); }
+  .design-tile img, .design-tile video{
+    width:100%; height:130px; object-fit:cover; display:block;
+    background:rgba(255,255,255,0.03);
+  }
+  .design-tile-label{
+    display:block; padding:8px 10px; font-size:0.7rem; color:var(--text-1);
+    font-family:var(--font-mono); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .design-note{
+    font-family:var(--font-mono); font-size:0.78rem; color:var(--text-2);
+    margin-top:24px;
+  }
+
+  /* ===== NOW / STATUS SECTION ===== */
+  .now-panel{ padding:40px; }
+  .now-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:0; }
+  .now-item{ display:flex; gap:16px; padding:18px 10px; border-bottom:1px solid var(--border); }
+  .now-item:nth-last-child(-n+1), .now-item:nth-last-child(-n+2){ border-bottom:none; }
+  .now-tag{ font-family:var(--font-mono); font-size:0.68rem; padding:5px 10px; border-radius:6px; height:fit-content; white-space:nowrap; }
+  .now-tag.build{ background:rgba(63,216,255,0.12); color:var(--blue); }
+  .now-tag.teach{ background:rgba(166,87,255,0.12); color:var(--purple); }
+  .now-tag.grow{ background:rgba(255,79,201,0.12); color:var(--magenta); }
+  .now-item p{ font-size:0.92rem; color:var(--text-1); }
+  @media (max-width:760px){ .now-grid{ grid-template-columns:1fr; } }
+
+  /* ===== CONTACT ===== */
+  .contact-panel{
+    padding:70px 6vw; text-align:center; position:relative; overflow:hidden;
+  }
+  .contact-panel h2{
+    font-family:var(--font-display); font-weight:600; font-size:clamp(1.9rem,4vw,3rem);
+    margin-bottom:18px;
+  }
+  .contact-panel p{ color:var(--text-1); max-width:520px; margin:0 auto 36px; }
+  .contact-links{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+  footer{
+    padding:34px 6vw; display:flex; justify-content:space-between; align-items:center;
+    border-top:1px solid var(--border); font-size:0.82rem; color:var(--text-2);
+    font-family:var(--font-mono);
+  }
+  @media (max-width:600px){ footer{ flex-direction:column; gap:10px; text-align:center; } }
+
+  /* cursor glow */
+  .cursor-glow{
+    position:fixed; width:380px; height:380px; border-radius:50%;
+    background:radial-gradient(circle, rgba(166,87,255,0.10), transparent 70%);
+    pointer-events:none; z-index:0; transform:translate(-50%,-50%);
+    transition:opacity .3s ease; opacity:0;
+  }
+</style>
 </head>
-<body class="text-gray-800">
+<body>
 
-    <header class="bg-white shadow-lg sticky top-0 z-50 backdrop-blur-sm bg-opacity-95 border-b-2 border-teal-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <img src="Professional Photo.JPG" class="w-10 h-10 rounded-full object-cover border-2 border-teal-100 shadow-sm" alt="SNAD Logo">
-                <div class="text-2xl font-bold bg-gradient-to-r from-teal-600 to-teal-700 bg-clip-text text-transparent">SNAD</div>
-            </div>
-            <nav class="hidden md:flex space-x-8 font-medium">
-                <a href="#about" class="text-gray-600 hover:text-teal-600 transition duration-300">About</a>
-                <a href="#experience" class="text-gray-600 hover:text-teal-600 transition duration-300">Experience</a>
-                <a href="#education" class="text-gray-600 hover:text-teal-600 transition duration-300">Education</a>
-                <a href="#projects" class="text-gray-600 hover:text-teal-600 transition duration-300">Reports</a>
-                <a href="#gallery" class="text-gray-600 hover:text-teal-600 transition duration-300">Project Gallery</a>
-                <a href="#contact" class="text-gray-600 hover:text-teal-600 transition duration-300">Contact</a>
-            </nav>
-            <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-teal-600">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-        </div>
-    </header>
+<div class="layer-bg"></div>
+<div class="layer-gradient"></div>
+<canvas id="particles"></canvas>
+<div class="cursor-glow" id="cursorGlow"></div>
 
-    <!-- Mobile Menu Drawer -->
-    <nav id="mobile-menu" class="fixed inset-y-0 right-0 w-72 bg-white shadow-2xl z-[1000] flex flex-col md:hidden">
-        <div class="flex justify-between items-center p-6 border-b border-gray-100">
-            <h2 class="text-2xl font-bold text-teal-600">Menu</h2>
-            <button id="close-menu-btn" class="text-gray-500 hover:text-teal-600">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-        </div>
-        <div class="flex-1 py-8 px-6 space-y-6 overflow-y-auto">
-            <a href="#about" class="block text-xl font-semibold text-gray-700">About</a>
-            <a href="#experience" class="block text-xl font-semibold text-gray-700">Experience</a>
-            <a href="#education" class="block text-xl font-semibold text-gray-700">Education</a>
-            <a href="#projects" class="block text-xl font-semibold text-gray-700">Reports</a>
-            <a href="#gallery" class="block text-xl font-semibold text-gray-700">Project Gallery</a>
-            <a href="#contact" class="block text-xl font-semibold text-gray-700">Contact</a>
-        </div>
-        <div class="p-6 border-t border-gray-100 bg-teal-50">
-            <p class="text-sm text-gray-500">© 2025 SNAD Portfolio</p>
-        </div>
-    </nav>
-    <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[999] md:hidden"></div>
+<nav id="nav">
+  <div class="logo">ND<span>.</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#now">Now</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">LET'S TALK</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+</nav>
 
-    <!-- Hero -->
-    <section id="hero" class="bg-gradient-to-br from-teal-50 via-blue-50 to-cyan-50 py-16 sm:py-32 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between relative z-10">
-            <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
-                <p class="text-xl text-teal-600 font-semibold mb-2 uppercase tracking-wide">Welcome to my portfolio</p>
-                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 leading-tight">Samuel <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-cyan-600">Nii Amu</span> Darko</h1>
-                <p class="text-xl sm:text-2xl text-gray-600 mt-4">Educator • Designer • Web Developer</p>
-                <p class="text-gray-700 mt-6 leading-relaxed max-w-md">12+ years of inspiring student success through innovative teaching, stunning design, and robust web applications.</p>
-                <div class="mt-10 flex gap-4 justify-center md:justify-start">
-                    <a href="#gallery" class="bg-teal-600 text-white px-8 py-4 rounded-xl font-bold shadow-lg">View My Work</a>
-                    <a href="#contact" class="bg-white text-teal-600 border-2 border-teal-600 px-8 py-4 rounded-xl font-bold shadow-md">Get in Touch</a>
-                </div>
-            </div>
-            <div class="hero-image md:w-1/3 flex justify-center">
-                <img src="Professional Photo.JPG" onerror="this.onerror=null;this.src='https://placehold.co/400x400?text=Photo';" alt="Profile" class="relative w-64 h-64 sm:w-80 sm:h-80 object-cover rounded-full shadow-2xl border-4 border-white">
-            </div>
-        </div>
-    </section>
+<!-- HERO -->
+<section class="hero section">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow reveal">FULL-STACK ENGINEER · ACCRA, GHANA</div>
+      <h1 class="reveal">I build production software <span class="grad">solo</span> — backend, frontend, and mobile.</h1>
+      <p class="reveal">12+ years teaching Computing and Mathematics. Years architecting and shipping real SaaS products end to end. I work in Django, Next.js, and Flutter — and I ship things that get used.</p>
+      <div class="hero-ctas reveal">
+        <a href="#projects" class="btn btn-primary">See the work →</a>
+        <a href="#contact" class="btn btn-ghost">Work with me</a>
+      </div>
+    </div>
+    <div class="glass status-panel reveal">
+      <div class="dot-row"><div class="dot"></div><span>SYSTEM STATUS: ACTIVE</span></div>
+      <div class="line"><span>ROLE</span><b>FOUNDER · ENGINEER</b></div>
+      <div class="line"><span>STACK</span><b>DJANGO / NEXT.JS / FLUTTER</b></div>
+      <div class="line"><span>BUILDING</span><b>2 SAAS PRODUCTS</b></div>
+      <div class="line"><span>LOCATION</span><b>ACCRA, GH</b></div>
+    </div>
+  </div>
+</section>
 
-    <!-- About -->
-    <section id="about" class="py-16 sm:py-24 bg-white relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl font-bold section-title mx-auto text-center mb-16">About Me</h2>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="text-lg text-gray-700 space-y-6 leading-relaxed">
-                    <p>Experienced Computing and Mathematics educator with over 12 years of inspiring student success and integrating technology into meaningful learning experiences.</p>
-                    <p>Expertise in <span class="font-bold text-teal-600">graphic & web design</span>, <span class="font-bold text-teal-600">academic data analysis</span>, and <span class="font-bold text-teal-600">full-stack development</span>.</p>
-                    <div class="bg-teal-50 p-4 rounded-xl border-l-4 border-teal-600 text-sm italic">
-                        <strong>Languages:</strong> English, Twi, Ga
-                    </div>
-                    <a href="#contact" class="inline-flex items-center gap-2 text-teal-600 hover:text-teal-800 font-bold transition duration-300 group">
-                        <svg class="w-5 h-5 group-hover:translate-y-1 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        Request to see my CV
-                    </a>
-                </div>
-                <div class="space-y-4">
-                    <div class="bg-gradient-to-br from-teal-50 to-cyan-50 p-8 rounded-2xl border-2 border-teal-200">
-                        <h3 class="text-2xl font-bold text-teal-600 mb-4">Core Expertise</h3>
-                        <ul class="space-y-3">
-                            <li>🎓 <strong>Education:</strong> Computing, Mathematics, Academic Leadership</li>
-                            <li>💻 <strong>Web Development:</strong> Full-stack, Modern Frameworks, UI/UX</li>
-                            <li>📊 <strong>Data Analysis:</strong> Excel, Google Sheets, Academic Reporting</li>
-                            <li>🎨 <strong>Graphic Design:</strong> Logos, Flyers, Business Presentations</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="eyebrow reveal">ABOUT</div>
+  <h2 class="headline reveal">From the classroom to the codebase.</h2>
+  <div class="about-grid">
+    <div class="reveal">
+      <p>I've spent over a decade teaching Computing and Mathematics to JHS students — which means over a decade of explaining complex systems simply, debugging confusion in real time, and staying patient when nothing works on the first try. Turns out that's exactly the skill set software needs.</p>
+      <p>Outside the classroom, I design and ship full SaaS products solo — <strong>architecture, backend, frontend, mobile, payments, all of it.</strong> I'm not interested in tutorials. I'm interested in things that run in production and make money.</p>
+      <p>Right now I'm balancing a full teaching schedule with building multiple products in parallel — because waiting for "the right time" was never going to ship anything.</p>
+    </div>
+    <div class="glass facts reveal">
+      <div class="fact"><span class="num">12+ yrs</span><span class="label">Teaching Computing & Math</span></div>
+      <div class="fact"><span class="num">Multiple</span><span class="label">SaaS products shipped solo</span></div>
+      <div class="fact"><span class="num">4-in-1</span><span class="label">Backend / Frontend / Mobile / Design</span></div>
+      <div class="fact"><span class="num">Accra</span><span class="label">Based in Ghana, building for Ghana</span></div>
+    </div>
+  </div>
+</section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="py-16 sm:py-24 bg-gradient-to-br from-teal-50 to-cyan-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl font-bold section-title mx-auto text-center mb-16">Work Experience</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600">
-                    <div class="text-4xl mb-4">📱</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Social Media Management</h3>
-                    <p class="text-sm text-gray-700">Strategic content creation, audience engagement, and brand identity management across multiple social platforms.</p>
-                </div>
-                <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600">
-                    <div class="text-4xl mb-4">💻</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Web Development</h3>
-                    <p class="text-sm text-gray-700">Full-stack solutions using modern frameworks with a focus on seamless UI/UX design.</p>
-                </div>
-                <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600">
-                    <div class="text-4xl mb-4">📊</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Data Analysis</h3>
-                    <p class="text-sm text-gray-700">Advanced Excel and Google Sheets reporting for academic and institutional decision-making.</p>
-                </div>
-                <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600">
-                    <div class="text-4xl mb-4">🎨</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Graphic Design</h3>
-                    <p class="text-sm text-gray-700">Professional logos, flyers, and executive business presentations.</p>
-                </div>
-                <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">Computing Teacher (JHS)</h3>
-                    <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">Bediako Memorial Institute</p>
-                    <p class="text-xs text-gray-500 mb-4">Nov 2024 - Present</p>
-                    <p class="text-sm text-gray-700">GES Computing Curriculum and interactive coding mentorship.</p>
-                </div>
-                <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">Academic Supervisor</h3>
-                    <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">Blessed Home Academy</p>
-                    <p class="text-xs text-gray-500 mb-4">July 2024 - Oct 2024</p>
-                    <p class="text-sm text-gray-700">Supervising performance and creating resources/visual aids.</p>
-                </div>
-                <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">Presentation Designer</h3>
-                    <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">Freelance (Remote)</p>
-                    <p class="text-xs text-gray-500 mb-4">2022 - 2024</p>
-                    <p class="text-sm text-gray-700">Corporate decks and pitch decks using PowerPoint & Canva.</p>
-                </div>
-                <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">Training Facilitator</h3>
-                    <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">FEFO Ghana</p>
-                    <p class="text-xs text-gray-500 mb-4">2019 - 2021</p>
-                    <p class="text-sm text-gray-700">Staff training in MS Office and consulting workshop decks.</p>
-                </div>
-                <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">ICT/Mathematics Teacher</h3>
-                    <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">Blessed Home Academy</p>
-                    <p class="text-xs text-gray-500 mb-4">2015 - 2023</p>
-                    <p class="text-sm text-gray-700">Teaching, data analysis, and educational resource design.</p>
-                </div>
-                <div class="card-experience bg-white p-8 rounded-2xl shadow-lg border-l-4 border-teal-600 hover:shadow-2xl">
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">Teacher</h3>
-                    <p class="text-sm text-teal-600 font-semibold mb-2 uppercase">De-Best Happy Home</p>
-                    <p class="text-xs text-gray-500 mb-4">2013 - 2015</p>
-                    <p class="text-sm text-gray-700">ICT and Mathematics instruction and reporting.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- STACK -->
+<section class="section" id="stack">
+  <div class="eyebrow reveal">TECH STACK</div>
+  <h2 class="headline reveal">The stack I build with.</h2>
+  <p class="lede reveal">No tutorial-hopping. These are the tools I use to take a product from blank repo to paying customers.</p>
+  <div class="stack-grid">
+    <div class="glass stack-card reveal">
+      <h3>Backend</h3>
+      <div class="skill-row" data-pct="92"><div class="skill-top"><span>Django / DRF</span><span>92%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+      <div class="skill-row" data-pct="88"><div class="skill-top"><span>PostgreSQL</span><span>88%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+      <div class="skill-row" data-pct="80"><div class="skill-top"><span>Redis / WebSockets</span><span>80%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+    </div>
+    <div class="glass stack-card reveal">
+      <h3>Frontend</h3>
+      <div class="skill-row" data-pct="90"><div class="skill-top"><span>Next.js / React</span><span>90%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+      <div class="skill-row" data-pct="85"><div class="skill-top"><span>TypeScript</span><span>85%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+      <div class="skill-row" data-pct="82"><div class="skill-top"><span>Tailwind CSS</span><span>82%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+    </div>
+    <div class="glass stack-card reveal">
+      <h3>Mobile</h3>
+      <div class="skill-row" data-pct="84"><div class="skill-top"><span>Flutter / Dart</span><span>84%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+      <div class="skill-row" data-pct="78"><div class="skill-top"><span>Bluetooth / Hardware I/O</span><span>78%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+    </div>
+    <div class="glass stack-card reveal">
+      <h3>Integrations &amp; Infra</h3>
+      <div class="skill-row" data-pct="88"><div class="skill-top"><span>Paystack / MoMo / Hubtel</span><span>88%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+      <div class="skill-row" data-pct="75"><div class="skill-top"><span>Docker / Deployment</span><span>75%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+    </div>
+  </div>
+</section>
 
-    <!-- Education -->
-    <section id="education" class="py-16 sm:py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl font-bold section-title mx-auto text-center mb-16">Education & Certifications</h2>
-            <div class="max-w-4xl mx-auto space-y-6">
-                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 shadow-sm transition hover:shadow-md">
-                    <div><h3 class="text-xl font-bold text-gray-900">BSc. Mathematics Education</h3><p class="text-teal-600 font-semibold">University of Education, Winneba</p></div>
-                    <div class="text-gray-500 font-medium">2019 - 2023</div>
-                </div>
-                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 shadow-sm transition hover:shadow-md">
-                    <div><h3 class="text-xl font-bold text-gray-900">Diploma in Data Analysis</h3><p class="text-teal-600 font-semibold">Alison (Online)</p></div>
-                    <div class="text-gray-500 font-medium">2023 - 2024</div>
-                </div>
-                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 shadow-sm transition hover:shadow-md">
-                    <div><h3 class="text-xl font-bold text-gray-900">Google Data Analytics Professional Certificate</h3><p class="text-teal-600 font-semibold">Coursera (Online)</p></div>
-                    <div class="text-gray-500 font-medium">2023</div>
-                </div>
-                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 shadow-sm transition hover:shadow-md">
-                    <div><h3 class="text-xl font-bold text-gray-900">Professional Certificate in UI/UX Design</h3><p class="text-teal-600 font-semibold">Google / Coursera</p></div>
-                    <div class="text-gray-500 font-medium">2022</div>
-                </div>
-                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 shadow-sm transition hover:shadow-md">
-                    <div><h3 class="text-xl font-bold text-gray-900">Advanced Graphic Design Specialization</h3><p class="text-teal-600 font-semibold">Coursera / Online</p></div>
-                    <div class="text-gray-500 font-medium">2020</div>
-                </div>
-                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 shadow-sm transition hover:shadow-md">
-                    <div><h3 class="text-xl font-bold text-gray-900">Certificate in Website Design</h3><p class="text-teal-600 font-semibold">Agape Harvest Institute</p></div>
-                    <div class="text-gray-500 font-medium">2016 - 2017</div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="eyebrow reveal">SERVICES</div>
+  <h2 class="headline reveal">What I can build for you.</h2>
+  <div class="services-grid">
+    <div class="glass service-card reveal">
+      <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3fd8ff" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+      <h3>Full-Stack SaaS</h3>
+      <p>From database schema to deployed UI — Django/DRF + Next.js, built to scale from day one, not bolted on later.</p>
+    </div>
+    <div class="glass service-card reveal">
+      <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a657ff" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="10" y1="19" x2="14" y2="19"/></svg></div>
+      <h3>Mobile Apps</h3>
+      <p>Cross-platform apps with Flutter — POS systems, business tools, anything that needs to run offline-first.</p>
+    </div>
+    <div class="glass service-card reveal">
+      <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff4fc9" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg></div>
+      <h3>Payments &amp; Messaging</h3>
+      <p>Paystack, MoMo, Hubtel, Arkesel — wired in correctly the first time, built for the African market specifically.</p>
+    </div>
+    <div class="glass service-card reveal">
+      <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3fd8ff" stroke-width="1.8"><path d="M4 19l5-10 4 6 3-4 4 8"/></svg></div>
+      <h3>Architecture &amp; MVPs</h3>
+      <p>Solo founder? I'll architect your product end to end, then help you ship a real first version fast.</p>
+    </div>
+  </div>
+</section>
 
-    <!-- Reports -->
-    <section id="projects" class="py-16 sm:py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl font-bold section-title mx-auto text-center mb-12">Academic Reports & Data</h2>
-            <div class="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h3 class="text-xl font-semibold text-teal-600 mb-2">Raw Performance Data</h3>
-                    <a href="Basic 9 T1_25_26 DATA.xlsx" target="_blank" class="text-teal-600 underline font-bold">View Excel Data</a>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h3 class="text-xl font-semibold text-teal-600 mb-2">Final Academic Reports</h3>
-                    <a href="BASIC 9 REPORT.pdf" target="_blank" class="text-teal-600 underline font-bold">View PDF Report</a>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="eyebrow reveal">SELECTED WORK</div>
+  <h2 class="headline reveal">Things I've actually shipped.</h2>
+  <div class="projects-grid">
+    <div class="glass project-card reveal">
+      <div class="project-top"><span class="badge">LIVE</span><span class="mark">DW</span></div>
+      <div class="project-body">
+        <h3>DwasoPOS</h3>
+        <p>A multi-platform POS system — desktop, web, and mobile — built for Ghanaian retail businesses. Real-time sync, offline-first, first client already live in Ghana.</p>
+        <div class="tags"><span class="tag">Django</span><span class="tag">Next.js</span><span class="tag">Flutter</span><span class="tag">PostgreSQL</span></div>
+        <a href="#contact" class="project-link">Ask me about it →</a>
+      </div>
+    </div>
+    <div class="glass project-card reveal">
+      <div class="project-top"><span class="badge">LIVE</span><span class="mark">FP</span></div>
+      <div class="project-body">
+        <h3>FinalPreps</h3>
+        <p>A BECE exam-prep SaaS for Ghanaian schools — multi-tenant "School Edition" architecture with revenue-sharing built directly into the payment flow.</p>
+        <div class="tags"><span class="tag">Django</span><span class="tag">Paystack</span><span class="tag">Multi-tenant</span></div>
+        <a href="https://finalpreps.com" target="_blank" rel="noopener" class="project-link">finalpreps.com →</a>
+      </div>
+    </div>
+    <div class="glass project-card reveal">
+      <div class="project-top"><span class="badge">LIVE</span><span class="mark">P2A</span></div>
+      <div class="project-body">
+        <h3>Pure 2A &amp; Associates</h3>
+        <p>An enterprise platform for a chartered accounting and consultancy firm — AI financial consultant, a secure 2FA-protected client portal, and a full insights/publishing hub.</p>
+        <div class="tags"><span class="tag">Next.js 14</span><span class="tag">Django REST</span><span class="tag">GPT-4o</span></div>
+        <a href="https://pure2a.com" target="_blank" rel="noopener" class="project-link">pure2a.com →</a>
+      </div>
+    </div>
+    <div class="glass project-card reveal">
+      <div class="project-top"><span class="badge">LIVE</span><span class="mark">SX</span></div>
+      <div class="project-body">
+        <h3>Sellux Plaster Ltd</h3>
+        <p>A hybrid e-commerce and bespoke-quotation platform for an architectural finishing company — material catalogue, custom design requests, and a before/after project showcase.</p>
+        <div class="tags"><span class="tag">Django</span><span class="tag">Paystack Ghana</span><span class="tag">E-commerce</span></div>
+        <a href="https://selluxplaster.com" target="_blank" rel="noopener" class="project-link">selluxplaster.com →</a>
+      </div>
+    </div>
+    <div class="glass project-card reveal">
+      <div class="project-top"><span class="badge">LIVE</span><span class="mark">DF</span></div>
+      <div class="project-body">
+        <h3>deFrimps Services</h3>
+        <p>A manufacturing-as-a-service platform for a luxury printing business — interactive 3D product previews and a dynamic pricing calculator with WhatsApp ordering built in.</p>
+        <div class="tags"><span class="tag">MERN</span><span class="tag">React Three Fiber</span><span class="tag">WhatsApp</span></div>
+        <a href="https://defrimps.com" target="_blank" rel="noopener" class="project-link">defrimps.com →</a>
+      </div>
+    </div>
+    <div class="glass project-card reveal">
+      <div class="project-top"><span class="badge">IN BUILD</span><span class="mark">LD</span></div>
+      <div class="project-body">
+        <h3>Local Dwaso</h3>
+        <p>A grocery e-commerce platform built for same-day delivery across Accra — buyer, vendor, and admin roles, loyalty points, and live order tracking.</p>
+        <div class="tags"><span class="tag">Django</span><span class="tag">Next.js</span><span class="tag">Flutter</span></div>
+        <a href="#contact" class="project-link">Ask me about it →</a>
+      </div>
+    </div>
+    <div class="glass project-card reveal">
+      <div class="project-top"><span class="badge">IN STEALTH</span><span class="mark">??</span></div>
+      <div class="project-body">
+        <h3>Confidential Project</h3>
+        <p>A global SaaS platform currently in active development. Details are under NDA for now — if you're a serious dev or partner, reach out directly.</p>
+        <div class="tags"><span class="tag">Django</span><span class="tag">Next.js</span><span class="tag">Stealth</span></div>
+        <a href="#contact" class="project-link">Get in touch →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Gallery -->
-    <section id="gallery" class="py-16 sm:py-20 bg-teal-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl font-bold section-title mx-auto text-center mb-8">Project Gallery</h2>
-            <div class="flex flex-wrap justify-center gap-2 mb-10">
-                <button data-category="WebApps" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Web Apps (4)</button>
-                <button data-category="SocialMedia" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Social Media (3)</button>
-                <button data-category="Flyers" class="tab-button active bg-teal-600 text-white px-4 py-2 rounded-full text-xs font-bold">Flyers (57)</button>
-                <button data-category="BookCovers" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Book Covers (5)</button>
-                <button data-category="Logos" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Logos (10)</button>
-                <button data-category="Catalogues" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Catalogues (1)</button>
-                <button data-category="Proposals" class="tab-button bg-white text-teal-600 border border-teal-600 px-4 py-2 rounded-full text-xs font-bold">Proposals (1)</button>
-            </div>
 
-            <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                <!-- Web Apps -->
-                <div data-category="WebApps" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
-                    <div class="webapp-card">
-                        <div>
-                            <h3 class="font-bold text-sm">Pure 2A &amp; Associates</h3>
-                            <p class="mt-2 text-xs leading-relaxed text-gray-600">Chartered accounting and tax consultancy for audit, advisory, and strategic financial support.</p>
-                        </div>
-                        <div class="flex gap-2 mt-4">
-                            <a href="https://pure2a.com/" target="_blank" rel="noopener noreferrer" class="webapp-link bg-teal-600 text-white text-[10px] p-1 rounded">Live</a>
-                        </div>
-                    </div>
-                </div>
-                <div data-category="WebApps" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
-                    <div class="webapp-card">
-                        <div>
-                            <h3 class="font-bold text-sm">FinalPreps</h3>
-                            <p class="mt-2 text-xs leading-relaxed text-gray-600">Exam-prep platform with BECE past questions, mock papers, and study resources for Ghanaian learners.</p>
-                        </div>
-                        <div class="flex gap-2 mt-4">
-                            <a href="https://finalpreps.com/" target="_blank" rel="noopener noreferrer" class="webapp-link bg-teal-600 text-white text-[10px] p-1 rounded">Live</a>
-                        </div>
-                    </div>
-                </div>
-                <div data-category="WebApps" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
-                    <div class="webapp-card">
-                        <div>
-                            <h3 class="font-bold text-sm">Sellux Plaster Ltd</h3>
-                            <p class="mt-2 text-xs leading-relaxed text-gray-600">Interior finishing and materials platform for plasterboard, acoustic ceilings, supply, and estimates.</p>
-                        </div>
-                        <div class="flex gap-2 mt-4">
-                            <a href="https://selluxplaster.com/" target="_blank" rel="noopener noreferrer" class="webapp-link bg-teal-600 text-white text-[10px] p-1 rounded">Live</a>
-                            <a href="https://github.com/NiiDk/sellux_plaster" target="_blank" rel="noopener noreferrer" class="webapp-link bg-gray-100 text-gray-600 text-[10px] p-1 rounded">Code</a>
-                        </div>
-                    </div>
-                </div>
-                <div data-category="WebApps" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
-                    <div class="webapp-card">
-                        <div>
-                            <h3 class="font-bold text-sm">deFrimps Services</h3>
-                            <p class="mt-2 text-xs leading-relaxed text-gray-600">Printing and design service site for embroidery, heat print, laser print, and digital design.</p>
-                        </div>
-                        <div class="flex gap-2 mt-4">
-                            <a href="https://defrimps.com/" target="_blank" rel="noopener noreferrer" class="webapp-link bg-teal-600 text-white text-[10px] p-1 rounded">Live</a>
-                        </div>
-                    </div>
-                </div>
+<!-- DESIGN WORK -->
+<section class="section" id="design">
+  <div class="eyebrow reveal">DESIGN WORK</div>
+  <h2 class="headline reveal">Before the code, there was the canvas.</h2>
+  <p class="lede reveal">Graphic design background — Canva, Adobe Illustrator, Inkscape. Flyers, logos, book covers, and catalogues built for real clients alongside the dev work.</p>
+  <div class="design-tabs reveal">
+    <button class="design-tab active" data-cat="Flyers">Flyers & Ads <span>(57)</span></button>
+      <button class="design-tab" data-cat="BookCovers">Book Covers <span>(5)</span></button>
+      <button class="design-tab" data-cat="Logos">Logos <span>(10)</span></button>
+      <button class="design-tab" data-cat="Catalogues">Catalogues <span>(1)</span></button>
+      <button class="design-tab" data-cat="Proposals">Proposals <span>(1)</span></button>
+  </div>
+  <div class="design-grid reveal">
+    <a href="Practice Maths2.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="BookCovers"><img src="Practice Maths2.jpg" alt="Math Workbook" loading="lazy" decoding="async"><span class="design-tile-label">Math Workbook</span></a>
+      <a href="Practice Maths1.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="BookCovers"><img src="Practice Maths1.jpg" alt="Past Questions" loading="lazy" decoding="async"><span class="design-tile-label">Past Questions</span></a>
+      <a href="Sellux Cover.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="BookCovers"><img src="Sellux Cover.jpg" alt="Catalogue Cover" loading="lazy" decoding="async"><span class="design-tile-label">Catalogue Cover</span></a>
+      <a href="The Overall Look.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="BookCovers"><img src="The Overall Look.jpg" alt="Design Book" loading="lazy" decoding="async"><span class="design-tile-label">Design Book</span></a>
+      <a href="canva-gallery/Elites_Maths_cover.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="BookCovers"><img src="canva-gallery/Elites_Maths_cover.jpg" alt="Elites_Maths_cover" loading="lazy" decoding="async"><span class="design-tile-label">Elites_Maths_cover</span></a>
+      <a href="Q1.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="Q1.jpg" alt="Logo 1" loading="lazy" decoding="async"><span class="design-tile-label">Logo 1</span></a>
+      <a href="DKlassics.PNG" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="DKlassics.PNG" alt="DKlassics" loading="lazy" decoding="async"><span class="design-tile-label">DKlassics</span></a>
+      <a href="Final1.png" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="Final1.png" alt="Final Logo" loading="lazy" decoding="async"><span class="design-tile-label">Final Logo</span></a>
+      <a href="g52.png" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="g52.png" alt="G52" loading="lazy" decoding="async"><span class="design-tile-label">G52</span></a>
+      <a href="Best.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="Best.jpg" alt="Best Logo" loading="lazy" decoding="async"><span class="design-tile-label">Best Logo</span></a>
+      <a href="IMG-20250517-WA0023.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="IMG-20250517-WA0023.jpg" alt="Logo 6" loading="lazy" decoding="async"><span class="design-tile-label">Logo 6</span></a>
+      <a href="canva-gallery/ChrisNaa_logo.png" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="canva-gallery/ChrisNaa_logo.png" alt="ChrisNaa_logo" loading="lazy" decoding="async"><span class="design-tile-label">ChrisNaa_logo</span></a>
+      <a href="canva-gallery/ChrisNaa_logo1.png" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="canva-gallery/ChrisNaa_logo1.png" alt="ChrisNaa_logo1" loading="lazy" decoding="async"><span class="design-tile-label">ChrisNaa_logo1</span></a>
+      <a href="canva-gallery/InsightW3b_logo.png" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="canva-gallery/InsightW3b_logo.png" alt="InsightW3b_logo" loading="lazy" decoding="async"><span class="design-tile-label">InsightW3b_logo</span></a>
+      <a href="canva-gallery/Links_logo.jpeg" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="canva-gallery/Links_logo.jpeg" alt="Links_logo" loading="lazy" decoding="async"><span class="design-tile-label">Links_logo</span></a>
+      <a href="Sellux Plaster Catalogue.pdf" target="_blank" rel="noopener" class="design-tile" data-cat="Catalogues"><img src="Sellux Cover.jpg" alt="Catalogue PDF" loading="lazy" decoding="async"><span class="design-tile-label">Catalogue PDF</span></a>
+      <a href="Proposal.pdf" target="_blank" rel="noopener" class="design-tile" data-cat="Proposals"><img src="IMG-20250517-WA0023.jpg" alt="Proposal PDF" loading="lazy" decoding="async"><span class="design-tile-label">Proposal PDF</span></a>
+      <a href="Beginner1.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Beginner1.jpg" alt="Workshop Ad" loading="lazy" decoding="async"><span class="design-tile-label">Workshop Ad</span></a>
+      <a href="FB_IMG_1762892741072.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="FB_IMG_1762892741072.jpg" alt="Notice 1" loading="lazy" decoding="async"><span class="design-tile-label">Notice 1</span></a>
+      <a href="FB_IMG_1762892752613.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="FB_IMG_1762892752613.jpg" alt="Notice 2" loading="lazy" decoding="async"><span class="design-tile-label">Notice 2</span></a>
+      <a href="3M Final2.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="3M Final2.png" alt="3M Final" loading="lazy" decoding="async"><span class="design-tile-label">3M Final</span></a>
+      <a href="FB_IMG_1762892805105.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="FB_IMG_1762892805105.jpg" alt="Notice 3" loading="lazy" decoding="async"><span class="design-tile-label">Notice 3</span></a>
+      <a href="Queenzlook Sept3.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Queenzlook Sept3.jpg" alt="Queenzlook Sept" loading="lazy" decoding="async"><span class="design-tile-label">Queenzlook Sept</span></a>
+      <a href="Queenzlook flyer.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Queenzlook flyer.png" alt="Queenzlook Flyer" loading="lazy" decoding="async"><span class="design-tile-label">Queenzlook Flyer</span></a>
+      <a href="Flyer.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Flyer.png" alt="Promo Flyer" loading="lazy" decoding="async"><span class="design-tile-label">Promo Flyer</span></a>
+      <a href="Queenzlook.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Queenzlook.png" alt="Queenzlook" loading="lazy" decoding="async"><span class="design-tile-label">Queenzlook</span></a>
+      <a href="Kasoa2.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Kasoa2.jpg" alt="Kasoa Interview" loading="lazy" decoding="async"><span class="design-tile-label">Kasoa Interview</span></a>
+      <a href="Hiring1.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Hiring1.jpg" alt="Hiring Ad" loading="lazy" decoding="async"><span class="design-tile-label">Hiring Ad</span></a>
+      <a href="PriceListA4.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="PriceListA4.jpg" alt="Price List" loading="lazy" decoding="async"><span class="design-tile-label">Price List</span></a>
+      <a href="canva-gallery/Carpenter Service.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Carpenter Service.jpg" alt="Carpenter Service" loading="lazy" decoding="async"><span class="design-tile-label">Carpenter Service</span></a>
+      <a href="canva-gallery/ChrisNaa_Fashion.mp4" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><video src="canva-gallery/ChrisNaa_Fashion.mp4" muted playsinline preload="metadata"></video><span class="design-tile-label">ChrisNaa_Fashion</span></a>
+      <a href="canva-gallery/deFrimps (1).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/deFrimps (1).png" alt="deFrimps (1)" loading="lazy" decoding="async"><span class="design-tile-label">deFrimps (1)</span></a>
+      <a href="canva-gallery/deFrimps (2).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/deFrimps (2).png" alt="deFrimps (2)" loading="lazy" decoding="async"><span class="design-tile-label">deFrimps (2)</span></a>
+      <a href="canva-gallery/electronic-discount.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/electronic-discount.jpg" alt="electronic-discount" loading="lazy" decoding="async"><span class="design-tile-label">electronic-discount</span></a>
+      <a href="canva-gallery/Finalpreps Ad3 (1).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Finalpreps Ad3 (1).png" alt="Finalpreps Ad3 (1)" loading="lazy" decoding="async"><span class="design-tile-label">Finalpreps Ad3 (1)</span></a>
+      <a href="canva-gallery/grg.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/grg.png" alt="grg" loading="lazy" decoding="async"><span class="design-tile-label">grg</span></a>
+      <a href="canva-gallery/insightw3b-training-3.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/insightw3b-training-3.jpg" alt="insightw3b-training-3" loading="lazy" decoding="async"><span class="design-tile-label">insightw3b-training-3</span></a>
+      <a href="canva-gallery/insightw3b-training-4.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/insightw3b-training-4.jpg" alt="insightw3b-training-4" loading="lazy" decoding="async"><span class="design-tile-label">insightw3b-training-4</span></a>
+      <a href="canva-gallery/insightw3b.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/insightw3b.jpg" alt="insightw3b" loading="lazy" decoding="async"><span class="design-tile-label">insightw3b</span></a>
+      <a href="canva-gallery/Launching.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Launching.png" alt="Launching" loading="lazy" decoding="async"><span class="design-tile-label">Launching</span></a>
+      <a href="canva-gallery/Links (3).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Links (3).png" alt="Links (3)" loading="lazy" decoding="async"><span class="design-tile-label">Links (3)</span></a>
+      <a href="canva-gallery/modern-web-design.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/modern-web-design.jpg" alt="modern-web-design" loading="lazy" decoding="async"><span class="design-tile-label">modern-web-design</span></a>
+      <a href="canva-gallery/NAA.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/NAA.png" alt="NAA" loading="lazy" decoding="async"><span class="design-tile-label">NAA</span></a>
+      <a href="canva-gallery/Naa1.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Naa1.png" alt="Naa1" loading="lazy" decoding="async"><span class="design-tile-label">Naa1</span></a>
+      <a href="canva-gallery/Oria1.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Oria1.png" alt="Oria1" loading="lazy" decoding="async"><span class="design-tile-label">Oria1</span></a>
+      <a href="canva-gallery/Queenzlook Banner 1.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Queenzlook Banner 1.jpg" alt="Queenzlook Banner 1" loading="lazy" decoding="async"><span class="design-tile-label">Queenzlook Banner 1</span></a>
+      <a href="canva-gallery/RichMens.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/RichMens.jpg" alt="RichMens" loading="lazy" decoding="async"><span class="design-tile-label">RichMens</span></a>
+      <a href="canva-gallery/Sandals.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Sandals.jpg" alt="Sandals" loading="lazy" decoding="async"><span class="design-tile-label">Sandals</span></a>
+      <a href="canva-gallery/Slipper.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Slipper.jpg" alt="Slipper" loading="lazy" decoding="async"><span class="design-tile-label">Slipper</span></a>
+      <a href="canva-gallery/software-training.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/software-training.jpg" alt="software-training" loading="lazy" decoding="async"><span class="design-tile-label">software-training</span></a>
+      <a href="canva-gallery/Web and Mobile.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Web and Mobile.jpg" alt="Web and Mobile" loading="lazy" decoding="async"><span class="design-tile-label">Web and Mobile</span></a>
+      <a href="canva-gallery/Web dev.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Web dev.jpg" alt="Web dev" loading="lazy" decoding="async"><span class="design-tile-label">Web dev</span></a>
+      <a href="canva-gallery/web-dev-1.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/web-dev-1.jpg" alt="web-dev-1" loading="lazy" decoding="async"><span class="design-tile-label">web-dev-1</span></a>
+      <a href="canva-gallery/web-dev1-1.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/web-dev1-1.jpg" alt="web-dev1-1" loading="lazy" decoding="async"><span class="design-tile-label">web-dev1-1</span></a>
+      <a href="canva-gallery/Website Development.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Website Development.jpg" alt="Website Development" loading="lazy" decoding="async"><span class="design-tile-label">Website Development</span></a>
+      <a href="Afra K.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Afra K.png" alt="Afra K" loading="lazy" decoding="async"><span class="design-tile-label">Afra K</span></a>
+      <a href="Afra K1.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Afra K1.png" alt="Afra K1" loading="lazy" decoding="async"><span class="design-tile-label">Afra K1</span></a>
+      <a href="AFRA K2.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="AFRA K2.png" alt="AFRA K2" loading="lazy" decoding="async"><span class="design-tile-label">AFRA K2</span></a>
+      <a href="AFRA K3.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="AFRA K3.png" alt="AFRA K3" loading="lazy" decoding="async"><span class="design-tile-label">AFRA K3</span></a>
+      <a href="Afrak4.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Afrak4.png" alt="Afrak4" loading="lazy" decoding="async"><span class="design-tile-label">Afrak4</span></a>
+      <a href="Albert.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Albert.png" alt="Albert" loading="lazy" decoding="async"><span class="design-tile-label">Albert</span></a>
+      <a href="Albert1 (1).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Albert1 (1).png" alt="Albert1 (1)" loading="lazy" decoding="async"><span class="design-tile-label">Albert1 (1)</span></a>
+      <a href="Albert2.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Albert2.png" alt="Albert2" loading="lazy" decoding="async"><span class="design-tile-label">Albert2</span></a>
+      <a href="Albert3 (1).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Albert3 (1).png" alt="Albert3 (1)" loading="lazy" decoding="async"><span class="design-tile-label">Albert3 (1)</span></a>
+      <a href="Albert3.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Albert3.png" alt="Albert3" loading="lazy" decoding="async"><span class="design-tile-label">Albert3</span></a>
+      <a href="Bless House (4).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Bless House (4).png" alt="Bless House (4)" loading="lazy" decoding="async"><span class="design-tile-label">Bless House (4)</span></a>
+      <a href="Bless House (7).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Bless House (7).png" alt="Bless House (7)" loading="lazy" decoding="async"><span class="design-tile-label">Bless House (7)</span></a>
+      <a href="Fashion Week.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Fashion Week.png" alt="Fashion Week" loading="lazy" decoding="async"><span class="design-tile-label">Fashion Week</span></a>
+      <a href="nd (1).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="nd (1).png" alt="nd (1)" loading="lazy" decoding="async"><span class="design-tile-label">nd (1)</span></a>
+      <a href="Red and Pink Playful Strawberry Product Label (1).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Red and Pink Playful Strawberry Product Label (1).png" alt="Strawberry Label" loading="lazy" decoding="async"><span class="design-tile-label">Strawberry Label</span></a>
+      <a href="Royal Heritage Citation of Honour Certificate A3.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Royal Heritage Citation of Honour Certificate A3.png" alt="Royal Heritage Citation" loading="lazy" decoding="async"><span class="design-tile-label">Royal Heritage Citation</span></a>
+      <a href="Sandy (1).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Sandy (1).png" alt="Sandy (1)" loading="lazy" decoding="async"><span class="design-tile-label">Sandy (1)</span></a>
+      <a href="Sandy.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Sandy.png" alt="Sandy" loading="lazy" decoding="async"><span class="design-tile-label">Sandy</span></a>
+      <a href="White and Black Modern Happy Birthday Your Story (2).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="White and Black Modern Happy Birthday Your Story (2).png" alt="Happy Birthday Story" loading="lazy" decoding="async"><span class="design-tile-label">Happy Birthday Story</span></a>
+  </div>
+  <p class="design-note">Showing local design files — host this page in the same folder as your image assets (including the <code>canva-gallery/</code> subfolder) for these to render.</p>
+</section>
 
-                <!-- Social Media Accounts -->
-                <div data-category="SocialMedia" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
-                    <div class="webapp-card social-card tiktok-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white">
-                                <i class="fab fa-tiktok"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-sm">Kasoa_Boy</h3>
-                                <p class="text-[10px] text-gray-500">TikTok Account Management</p>
-                            </div>
-                        </div>
-                        <p class="text-xs leading-relaxed text-gray-600">Managing content strategy, engagement, and growth for the Kasoa_Boy TikTok channel.</p>
-                        <div class="flex gap-2 mt-4">
-                            <a href="https://www.tiktok.com/@kasoa_boy?_r=1&_t=ZS-96HMBKDxe56" target="_blank" rel="noopener noreferrer" class="webapp-link bg-black text-white text-[10px] p-2 rounded flex items-center justify-center gap-2">
-                                <i class="fab fa-tiktok"></i> View Profile
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div data-category="SocialMedia" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
-                    <div class="webapp-card social-card tiktok-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-gradient-to-tr from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white">
-                                <i class="fab fa-tiktok"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-sm">Queenzlook Beauty Parlour</h3>
-                                <p class="text-[10px] text-gray-500">Beauty & Wellness Management</p>
-                            </div>
-                        </div>
-                        <p class="text-xs leading-relaxed text-gray-600">Digital presence and social media marketing for Queenzlook Beauty Parlour.</p>
-                        <div class="flex gap-2 mt-4">
-                            <a href="https://www.tiktok.com/@queenzlookbeautyparlour" target="_blank" rel="noopener noreferrer" class="webapp-link bg-black text-white text-[10px] p-2 rounded flex items-center justify-center gap-2">
-                                <i class="fab fa-tiktok"></i> View Profile
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div data-category="SocialMedia" class="gallery-item active col-span-2 sm:col-span-3 lg:col-span-2">
-                    <div class="webapp-card social-card tiktok-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white">
-                                <i class="fab fa-tiktok"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-sm">Nanasei_shugaboy</h3>
-                                <p class="text-[10px] text-gray-500">Influencer Account Management</p>
-                            </div>
-                        </div>
-                        <p class="text-xs leading-relaxed text-gray-600">Content production and audience interaction for Nanasei_shugaboy.</p>
-                        <div class="flex gap-2 mt-4">
-                            <a href="https://www.tiktok.com/@nanasei_shugaboy?_r=1&_t=ZS-96HM8a5OEBY" target="_blank" rel="noopener noreferrer" class="webapp-link bg-black text-white text-[10px] p-2 rounded flex items-center justify-center gap-2">
-                                <i class="fab fa-tiktok"></i> View Profile
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Book Covers -->
-                <div data-category="BookCovers" class="gallery-item cute-tile"><a href="Practice Maths2.jpg" target="_blank"><img src="Practice Maths2.jpg"></a><p class="p-1 text-[10px] text-center truncate">Math Workbook</p></div>
-                <div data-category="BookCovers" class="gallery-item cute-tile"><a href="Practice Maths1.jpg" target="_blank"><img src="Practice Maths1.jpg"></a><p class="p-1 text-[10px] text-center truncate">Past Questions</p></div>
-                <div data-category="BookCovers" class="gallery-item cute-tile"><a href="Sellux Cover.jpg" target="_blank"><img src="Sellux Cover.jpg"></a><p class="p-1 text-[10px] text-center truncate">Catalogue Cover</p></div>
-                <div data-category="BookCovers" class="gallery-item cute-tile"><a href="The Overall Look.jpg" target="_blank"><img src="The Overall Look.jpg"></a><p class="p-1 text-[10px] text-center truncate">Design Book</p></div>
-                <div data-category="BookCovers" class="gallery-item cute-tile"><a href="canva-gallery/Elites_Maths_cover.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/Elites_Maths_cover.jpg" alt="Elites_Maths_cover" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">Elites_Maths_cover</p></div>
+<!-- NOW -->
+<section class="section" id="now">
+  <div class="eyebrow reveal">RIGHT NOW</div>
+  <h2 class="headline reveal">What I'm actively working on.</h2>
+  <div class="glass now-panel reveal">
+    <div class="now-grid">
+      <div class="now-item"><span class="now-tag build">BUILDING</span><p>A multi-platform POS system for Ghanaian retail businesses — desktop, web, mobile.</p></div>
+      <div class="now-item"><span class="now-tag build">BUILDING</span><p>A global SaaS platform, currently in stealth.</p></div>
+      <div class="now-item"><span class="now-tag teach">TEACHING</span><p>Computing & Mathematics, JHS level — 12+ years running, still going.</p></div>
+      <div class="now-item"><span class="now-tag grow">GROWING</span><p>Building in public daily on X — the wins, the bugs, all of it.</p></div>
+    </div>
+  </div>
+</section>
 
-                <!-- Logos -->
-                <div data-category="Logos" class="gallery-item cute-tile"><a href="Q1.jpg" target="_blank"><img src="Q1.jpg"></a><p class="p-1 text-[10px] text-center truncate">Logo 1</p></div>
-                <div data-category="Logos" class="gallery-item cute-tile"><a href="DKlassics.PNG" target="_blank"><img src="DKlassics.PNG"></a><p class="p-1 text-[10px] text-center truncate">DKlassics</p></div>
-                <div data-category="Logos" class="gallery-item cute-tile"><a href="Final1.png" target="_blank"><img src="Final1.png"></a><p class="p-1 text-[10px] text-center truncate">Final Logo</p></div>
-                <div data-category="Logos" class="gallery-item cute-tile"><a href="g52.png" target="_blank"><img src="g52.png"></a><p class="p-1 text-[10px] text-center truncate">G52</p></div>
-                <div data-category="Logos" class="gallery-item cute-tile"><a href="Best.jpg" target="_blank"><img src="Best.jpg"></a><p class="p-1 text-[10px] text-center truncate">Best Logo</p></div>
-                <div data-category="Logos" class="gallery-item cute-tile"><a href="IMG-20250517-WA0023.jpg" target="_blank"><img src="IMG-20250517-WA0023.jpg"></a><p class="p-1 text-[10px] text-center truncate">Logo 6</p></div>
-                <div data-category="Logos" class="gallery-item cute-tile"><a href="canva-gallery/ChrisNaa_logo.png" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/ChrisNaa_logo.png" alt="ChrisNaa_logo" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">ChrisNaa_logo</p></div>
-                <div data-category="Logos" class="gallery-item cute-tile"><a href="canva-gallery/ChrisNaa_logo1.png" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/ChrisNaa_logo1.png" alt="ChrisNaa_logo1" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">ChrisNaa_logo1</p></div>
-                <div data-category="Logos" class="gallery-item cute-tile"><a href="canva-gallery/InsightW3b_logo.png" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/InsightW3b_logo.png" alt="InsightW3b_logo" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">InsightW3b_logo</p></div>
-                <div data-category="Logos" class="gallery-item cute-tile"><a href="canva-gallery/Links_logo.jpeg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/Links_logo.jpeg" alt="Links_logo" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">Links_logo</p></div>
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="glass contact-panel reveal">
+    <h2>Let's build something.</h2>
+    <p>Open to select freelance work, technical co-founder conversations, and genuinely interesting problems. If it's real, reach out.</p>
+    <div class="contact-links">
+      <a href="mailto:darkosammy2@gmail.com" class="btn btn-primary">darkosammy2@gmail.com</a>
+      <a href="https://wa.me/233542232515" target="_blank" rel="noopener" class="btn btn-ghost">WhatsApp</a>
+      <a href="https://github.com/NiiDk" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+    </div>
+  </div>
+</section>
 
-                <!-- Catalogues & Proposals -->
-                <div data-category="Catalogues" class="gallery-item cute-tile"><a href="Sellux Plaster Catalogue.pdf" target="_blank"><img src="Sellux Cover.jpg"></a><p class="p-1 text-[10px] text-center truncate">Catalogue PDF</p></div>
-                <div data-category="Proposals" class="gallery-item cute-tile"><a href="Proposal.pdf" target="_blank"><img src="IMG-20250517-WA0023.jpg"></a><p class="p-1 text-[10px] text-center truncate">Proposal PDF</p></div>
+<footer>
+  <span>© 2026 Nii Darko</span>
+  <span>Built solo, like everything else.</span>
+</footer>
 
-                <!-- Flyers -->
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Beginner1.jpg" target="_blank"><img src="Beginner1.jpg"></a><p class="p-1 text-[10px] text-center truncate">Workshop Ad</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="FB_IMG_1762892741072.jpg" target="_blank"><img src="FB_IMG_1762892741072.jpg"></a><p class="p-1 text-[10px] text-center truncate">Notice 1</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="FB_IMG_1762892752613.jpg" target="_blank"><img src="FB_IMG_1762892752613.jpg"></a><p class="p-1 text-[10px] text-center truncate">Notice 2</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="3M Final2.png" target="_blank"><img src="3M Final2.png"></a><p class="p-1 text-[10px] text-center truncate">3M Final</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="FB_IMG_1762892805105.jpg" target="_blank"><img src="FB_IMG_1762892805105.jpg"></a><p class="p-1 text-[10px] text-center truncate">Notice 3</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Queenzlook Sept3.jpg" target="_blank"><img src="Queenzlook Sept3.jpg"></a><p class="p-1 text-[10px] text-center truncate">Queenzlook Sept</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Queenzlook flyer.png" target="_blank"><img src="Queenzlook flyer.png"></a><p class="p-1 text-[10px] text-center truncate">Queenzlook Flyer</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Flyer.png" target="_blank"><img src="Flyer.png"></a><p class="p-1 text-[10px] text-center truncate">Promo Flyer</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Queenzlook.png" target="_blank"><img src="Queenzlook.png"></a><p class="p-1 text-[10px] text-center truncate">Queenzlook</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Kasoa2.jpg" target="_blank"><img src="Kasoa2.jpg"></a><p class="p-1 text-[10px] text-center truncate">Kasoa Interview</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Hiring1.jpg" target="_blank"><img src="Hiring1.jpg"></a><p class="p-1 text-[10px] text-center truncate">Hiring Ad</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="PriceListA4.jpg" target="_blank"><img src="PriceListA4.jpg"></a><p class="p-1 text-[10px] text-center truncate">Price List</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/Carpenter Service.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/Carpenter Service.jpg" alt="Carpenter Service" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">Carpenter Service</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/ChrisNaa_Fashion.mp4" target="_blank" rel="noopener noreferrer"><video src="canva-gallery/ChrisNaa_Fashion.mp4" class="w-full h-[120px] object-cover" muted playsinline preload="metadata"></video></a><p class="p-1 text-[10px] text-center truncate">ChrisNaa_Fashion</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/deFrimps (1).png" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/deFrimps (1).png" alt="deFrimps (1)" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">deFrimps (1)</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/deFrimps (2).png" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/deFrimps (2).png" alt="deFrimps (2)" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">deFrimps (2)</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/electronic-discount.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/electronic-discount.jpg" alt="electronic-discount" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">electronic-discount</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/Finalpreps Ad3 (1).png" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/Finalpreps Ad3 (1).png" alt="Finalpreps Ad3 (1)" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">Finalpreps Ad3 (1)</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/grg.png" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/grg.png" alt="grg" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">grg</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/insightw3b-training-3.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/insightw3b-training-3.jpg" alt="insightw3b-training-3" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">insightw3b-training-3</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/insightw3b-training-4.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/insightw3b-training-4.jpg" alt="insightw3b-training-4" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">insightw3b-training-4</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/insightw3b.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/insightw3b.jpg" alt="insightw3b" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">insightw3b</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/Launching.png" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/Launching.png" alt="Launching" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">Launching</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/Links (3).png" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/Links (3).png" alt="Links (3)" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">Links (3)</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/modern-web-design.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/modern-web-design.jpg" alt="modern-web-design" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">modern-web-design</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/NAA.png" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/NAA.png" alt="NAA" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">NAA</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/Naa1.png" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/Naa1.png" alt="Naa1" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">Naa1</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/Oria1.png" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/Oria1.png" alt="Oria1" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">Oria1</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/Queenzlook Banner 1.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/Queenzlook Banner 1.jpg" alt="Queenzlook Banner 1" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">Queenzlook Banner 1</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/RichMens.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/RichMens.jpg" alt="RichMens" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">RichMens</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/Sandals.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/Sandals.jpg" alt="Sandals" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">Sandals</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/Slipper.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/Slipper.jpg" alt="Slipper" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">Slipper</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/software-training.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/software-training.jpg" alt="software-training" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">software-training</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/Web and Mobile.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/Web and Mobile.jpg" alt="Web and Mobile" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">Web and Mobile</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/Web dev.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/Web dev.jpg" alt="Web dev" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">Web dev</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/web-dev-1.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/web-dev-1.jpg" alt="web-dev-1" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">web-dev-1</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/web-dev1-1.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/web-dev1-1.jpg" alt="web-dev1-1" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">web-dev1-1</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="canva-gallery/Website Development.jpg" target="_blank" rel="noopener noreferrer"><img src="canva-gallery/Website Development.jpg" alt="Website Development" loading="lazy" decoding="async"></a><p class="p-1 text-[10px] text-center truncate">Website Development</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Afra K.png" target="_blank"><img src="Afra K.png" alt="Afra K"></a><p class="p-1 text-[10px] text-center truncate">Afra K</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Afra K1.png" target="_blank"><img src="Afra K1.png" alt="Afra K1"></a><p class="p-1 text-[10px] text-center truncate">Afra K1</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="AFRA K2.png" target="_blank"><img src="AFRA K2.png" alt="AFRA K2"></a><p class="p-1 text-[10px] text-center truncate">AFRA K2</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="AFRA K3.png" target="_blank"><img src="AFRA K3.png" alt="AFRA K3"></a><p class="p-1 text-[10px] text-center truncate">AFRA K3</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Afrak4.png" target="_blank"><img src="Afrak4.png" alt="Afrak4"></a><p class="p-1 text-[10px] text-center truncate">Afrak4</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Albert.png" target="_blank"><img src="Albert.png" alt="Albert"></a><p class="p-1 text-[10px] text-center truncate">Albert</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Albert1 (1).png" target="_blank"><img src="Albert1 (1).png" alt="Albert1 (1)"></a><p class="p-1 text-[10px] text-center truncate">Albert1 (1)</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Albert2.png" target="_blank"><img src="Albert2.png" alt="Albert2"></a><p class="p-1 text-[10px] text-center truncate">Albert2</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Albert3 (1).png" target="_blank"><img src="Albert3 (1).png" alt="Albert3 (1)"></a><p class="p-1 text-[10px] text-center truncate">Albert3 (1)</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Albert3.png" target="_blank"><img src="Albert3.png" alt="Albert3"></a><p class="p-1 text-[10px] text-center truncate">Albert3</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Bless House (4).png" target="_blank"><img src="Bless House (4).png" alt="Bless House (4)"></a><p class="p-1 text-[10px] text-center truncate">Bless House (4)</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Bless House (7).png" target="_blank"><img src="Bless House (7).png" alt="Bless House (7)"></a><p class="p-1 text-[10px] text-center truncate">Bless House (7)</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Fashion Week.png" target="_blank"><img src="Fashion Week.png" alt="Fashion Week"></a><p class="p-1 text-[10px] text-center truncate">Fashion Week</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="nd (1).png" target="_blank"><img src="nd (1).png" alt="nd (1)"></a><p class="p-1 text-[10px] text-center truncate">nd (1)</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Red and Pink Playful Strawberry Product Label (1).png" target="_blank"><img src="Red and Pink Playful Strawberry Product Label (1).png" alt="Red and Pink Playful Strawberry Product Label (1)"></a><p class="p-1 text-[10px] text-center truncate">Strawberry Label</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Royal Heritage Citation of Honour Certificate A3.png" target="_blank"><img src="Royal Heritage Citation of Honour Certificate A3.png" alt="Royal Heritage Citation of Honour Certificate A3"></a><p class="p-1 text-[10px] text-center truncate">Royal Heritage Citation</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Sandy (1).png" target="_blank"><img src="Sandy (1).png" alt="Sandy (1)"></a><p class="p-1 text-[10px] text-center truncate">Sandy (1)</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="Sandy.png" target="_blank"><img src="Sandy.png" alt="Sandy"></a><p class="p-1 text-[10px] text-center truncate">Sandy</p></div>
-                <div data-category="Flyers" class="gallery-item cute-tile"><a href="White and Black Modern Happy Birthday Your Story (2).png" target="_blank"><img src="White and Black Modern Happy Birthday Your Story (2).png" alt="White and Black Modern Happy Birthday Your Story (2)"></a><p class="p-1 text-[10px] text-center truncate">Happy Birthday Story</p></div>
-            </div>
-        </div>
-    </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  // ---------- DESIGN GALLERY FILTER ----------
+  const designTabs = document.querySelectorAll('.design-tab');
+  const designTiles = document.querySelectorAll('.design-tile');
+  function setDesignCat(cat) {
+    designTabs.forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+    designTiles.forEach(tile => tile.classList.toggle('show', tile.dataset.cat === cat));
+  }
+  designTabs.forEach(tab => tab.addEventListener('click', () => setDesignCat(tab.dataset.cat)));
+  if (designTabs.length) setDesignCat(designTabs[0].dataset.cat);
 
-    <!-- Contact -->
-    <section id="contact" class="py-16 sm:py-24 bg-gray-900 text-white text-center">
-        <div class="max-xl mx-auto px-4">
-            <h2 class="text-4xl font-bold mb-6">Get In Touch</h2>
-            <p class="text-lg text-gray-300 mb-8">Located in Akweley-Kasoa.</p>
-            <div class="space-y-4 max-w-sm mx-auto">
-                <a href="mailto:darkosammy2@gmail.com" class="block p-4 bg-white bg-opacity-10 border border-white border-opacity-20 rounded-xl">📧 darkosammy2@gmail.com</a>
-                <a href="tel:+233542232515" class="block p-4 bg-white bg-opacity-10 border border-white border-opacity-20 rounded-xl">📱 (+233) 542 232 515</a>
-                <a href="https://wa.me/233542232515" target="_blank" class="block p-4 bg-white bg-opacity-10 border border-white border-opacity-20 rounded-xl text-xl font-bold">💬 WhatsApp</a>
-            </div>
-            <div class="mt-12 pt-8 border-t border-white border-opacity-20">
-                <a href="https://github.com/NiiDk" target="_blank" class="text-3xl hover:text-teal-400"><i class="fab fa-github"></i></a>
-            </div>
-        </div>
-    </section>
+  // ---------- NAV ----------
+  const nav = document.getElementById('nav');
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-    <footer class="bg-gray-900 text-gray-400 py-8 text-center"><p>© 2025 Samuel Nii Amu Darko. All rights reserved.</p></footer>
+  // ---------- SCROLL REVEAL ----------
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
 
-    <script src="script.js"></script>
+  // ---------- SKILL BARS ----------
+  const skillRows = document.querySelectorAll('.skill-row');
+  const skillIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const pct = entry.target.getAttribute('data-pct');
+        entry.target.querySelector('.bar-fill').style.width = pct + '%';
+        skillIO.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  skillRows.forEach(el => skillIO.observe(el));
+
+  // ---------- CURSOR GLOW (desktop only) ----------
+  const glow = document.getElementById('cursorGlow');
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    window.addEventListener('mousemove', (e) => {
+      glow.style.opacity = '1';
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+    });
+  }
+
+  // ---------- THREE.JS BACKGROUND ----------
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('particles');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 60;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  // Particle network
+  const particleCount = window.innerWidth < 700 ? 60 : 140;
+  const positions = new Float32Array(particleCount * 3);
+  for (let i = 0; i < particleCount; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 140;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 90;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 80;
+  }
+  const particleGeo = new THREE.BufferGeometry();
+  particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const particleMat = new THREE.PointsMaterial({ color: 0x3fd8ff, size: 0.6, transparent: true, opacity: 0.55 });
+  const particles = new THREE.Points(particleGeo, particleMat);
+  scene.add(particles);
+
+  // Connecting lines (nearest-neighbor approximation, capped for perf)
+  const linePositions = [];
+  for (let i = 0; i < particleCount; i++) {
+    let nearestDist = Infinity, nearestIdx = -1;
+    for (let j = 0; j < particleCount; j++) {
+      if (i === j) continue;
+      const dx = positions[i*3] - positions[j*3];
+      const dy = positions[i*3+1] - positions[j*3+1];
+      const dz = positions[i*3+2] - positions[j*3+2];
+      const d = dx*dx + dy*dy + dz*dz;
+      if (d < nearestDist) { nearestDist = d; nearestIdx = j; }
+    }
+    if (nearestIdx !== -1 && Math.sqrt(nearestDist) < 28) {
+      linePositions.push(positions[i*3], positions[i*3+1], positions[i*3+2]);
+      linePositions.push(positions[nearestIdx*3], positions[nearestIdx*3+1], positions[nearestIdx*3+2]);
+    }
+  }
+  const lineGeo = new THREE.BufferGeometry();
+  lineGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(linePositions), 3));
+  const lineMat = new THREE.LineBasicMaterial({ color: 0xa657ff, transparent: true, opacity: 0.12 });
+  const lines = new THREE.LineSegments(lineGeo, lineMat);
+  scene.add(lines);
+
+  // Floating wireframe geometry
+  const shapes = [];
+  const geoTypes = [
+    new THREE.IcosahedronGeometry(6, 0),
+    new THREE.OctahedronGeometry(5, 0),
+    new THREE.TetrahedronGeometry(5.5, 0),
+    new THREE.IcosahedronGeometry(4, 0)
+  ];
+  const shapeColors = [0x3fd8ff, 0xa657ff, 0xff4fc9, 0x3fd8ff];
+  geoTypes.forEach((geo, i) => {
+    const mat = new THREE.MeshBasicMaterial({ color: shapeColors[i], wireframe: true, transparent: true, opacity: 0.35 });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(
+      (Math.random() - 0.5) * 100,
+      (Math.random() - 0.5) * 60,
+      (Math.random() - 0.5) * 40 - 10
+    );
+    scene.add(mesh);
+    shapes.push(mesh);
+  });
+
+  let mouseX = 0, mouseY = 0;
+  window.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth - 0.5);
+    mouseY = (e.clientY / window.innerHeight - 0.5);
+  });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    if (!reduceMotion) {
+      particles.rotation.y += 0.0006;
+      lines.rotation.y += 0.0006;
+      shapes.forEach((s, i) => {
+        s.rotation.x += 0.0018 + i * 0.0004;
+        s.rotation.y += 0.0022 + i * 0.0003;
+      });
+      camera.position.x += (mouseX * 8 - camera.position.x) * 0.02;
+      camera.position.y += (-mouseY * 8 - camera.position.y) * 0.02;
+      camera.lookAt(0, 0, 0);
+    }
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+</script>
+
 </body>
 </html>
