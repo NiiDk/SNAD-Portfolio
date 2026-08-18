@@ -3,468 +3,565 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nii Darko — Full-Stack Engineer</title>
+<title>Nii Darko — Full-Stack Systems Engineer &amp; Designer</title>
+<meta name="description" content="12+ years of mathematical & computing rigor. Architecting and shipping production software solo — Django, Next.js, Flutter, and African payment infrastructure." />
+<meta name="author" content="Nii Darko" />
+
+<!-- Open Graph / SEO -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Nii Darko — Full-Stack Systems Engineer &amp; Designer" />
+<meta property="og:description" content="I architect and ship production SaaS solo — backend, frontend, mobile, and payments. 12+ years computing educator." />
+<meta property="og:image" content="Nii Darko.png" />
+
+<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --bg-0:#030407;
-    --bg-1:#080a10;
-    --bg-2:#0f121d;
-    --glass:rgba(255,255,255,0.035);
-    --glass-strong:rgba(255,255,255,0.08);
-    --border:rgba(255,255,255,0.09);
-    --border-bright:rgba(255,255,255,0.22);
-    --blue:#00f2ff;
-    --purple:#8a2be2;
-    --magenta:#ff007f;
-    --text-0:#f8fafc;
-    --text-1:#94a3b8;
-    --text-2:#64748b;
-    --font-display:'Space Grotesk',sans-serif;
-    --font-body:'Inter',sans-serif;
-    --font-mono:'JetBrains Mono',monospace;
+  :root {
+    --bg-0: #06070a;
+    --bg-1: #0b0d14;
+    --bg-2: #121520;
+    --panel: rgba(14, 17, 27, 0.7);
+    --panel-hover: rgba(20, 25, 39, 0.85);
+    
+    --border: rgba(255, 255, 255, 0.08);
+    --border-bright: rgba(255, 255, 255, 0.18);
+    --border-accent: rgba(0, 242, 255, 0.35);
+    
+    --cyan: #00f2ff;
+    --cyan-glow: rgba(0, 242, 255, 0.16);
+    --emerald: #10b981;
+    --purple: #8a2be2;
+    --magenta: #ff007f;
+    --amber: #f59e0b;
+    
+    --text-0: #f8fafc;
+    --text-1: #94a3b8;
+    --text-2: #64748b;
+    --text-muted: #475569;
+    
+    --font-serif: 'Fraunces', Georgia, serif;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
   }
 
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg-0);
-    color:var(--text-0);
-    font-family:var(--font-body);
-    overflow-x:hidden;
-    line-height:1.5;
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--bg-0);
+    color: var(--text-0);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
-  a{color:inherit;text-decoration:none;}
-  ul{list-style:none;}
-  img,svg{display:block;}
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+  img, svg, video { display: block; }
 
-  ::selection{background:var(--purple);color:#fff;}
+  ::selection { background: var(--cyan); color: #030407; }
 
-  *:focus-visible{
-    outline:2px solid var(--blue);
-    outline-offset:3px;
-    border-radius:4px;
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  *:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 
-  /* ===== LAYERED BACKGROUND SYSTEM ===== */
-  .layer-bg{
-    position:fixed; inset:0; z-index:-3;
-    background:var(--bg-0);
+  /* ===== LUXURY REFINED ATMOSPHERE (ZERO NOISE) ===== */
+  .bg-atmosphere {
+    position: fixed; inset: 0; z-index: -2; pointer-events: none;
+    background: radial-gradient(circle at 50% 0%, rgba(0, 242, 255, 0.05), transparent 45%),
+                radial-gradient(circle at 85% 30%, rgba(138, 43, 226, 0.04), transparent 50%),
+                radial-gradient(circle at 10% 70%, rgba(16, 185, 129, 0.03), transparent 45%);
   }
-  .layer-gradient{
-    position:fixed; inset:-10%; z-index:-2;
-    background:
-      radial-gradient(45% 35% at 15% 20%, rgba(63,216,255,0.16), transparent 60%),
-      radial-gradient(40% 40% at 85% 15%, rgba(166,87,255,0.18), transparent 60%),
-      radial-gradient(50% 45% at 50% 90%, rgba(255,79,201,0.10), transparent 60%);
-    filter:blur(40px);
-    animation:driftGradient 24s ease-in-out infinite alternate;
-  }
-  @keyframes driftGradient{
-    0%{ transform:translate3d(0,0,0) scale(1); }
-    100%{ transform:translate3d(-2%,3%,0) scale(1.08); }
-  }
-  #particles{
-    position:fixed; inset:0; z-index:-1;
-    width:100%; height:100%;
-    opacity:0.85;
+  .bg-grid {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
   }
 
-  /* ===== NAV ===== */
-  nav{
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:20px 6vw;
-    transition:background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
-    border-bottom:1px solid transparent;
-  }
-  nav.scrolled{
-    background:rgba(6,6,10,0.7);
-    backdrop-filter:blur(16px);
-    border-bottom:1px solid var(--border);
-  }
-  .logo{
-    font-family:var(--font-display);
-    font-weight:700; font-size:1.15rem; letter-spacing:0.02em;
-  }
-  .logo span{ color:var(--blue); }
-  .nav-links{ display:flex; gap:34px; font-size:0.92rem; color:var(--text-1); }
-  .nav-links a{ transition:color .2s ease; position:relative; }
-  .nav-links a:hover{ color:var(--text-0); }
-  .nav-cta{
-    font-family:var(--font-mono); font-size:0.8rem; font-weight:700;
-    padding:9px 20px; border-radius:100px;
-    background:linear-gradient(135deg, var(--blue), var(--purple));
-    color:#030407 !important; border:none;
-    box-shadow:0 0 16px rgba(0,242,255,0.35);
-    transition:all .25s ease; text-decoration:none;
-  }
-  .nav-cta:hover{
-    box-shadow:0 0 26px rgba(0,242,255,0.65); transform:translateY(-2px); color:#030407 !important;
-  }
-  .nav-toggle{ display:none; background:none; border:none; color:var(--text-0); font-size:1.5rem; cursor:pointer; }
-
-  @media (max-width:760px){
-    .nav-links{
-      position:fixed; top:64px; right:6vw; left:6vw;
-      flex-direction:column; gap:18px;
-      background:rgba(10,11,18,0.95); backdrop-filter:blur(20px);
-      border:1px solid var(--border); border-radius:16px;
-      padding:24px; transform:translateY(-12px); opacity:0; pointer-events:none;
-      transition:all .25s ease;
-    }
-    .nav-links.open{ transform:translateY(0); opacity:1; pointer-events:auto; }
-    .nav-cta{ display:none; }
-    .nav-toggle{ display:block; }
+  /* Interactive soft mouse spotlight */
+  .mouse-spotlight {
+    position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 242, 255, 0.04), transparent 70%);
+    pointer-events: none; z-index: 0; transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease; opacity: 0;
   }
 
-  /* ===== LAYOUT UTILS ===== */
-  .section{ position:relative; padding:130px 6vw; max-width:1280px; margin:0 auto; }
-  .eyebrow{
-    font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.12em;
-    color:var(--blue); text-transform:uppercase; margin-bottom:18px;
-    display:flex; align-items:center; gap:10px;
+  /* ===== NAVIGATION ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 6vw;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
   }
-  .eyebrow::before{
-    content:''; width:7px; height:7px; border-radius:50%;
-    background:var(--blue); box-shadow:0 0 12px var(--blue);
+  nav.scrolled {
+    background: rgba(6, 7, 10, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 6vw;
   }
-  h2.headline{
-    font-family:var(--font-display); font-weight:600;
-    font-size:clamp(1.8rem,3.4vw,2.7rem); letter-spacing:-0.01em;
-    margin-bottom:18px; max-width:680px;
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em;
   }
-  .lede{ color:var(--text-1); font-size:1.05rem; max-width:620px; margin-bottom:50px; }
-
-  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
-  .reveal.visible{ opacity:1; transform:translateY(0); }
-
-  /* ===== GLASS CARD ===== */
-  .glass{
-    background:var(--glass);
-    border:1px solid var(--border);
-    border-radius:18px;
-    backdrop-filter:blur(14px);
-    position:relative;
-    transition:transform .35s ease, border-color .35s ease, background .35s ease;
+  .logo-mark {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, rgba(0, 242, 255, 0.2), rgba(138, 43, 226, 0.2));
+    border: 1px solid var(--border-bright);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; color: var(--cyan);
   }
-  .glass::before{
-    content:''; position:absolute; inset:0; border-radius:18px; padding:1px;
-    background:linear-gradient(135deg, rgba(63,216,255,0.0), rgba(166,87,255,0.0));
-    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite:xor; mask-composite:exclude;
-    opacity:0; transition:opacity .35s ease;
-    pointer-events:none;
-  }
-  .glass:hover{ transform:translateY(-4px); border-color:var(--border-bright); background:var(--glass-strong); }
-  .glass:hover::before{
-    opacity:1;
-    background:linear-gradient(135deg, var(--blue), var(--purple));
-  }
-
-  /* ===== HERO ===== */
-  .hero{
-    min-height:100vh; display:flex; align-items:center;
-    padding-top:90px;
-  }
-  .hero-grid{
-    display:grid; grid-template-columns:1.3fr 0.7fr; gap:60px; align-items:center; width:100%;
-  }
-  .hero h1{
-    font-family:var(--font-display); font-weight:700;
-    font-size:clamp(2.4rem,5.4vw,4.4rem); line-height:1.05; letter-spacing:-0.02em;
-    margin-bottom:24px;
-  }
-  .hero h1 .grad{
-    background:linear-gradient(100deg,var(--blue),var(--purple) 55%,var(--magenta));
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .hero p{ color:var(--text-1); font-size:1.1rem; max-width:540px; margin-bottom:36px; }
-  .hero-ctas{ display:flex; gap:16px; flex-wrap:wrap; }
-  .btn{
-    font-family:var(--font-mono); font-size:0.85rem; padding:14px 26px;
-    border-radius:100px; transition:all .25s ease; display:inline-flex; align-items:center; gap:8px;
-    cursor:pointer; text-decoration:none;
-  }
-  .btn-primary{
-    background:linear-gradient(100deg,var(--blue),var(--purple)) !important;
-    color:#030407 !important; font-weight:700 !important;
-    border:none; box-shadow:0 0 20px rgba(0,242,255,0.3);
-  }
-  .btn-primary:hover{
-    box-shadow:0 0 32px rgba(0,242,255,0.65); transform:translateY(-2px); color:#030407 !important;
-  }
-  .copy-email-btn{
-    background:rgba(0,242,255,0.12) !important;
-    border:1px solid var(--blue) !important;
-    color:var(--blue) !important;
-    font-weight:600 !important;
-  }
-  .copy-email-btn:hover{
-    background:var(--blue) !important;
-    color:#030407 !important;
-    box-shadow:0 0 24px rgba(0,242,255,0.5) !important;
-    transform:translateY(-2px);
-  }
-  .btn-ghost{ border:1px solid var(--border-bright); color:var(--text-0) !important; }
-  .btn-ghost:hover{ background:var(--glass-strong); color:var(--text-0) !important; }
-
-  .status-panel{
-    padding:24px; font-family:var(--font-mono); font-size:0.78rem; color:var(--text-1);
-  }
-  .status-panel .dot-row{ display:flex; align-items:center; gap:8px; margin-bottom:16px; }
-  .status-panel .dot{ width:8px; height:8px; border-radius:50%; background:#3fff8f; box-shadow:0 0 10px #3fff8f; }
-  .status-panel .line{ display:flex; justify-content:space-between; padding:9px 0; border-top:1px solid var(--border); }
-  .status-panel .line:first-of-type{ border-top:none; }
-  .status-panel .line b{ color:var(--text-0); font-weight:500; }
-
-  @media (max-width:900px){
-    .hero-grid{ grid-template-columns:1fr; }
-  }
-
-  /* ===== ABOUT ===== */
-  .about-grid{ display:grid; grid-template-columns:1.4fr 1fr; gap:50px; }
-  .about-grid p{ color:var(--text-1); margin-bottom:18px; font-size:1.02rem; }
-  .about-grid strong{ color:var(--text-0); }
-  .facts{ padding:30px; display:flex; flex-direction:column; gap:22px; }
-  .fact{ display:flex; flex-direction:column; gap:4px; }
-  .fact .num{ font-family:var(--font-display); font-size:1.6rem; font-weight:600; color:var(--text-0); }
-  .fact .label{ font-family:var(--font-mono); font-size:0.74rem; color:var(--text-2); letter-spacing:0.05em; text-transform:uppercase; }
-  @media (max-width:900px){ .about-grid{ grid-template-columns:1fr; } }
-
-  /* ===== STACK / SKILLS ===== */
-  .stack-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
-  .stack-card{ padding:28px; }
-  .stack-card h3{ font-family:var(--font-display); font-size:1.05rem; margin-bottom:20px; color:var(--text-0); }
-  .skill-row{ margin-bottom:16px; }
-  .skill-row:last-child{ margin-bottom:0; }
-  .skill-top{ display:flex; justify-content:space-between; font-size:0.84rem; margin-bottom:7px; color:var(--text-1); }
-  .skill-top span:last-child{ font-family:var(--font-mono); color:var(--text-2); }
-  .bar-track{ height:5px; border-radius:4px; background:rgba(255,255,255,0.06); overflow:hidden; }
-  .bar-fill{
-    height:100%; border-radius:4px; width:0%;
-    background:linear-gradient(90deg,var(--blue),var(--purple));
-    transition:width 1.1s cubic-bezier(.16,1,.3,1);
-  }
-  @media (max-width:900px){ .stack-grid{ grid-template-columns:1fr; } }
-
-  /* ===== SERVICES ===== */
-  .services-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
-  .service-card{ padding:30px 26px; }
-  .service-icon{
-    width:42px; height:42px; border-radius:11px; margin-bottom:20px;
-    background:linear-gradient(135deg, rgba(63,216,255,0.16), rgba(166,87,255,0.16));
-    display:flex; align-items:center; justify-content:center;
-  }
-  .service-card h3{ font-family:var(--font-display); font-size:1.02rem; margin-bottom:10px; }
-  .service-card p{ font-size:0.9rem; color:var(--text-1); }
-  @media (max-width:1000px){ .services-grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:600px){ .services-grid{ grid-template-columns:1fr; } }
-
-  /* ===== PROJECTS ===== */
-  .projects-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-  .project-card{ padding:0; overflow:hidden; display:flex; flex-direction:column; }
-  .project-top{
-    height:130px; position:relative;
-    background:linear-gradient(135deg, rgba(63,216,255,0.14), rgba(166,87,255,0.14));
-    display:flex; align-items:center; justify-content:center;
-  }
-  .project-top .badge{
-    position:absolute; top:14px; right:14px;
-    font-family:var(--font-mono); font-size:0.66rem; padding:5px 11px;
-    border-radius:100px; border:1px solid var(--border-bright); color:var(--text-1);
-    background:rgba(6,6,10,0.5);
-  }
-  .project-top .mark{ font-family:var(--font-display); font-size:1.8rem; font-weight:700; color:rgba(255,255,255,0.7); }
-  .project-body{ padding:26px; display:flex; flex-direction:column; flex:1; }
-  .project-body h3{ font-family:var(--font-display); font-size:1.1rem; margin-bottom:10px; }
-  .project-body p{ font-size:0.9rem; color:var(--text-1); margin-bottom:18px; flex:1; }
-  .tags{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:18px; }
-  .tag{ font-family:var(--font-mono); font-size:0.68rem; padding:5px 10px; border-radius:100px; background:rgba(255,255,255,0.06); color:var(--text-1); }
-  .project-link{ font-family:var(--font-mono); font-size:0.82rem; color:var(--blue); display:inline-flex; align-items:center; gap:6px; }
-  .project-link:hover{ text-decoration:underline; }
-  @media (max-width:1000px){ .projects-grid{ grid-template-columns:1fr 1fr; } }
-  @media (max-width:650px){ .projects-grid{ grid-template-columns:1fr; } }
-
-  /* ===== DESIGN GALLERY ===== */
-  .design-tabs{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:36px; }
-  .design-tab{
-    font-family:var(--font-mono); font-size:0.78rem; padding:9px 16px;
-    border-radius:100px; border:1px solid var(--border-bright); color:var(--text-1);
-    background:transparent; cursor:pointer; transition:all .2s ease;
-  }
-  .design-tab span{ color:var(--text-2); }
-  .design-tab:hover{ border-color:var(--blue); color:var(--text-0); }
-  .design-tab.active{
-    background:linear-gradient(100deg,var(--blue),var(--purple));
-    color:#06060a; border-color:transparent;
-  }
-  .design-tab.active span{ color:rgba(6,6,10,0.6); }
-  .design-grid{
-    display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));
-    gap:14px;
-  }
-  .design-tile{
-    display:none;
-    border-radius:12px; overflow:hidden; border:1px solid var(--border);
-    background:var(--glass); transition:transform .25s ease, border-color .25s ease;
-    position:relative;
-  }
-  .design-tile.show{ display:block; }
-  .design-tile:hover{ transform:translateY(-3px); border-color:var(--border-bright); }
-  .design-tile img, .design-tile video{
-    width:100%; height:130px; object-fit:cover; display:block;
-    background:rgba(255,255,255,0.03);
-  }
-  .design-tile-label{
-    display:block; padding:8px 10px; font-size:0.7rem; color:var(--text-1);
-    font-family:var(--font-mono); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  }
-  .design-note{
-    font-family:var(--font-mono); font-size:0.78rem; color:var(--text-2);
-    margin-top:24px;
-  }
-
-  /* ===== NOW / STATUS SECTION ===== */
-  .now-panel{ padding:40px; }
-  .now-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:0; }
-  .now-item{ display:flex; gap:16px; padding:18px 10px; border-bottom:1px solid var(--border); }
-  .now-item:nth-last-child(-n+1), .now-item:nth-last-child(-n+2){ border-bottom:none; }
-  .now-tag{ font-family:var(--font-mono); font-size:0.68rem; padding:5px 10px; border-radius:6px; height:fit-content; white-space:nowrap; }
-  .now-tag.build{ background:rgba(63,216,255,0.12); color:var(--blue); }
-  .now-tag.teach{ background:rgba(166,87,255,0.12); color:var(--purple); }
-  .now-tag.grow{ background:rgba(255,79,201,0.12); color:var(--magenta); }
-  .now-item p{ font-size:0.92rem; color:var(--text-1); }
-  @media (max-width:760px){ .now-grid{ grid-template-columns:1fr; } }
-
-  /* ===== CONTACT ===== */
-  .contact-panel{
-    padding:70px 6vw; text-align:center; position:relative; overflow:hidden;
-  }
-  .contact-panel h2{
-    font-family:var(--font-display); font-weight:600; font-size:clamp(1.9rem,4vw,3rem);
-    margin-bottom:18px;
-  }
-  .contact-panel p{ color:var(--text-1); max-width:520px; margin:0 auto 36px; }
-  .contact-links{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
-
-  footer{
-    padding:34px 6vw; display:flex; justify-content:space-between; align-items:center;
-    border-top:1px solid var(--border); font-size:0.82rem; color:var(--text-2);
-    font-family:var(--font-mono);
-  }
-  @media (max-width:600px){ footer{ flex-direction:column; gap:10px; text-align:center; } }
-
-  /* cursor glow */
-  .cursor-glow{
-    position:fixed; width:380px; height:380px; border-radius:50%;
-    background:radial-gradient(circle, rgba(166,87,255,0.10), transparent 70%);
-    pointer-events:none; z-index:0; transform:translate(-50%,-50%);
-    transition:opacity .3s ease; opacity:0;
-  }
-
-  /* ===== SCROLLSPY NAV ACTIVE STATE ===== */
-  .nav-links a.active {
-    color: var(--blue) !important;
-  }
+  .nav-links { display: flex; gap: 32px; font-size: 0.9rem; color: var(--text-1); }
+  .nav-links a { transition: color 0.2s ease; position: relative; font-weight: 500; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text-0); }
   .nav-links a.active::after {
-    width: 100% !important;
+    content: ''; position: absolute; bottom: -6px; left: 0; width: 100%; height: 2px;
+    background: var(--cyan); border-radius: 2px;
   }
 
-  /* ===== TYPEWRITER CURSOR ===== */
-  .cursor-blink {
-    display: inline-block;
-    color: var(--blue);
-    font-weight: 300;
-    margin-left: 2px;
-    animation: blink 0.9s infinite;
+  .nav-actions { display: flex; align-items: center; gap: 12px; }
+  .nav-cmd-btn {
+    font-family: var(--font-mono); font-size: 0.76rem;
+    padding: 7px 14px; border: 1px solid var(--border-bright); border-radius: 100px;
+    background: rgba(255, 255, 255, 0.03); color: var(--text-1); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease;
   }
-  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  .nav-cmd-btn:hover { border-color: var(--cyan); color: var(--text-0); background: rgba(0, 242, 255, 0.08); }
+  .nav-cmd-btn kbd {
+    background: rgba(255, 255, 255, 0.08); padding: 2px 6px; border-radius: 4px; font-size: 0.68rem; color: var(--text-0);
+  }
+  .nav-cta {
+    font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600;
+    padding: 8px 18px; border-radius: 100px;
+    background: var(--text-0); color: var(--bg-0) !important;
+    transition: all 0.25s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .nav-cta:hover {
+    background: var(--cyan); box-shadow: 0 0 20px rgba(0, 242, 255, 0.4); transform: translateY(-1px);
+  }
+  .nav-toggle { display: none; background: none; border: none; color: var(--text-0); font-size: 1.4rem; cursor: pointer; }
 
-  /* ===== LIVE PULSE BADGE ===== */
-  .badge.live-pulse {
+  @media (max-width: 860px) {
+    .nav-links {
+      position: fixed; top: 68px; right: 6vw; left: 6vw;
+      flex-direction: column; gap: 16px;
+      background: rgba(11, 13, 20, 0.98); backdrop-filter: blur(20px);
+      border: 1px solid var(--border-bright); border-radius: 16px;
+      padding: 24px; transform: translateY(-12px); opacity: 0; pointer-events: none;
+      transition: all 0.25s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+    .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .nav-toggle { display: block; }
+  }
+
+  /* ===== SECTION LAYOUT UTILS ===== */
+  .section { position: relative; padding: 110px 6vw; max-width: 1240px; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.12em;
+    color: var(--cyan); text-transform: uppercase; margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0, 242, 255, 0.06); padding: 5px 12px; border-radius: 100px;
+    border: 1px solid rgba(0, 242, 255, 0.2);
+  }
+  .eyebrow::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--cyan); box-shadow: 0 0 8px var(--cyan);
+  }
+  h2.headline {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(2rem, 3.6vw, 2.9rem); letter-spacing: -0.02em; line-height: 1.15;
+    margin-bottom: 16px; color: var(--text-0);
+  }
+  h2.headline em {
+    font-family: var(--font-serif); font-style: italic; font-weight: 400; color: #fff;
+  }
+  .lede { color: var(--text-1); font-size: 1.05rem; max-width: 640px; margin-bottom: 44px; line-height: 1.6; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== LUXURY CARD BASE ===== */
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     position: relative;
-    padding-left: 20px !important;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   }
-  .badge.live-pulse::before {
-    content: '';
-    position: absolute;
-    left: 8px; top: 50%;
-    transform: translateY(-50%);
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #3fff8f;
-    box-shadow: 0 0 10px #3fff8f;
-    animation: pulseDot 1.8s infinite;
+  .card:hover {
+    border-color: var(--border-bright);
+    background: var(--panel-hover);
+    box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.5);
+  }
+
+  /* ===== HERO SECTION ===== */
+  .hero {
+    min-height: 94vh; display: flex; flex-direction: column; justify-content: center;
+    padding-top: 110px; padding-bottom: 60px;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 50px; align-items: center; width: 100%;
+    margin-bottom: 48px;
+  }
+  .hero h1 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1.08; letter-spacing: -0.025em;
+    margin-bottom: 22px; color: var(--text-0);
+  }
+  .hero h1 em {
+    font-family: var(--font-serif); font-style: italic; font-weight: 400;
+    background: linear-gradient(110deg, #fff 20%, var(--cyan) 80%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p {
+    color: var(--text-1); font-size: 1.12rem; max-width: 580px; margin-bottom: 32px; line-height: 1.65;
+  }
+  .hero p strong { color: var(--text-0); font-weight: 600; }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+
+  .btn {
+    font-family: var(--font-mono); font-size: 0.84rem; padding: 13px 24px;
+    border-radius: 100px; transition: all 0.25s ease; display: inline-flex; align-items: center; gap: 8px;
+    cursor: pointer; text-decoration: none; font-weight: 600;
+  }
+  .btn-primary {
+    background: var(--text-0); color: var(--bg-0) !important; border: none;
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+  }
+  .btn-primary:hover {
+    background: var(--cyan); box-shadow: 0 0 28px rgba(0, 242, 255, 0.55);
+    transform: translateY(-2px); color: var(--bg-0) !important;
+  }
+  .btn-copy-email {
+    background: rgba(0, 242, 255, 0.08); border: 1px solid rgba(0, 242, 255, 0.3);
+    color: var(--cyan);
+  }
+  .btn-copy-email:hover {
+    background: var(--cyan); color: var(--bg-0); border-color: transparent;
+    transform: translateY(-2px); box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+  }
+  .btn-ghost {
+    background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-bright);
+    color: var(--text-0);
+  }
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.1); transform: translateY(-2px);
+  }
+
+  /* Hero Profile Card */
+  .profile-badge-card {
+    padding: 30px 24px; text-align: center; position: relative;
+  }
+  .profile-img-wrap {
+    position: relative; width: 170px; height: 170px; margin: 0 auto 18px;
+    border-radius: 50%; padding: 4px;
+    background: linear-gradient(135deg, rgba(0, 242, 255, 0.5), rgba(138, 43, 226, 0.5));
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+  }
+  .profile-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+    border: 3px solid var(--bg-0);
+  }
+  .live-status-dot {
+    position: absolute; bottom: 8px; right: 8px; width: 18px; height: 18px;
+    border-radius: 50%; background: var(--emerald); border: 3px solid var(--bg-0);
+    box-shadow: 0 0 12px var(--emerald); animation: pulseDot 2s infinite;
   }
   @keyframes pulseDot {
-    0% { transform: translateY(-50%) scale(0.9); opacity: 0.7; }
-    50% { transform: translateY(-50%) scale(1.3); opacity: 1; box-shadow: 0 0 14px #3fff8f; }
-    100% { transform: translateY(-50%) scale(0.9); opacity: 0.7; }
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.8; }
+  }
+  .profile-name { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; margin-bottom: 4px; }
+  .profile-title { font-family: var(--font-mono); font-size: 0.74rem; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
+  .profile-table { font-family: var(--font-mono); font-size: 0.76rem; text-align: left; }
+  .profile-row { display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid var(--border); color: var(--text-1); }
+  .profile-row b { color: var(--text-0); font-weight: 500; }
+
+  /* ===== HARD-METRIC TELEMETRY BAR (from igaurav.site) ===== */
+  .telemetry-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    padding: 20px 24px; border-radius: 16px;
+    background: rgba(14, 17, 27, 0.6); border: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+  }
+  .telemetry-cell { display: flex; flex-direction: column; gap: 4px; }
+  .telemetry-cell:not(:first-child) { border-left: 1px solid var(--border); padding-left: 20px; }
+  .telemetry-num {
+    font-family: var(--font-serif); font-style: italic; font-size: 1.7rem; font-weight: 600;
+    color: var(--text-0); line-height: 1;
+  }
+  .telemetry-num span { color: var(--cyan); font-family: var(--font-mono); font-size: 1.1rem; font-style: normal; }
+  .telemetry-lbl {
+    font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-2); text-transform: uppercase; letter-spacing: 0.06em;
   }
 
-  /* ===== PROJECT FILTERS ===== */
-  .project-filters {
-    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px;
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .telemetry-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .telemetry-cell:nth-child(3) { border-left: none; padding-left: 0; }
   }
-  .project-filter-btn {
+  @media (max-width: 550px) {
+    .telemetry-grid { grid-template-columns: 1fr; }
+    .telemetry-cell { border-left: none !important; padding-left: 0 !important; }
+  }
+
+  /* ===== ABOUT: THE EDUCATOR ADVANTAGE ===== */
+  .about-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 40px; align-items: start; }
+  .about-content p { color: var(--text-1); font-size: 1.04rem; margin-bottom: 20px; line-height: 1.7; }
+  .about-content strong { color: var(--text-0); font-weight: 600; }
+  
+  .pillar-list { display: flex; flex-direction: column; gap: 14px; }
+  .pillar-card {
+    padding: 18px 20px; display: flex; gap: 16px; align-items: flex-start;
+  }
+  .pillar-icon {
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    background: rgba(0, 242, 255, 0.08); border: 1px solid rgba(0, 242, 255, 0.2);
+    display: flex; align-items: center; justify-content: center; color: var(--cyan);
+    font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700;
+  }
+  .pillar-card h4 { font-family: var(--font-display); font-size: 0.98rem; margin-bottom: 4px; }
+  .pillar-card p { font-size: 0.85rem; color: var(--text-1); line-height: 1.5; }
+
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ===== INTERACTIVE ARCHITECTURE & DISCIPLINES ===== */
+  .disc-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .disc-tab {
+    font-family: var(--font-mono); font-size: 0.8rem; padding: 10px 18px;
+    border-radius: 100px; border: 1px solid var(--border); color: var(--text-1);
+    background: rgba(255, 255, 255, 0.02); cursor: pointer; transition: all 0.2s ease;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .disc-tab span { color: var(--text-2); font-size: 0.72rem; }
+  .disc-tab:hover { border-color: var(--border-bright); color: var(--text-0); }
+  .disc-tab.active {
+    background: var(--text-0); color: var(--bg-0); border-color: transparent; font-weight: 600;
+  }
+  .disc-tab.active span { color: rgba(0,0,0,0.6); }
+
+  .disc-panel {
+    padding: 34px; display: none;
+  }
+  .disc-panel.show { display: block; }
+  .disc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; gap: 20px; }
+  .disc-header h3 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; margin-bottom: 6px; }
+  .disc-header p { color: var(--text-1); font-size: 0.95rem; max-width: 600px; }
+  .disc-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .disc-pill {
+    font-family: var(--font-mono); font-size: 0.72rem; padding: 5px 12px;
+    border-radius: 6px; background: rgba(0, 242, 255, 0.08); color: var(--cyan);
+    border: 1px solid rgba(0, 242, 255, 0.2); font-weight: 500;
+  }
+  
+  .disc-code-box {
+    background: #040508; border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  }
+  .disc-code-bar {
+    background: rgba(18, 22, 35, 0.8); border-bottom: 1px solid var(--border);
+    padding: 9px 16px; display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-2);
+  }
+  .mockup-dots { display: flex; gap: 6px; }
+  .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .mockup-dot.red { background: #ff5f56; }
+  .mockup-dot.yellow { background: #ffbd2e; }
+  .mockup-dot.green { background: #27c93f; }
+  .disc-code-content {
+    padding: 20px; font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.7;
+    color: var(--text-0); overflow-x: auto;
+  }
+
+  /* ===== PROJECTS & CASE STUDIES ===== */
+  .proj-filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+  .proj-filter-btn {
     font-family: var(--font-mono); font-size: 0.78rem; padding: 8px 16px;
-    border-radius: 100px; border: 1px solid var(--border-bright); color: var(--text-1);
-    background: transparent; cursor: pointer; transition: all .2s ease;
+    border-radius: 100px; border: 1px solid var(--border); color: var(--text-1);
+    background: transparent; cursor: pointer; transition: all 0.2s ease;
   }
-  .project-filter-btn:hover { border-color: var(--blue); color: var(--text-0); }
-  .project-filter-btn.active {
-    background: linear-gradient(100deg, var(--blue), var(--purple));
-    color: #06060a; border-color: transparent; font-weight: 500;
+  .proj-filter-btn:hover { border-color: var(--border-bright); color: var(--text-0); }
+  .proj-filter-btn.active {
+    background: var(--text-0); color: var(--bg-0); border-color: transparent; font-weight: 600;
   }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .project-card {
+    padding: 0; overflow: hidden; display: flex; flex-direction: column;
+  }
+  .project-header-bar {
+    background: rgba(14, 18, 30, 0.9); border-bottom: 1px solid var(--border);
+    padding: 10px 18px; display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-2);
+  }
+  .project-body { padding: 28px; display: flex; flex-direction: column; flex: 1; }
+  .project-top-line { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .project-title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--text-0); }
+  
+  .badge-live {
+    font-family: var(--font-mono); font-size: 0.68rem; padding: 4px 10px;
+    border-radius: 100px; background: rgba(16, 185, 129, 0.12); color: var(--emerald);
+    border: 1px solid rgba(16, 185, 129, 0.3); display: inline-flex; align-items: center; gap: 6px; font-weight: 600;
+  }
+  .badge-live::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--emerald);
+    box-shadow: 0 0 8px var(--emerald);
+  }
+  .badge-build {
+    font-family: var(--font-mono); font-size: 0.68rem; padding: 4px 10px;
+    border-radius: 100px; background: rgba(245, 158, 11, 0.12); color: var(--amber);
+    border: 1px solid rgba(245, 158, 11, 0.3); font-weight: 600;
+  }
+
+  .project-desc { font-size: 0.92rem; color: var(--text-1); margin-bottom: 20px; line-height: 1.6; flex: 1; }
+  
+  .project-metric-box {
+    padding: 12px 14px; border-radius: 10px; background: rgba(0, 242, 255, 0.04);
+    border: 1px solid rgba(0, 242, 255, 0.15); margin-bottom: 18px;
+    font-size: 0.82rem; color: var(--text-0); font-family: var(--font-mono);
+  }
+  .project-metric-box span { color: var(--cyan); font-weight: 600; }
+
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .project-tag {
+    font-family: var(--font-mono); font-size: 0.68rem; padding: 4px 9px;
+    border-radius: 6px; background: rgba(255, 255, 255, 0.05); color: var(--text-1);
+  }
+  .project-link-row {
+    display: flex; align-items: center; justify-content: space-between; padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .project-action-link {
+    font-family: var(--font-mono); font-size: 0.82rem; color: var(--cyan);
+    display: inline-flex; align-items: center; gap: 6px; font-weight: 600;
+  }
+  .project-action-link:hover { text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ===== METHODOLOGY & PROCESS ===== */
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .process-card { padding: 26px 22px; }
+  .process-step-num {
+    font-family: var(--font-mono); font-size: 0.74rem; color: var(--cyan);
+    margin-bottom: 12px; font-weight: 600;
+  }
+  .process-card h3 { font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 8px; }
+  .process-card p { font-size: 0.88rem; color: var(--text-1); line-height: 1.5; }
+
+  @media (max-width: 960px) { .process-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 550px) { .process-grid { grid-template-columns: 1fr; } }
+
+  /* ===== DESIGN GALLERY WITH LIGHTBOX ===== */
+  .design-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 30px; }
+  .design-tab {
+    font-family: var(--font-mono); font-size: 0.78rem; padding: 8px 16px;
+    border-radius: 100px; border: 1px solid var(--border); color: var(--text-1);
+    background: transparent; cursor: pointer; transition: all 0.2s ease;
+  }
+  .design-tab span { color: var(--text-2); font-size: 0.7rem; }
+  .design-tab:hover { border-color: var(--border-bright); color: var(--text-0); }
+  .design-tab.active {
+    background: var(--text-0); color: var(--bg-0); border-color: transparent; font-weight: 600;
+  }
+  .design-tab.active span { color: rgba(0,0,0,0.6); }
+
+  .design-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+  }
+  .design-tile {
+    display: none; border-radius: 12px; overflow: hidden; border: 1px solid var(--border);
+    background: var(--panel); transition: transform 0.25s ease, border-color 0.25s ease;
+    cursor: pointer; position: relative;
+  }
+  .design-tile.show { display: block; }
+  .design-tile:hover { transform: translateY(-4px); border-color: var(--cyan); }
+  .design-tile img, .design-tile video {
+    width: 100%; height: 140px; object-fit: cover; display: block;
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .design-tile-label {
+    display: block; padding: 9px 10px; font-size: 0.7rem; color: var(--text-1);
+    font-family: var(--font-mono); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    background: rgba(10, 13, 20, 0.85); border-top: 1px solid var(--border);
+  }
+
+  /* ===== CONTACT SECTION ===== */
+  .contact-panel {
+    padding: 70px 6vw; text-align: center;
+  }
+  .contact-panel h2 {
+    font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 4vw, 3.2rem);
+    margin-bottom: 16px;
+  }
+  .contact-panel h2 em { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--cyan); }
+  .contact-panel p { color: var(--text-1); max-width: 540px; margin: 0 auto 36px; font-size: 1.05rem; }
+  .contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  footer {
+    padding: 34px 6vw; display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--text-2);
+    font-family: var(--font-mono);
+  }
+  @media (max-width: 600px) { footer { flex-direction: column; gap: 10px; text-align: center; } }
+
+  /* ===== BACK TO TOP ===== */
+  .back-to-top {
+    position: fixed; bottom: 30px; right: 30px; z-index: 90;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(14, 17, 27, 0.9); border: 1px solid var(--border-bright);
+    color: var(--text-0); display: flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0; pointer-events: none; transition: all 0.3s ease;
+    backdrop-filter: blur(12px); box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  }
+  .back-to-top:hover {
+    background: var(--cyan); color: var(--bg-0); transform: translateY(-3px); border-color: transparent;
+  }
+  .back-to-top.show { opacity: 1; pointer-events: auto; }
 
   /* ===== TOAST NOTIFICATION ===== */
   .toast-notice {
     position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
-    background: rgba(11, 12, 20, 0.95); border: 1px solid var(--border-bright);
+    background: rgba(14, 18, 30, 0.96); border: 1px solid var(--cyan);
     backdrop-filter: blur(16px); color: var(--text-0); font-family: var(--font-mono);
     font-size: 0.84rem; padding: 12px 24px; border-radius: 100px; z-index: 1000;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); opacity: 0; pointer-events: none;
+    box-shadow: 0 10px 30px rgba(0, 242, 255, 0.2); opacity: 0; pointer-events: none;
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; gap: 10px;
   }
   .toast-notice.show {
     transform: translateX(-50%) translateY(0); opacity: 1; pointer-events: auto;
   }
-  .toast-icon { color: #3fff8f; font-size: 1rem; }
-
-  /* ===== BACK TO TOP BUTTON ===== */
-  .back-to-top {
-    position: fixed; bottom: 30px; right: 30px; z-index: 90;
-    width: 44px; height: 44px; border-radius: 50%;
-    background: var(--glass-strong); border: 1px solid var(--border-bright);
-    color: var(--text-0); display: flex; align-items: center; justify-content: center;
-    cursor: pointer; opacity: 0; pointer-events: none; transition: all 0.3s ease;
-    backdrop-filter: blur(12px); box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  }
-  .back-to-top:hover {
-    background: linear-gradient(135deg, var(--blue), var(--purple));
-    color: #06060a; transform: translateY(-3px); border-color: transparent;
-  }
-  .back-to-top.show { opacity: 1; pointer-events: auto; }
+  .toast-icon { color: var(--emerald); font-size: 1.1rem; }
 
   /* ===== LIGHTBOX MODAL ===== */
   .lightbox-overlay {
     position: fixed; inset: 0; z-index: 999;
-    background: rgba(4, 5, 8, 0.88); backdrop-filter: blur(20px);
+    background: rgba(4, 5, 8, 0.92); backdrop-filter: blur(20px);
     display: flex; align-items: center; justify-content: center;
     padding: 30px 2vw; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
   }
   .lightbox-overlay.active { opacity: 1; pointer-events: auto; }
   .lightbox-card {
-    background: rgba(11, 12, 20, 0.95); border: 1px solid var(--border-bright);
+    background: rgba(11, 14, 24, 0.98); border: 1px solid var(--border-bright);
     border-radius: 20px; max-width: 90vw; max-height: 90vh; width: 900px;
     display: flex; flex-direction: column; overflow: hidden; position: relative;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7); transform: scale(0.95); transition: transform 0.3s ease;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8); transform: scale(0.95); transition: transform 0.3s ease;
   }
   .lightbox-overlay.active .lightbox-card { transform: scale(1); }
   .lightbox-header {
@@ -472,10 +569,10 @@
     padding: 16px 24px; border-bottom: 1px solid var(--border);
     font-family: var(--font-mono); font-size: 0.85rem;
   }
-  .lightbox-title { color: var(--text-0); font-weight: 500; font-size: 0.95rem; }
+  .lightbox-title { color: var(--text-0); font-weight: 600; font-size: 0.95rem; }
   .lightbox-badge {
-    padding: 4px 12px; border-radius: 100px; background: rgba(63,216,255,0.12);
-    color: var(--blue); font-size: 0.72rem; letter-spacing: 0.05em; margin-left: 12px;
+    padding: 4px 12px; border-radius: 100px; background: rgba(0, 242, 255, 0.12);
+    color: var(--cyan); font-size: 0.72rem; letter-spacing: 0.05em; margin-left: 12px;
   }
   .lightbox-close {
     background: none; border: none; color: var(--text-1); font-size: 1.5rem;
@@ -492,7 +589,6 @@
   }
   .lightbox-media-container img, .lightbox-media-container video {
     max-width: 100%; max-height: 75vh; object-fit: contain; border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
   .lightbox-nav {
     position: absolute; top: 50%; transform: translateY(-50%);
@@ -501,52 +597,22 @@
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; transition: all 0.2s ease; backdrop-filter: blur(8px); z-index: 10;
   }
-  .lightbox-nav:hover { background: var(--blue); color: #000; border-color: transparent; }
+  .lightbox-nav:hover { background: var(--cyan); color: #000; border-color: transparent; }
   .lightbox-prev { left: 16px; }
   .lightbox-next { right: 16px; }
 
-  /* ===== MOUSE SPOTLIGHT BORDER GLOW ===== */
-  .glass {
-    --mouse-x: 50%;
-    --mouse-y: 50%;
-  }
-  .glass::after {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: 18px;
-    padding: 1px;
-    background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(63,216,255,0.35), transparent 60%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude;
-    opacity: 0; transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-  .glass:hover::after { opacity: 1; }
-
   /* ===== COMMAND PALETTE MODAL ===== */
-  .nav-cmd-btn {
-    font-family: var(--font-mono); font-size: 0.76rem;
-    padding: 7px 14px; border: 1px solid var(--border-bright); border-radius: 100px;
-    background: rgba(255,255,255,0.03); color: var(--text-1); cursor: pointer;
-    display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease;
-  }
-  .nav-cmd-btn:hover { border-color: var(--blue); color: var(--text-0); background: var(--glass-strong); }
-  .nav-cmd-btn kbd {
-    background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.68rem; color: var(--text-0);
-  }
-
   .cmd-overlay {
     position: fixed; inset: 0; z-index: 1001;
-    background: rgba(4, 5, 8, 0.82); backdrop-filter: blur(16px);
+    background: rgba(4, 5, 8, 0.85); backdrop-filter: blur(16px);
     display: flex; align-items: flex-start; justify-content: center; padding-top: 12vh;
     opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
   }
   .cmd-overlay.active { opacity: 1; pointer-events: auto; }
   .cmd-card {
-    background: rgba(11, 12, 20, 0.96); border: 1px solid var(--border-bright);
+    background: rgba(11, 14, 24, 0.98); border: 1px solid var(--border-bright);
     border-radius: 16px; width: 90vw; max-width: 640px; overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.8); transform: translateY(-15px); transition: transform 0.25s ease;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.8); transform: translateY(-15px); transition: transform 0.25s ease;
   }
   .cmd-overlay.active .cmd-card { transform: translateY(0); }
   .cmd-search-bar {
@@ -558,9 +624,7 @@
     font-family: var(--font-body); font-size: 1.05rem; width: 100%;
   }
   .cmd-search-bar input::placeholder { color: var(--text-2); }
-  .cmd-results {
-    max-height: 380px; overflow-y: auto; padding: 12px;
-  }
+  .cmd-results { max-height: 380px; overflow-y: auto; padding: 12px; }
   .cmd-group-label {
     font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-2);
     letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 12px 4px;
@@ -571,406 +635,647 @@
     font-size: 0.9rem; cursor: pointer; transition: all 0.15s ease;
   }
   .cmd-item:hover, .cmd-item.selected {
-    background: var(--glass-strong); color: var(--text-0); border-left: 2px solid var(--blue);
+    background: rgba(0, 242, 255, 0.08); color: var(--text-0); border-left: 2px solid var(--cyan);
   }
   .cmd-item-left { display: flex; align-items: center; gap: 10px; }
-  .cmd-item-badge {
-    font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-2);
-  }
-
-  /* ===== BROWSER WINDOW MOCKUP ===== */
-  .mockup-bar {
-    background: rgba(18, 20, 32, 0.9); border-bottom: 1px solid var(--border);
-    padding: 10px 16px; display: flex; align-items: center; justify-content: space-between;
-    font-family: var(--font-mono); font-size: 0.72rem;
-  }
-  .mockup-dots { display: flex; gap: 6px; }
-  .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .mockup-dot.red { background: #ff5f56; }
-  .mockup-dot.yellow { background: #ffbd2e; }
-  .mockup-dot.green { background: #27c93f; }
-  /* ===== ANTI-GRAVITY LEVITATION PHYSICS ===== */
-  @keyframes levitatePhysics {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(0.8deg); }
-  }
-  .levitate {
-    animation: levitatePhysics 6s ease-in-out infinite;
-  }
-  .levitate-slow {
-    animation: levitatePhysics 9s ease-in-out infinite 1.5s;
-  }
-  .levitate-fast {
-    animation: levitatePhysics 4.5s ease-in-out infinite 0.8s;
-  }
-
-  /* ===== MISSION CONTROL TELEMETRY BAR ===== */
-  .telemetry-bar {
-    display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
-    padding: 10px 22px; border-radius: 100px;
-    background: rgba(0, 242, 255, 0.05); border: 1px solid rgba(0, 242, 255, 0.2);
-    font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-1);
-    margin-bottom: 24px; width: fit-content; backdrop-filter: blur(12px);
-    box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
-  }
-  .telemetry-item { display: flex; align-items: center; gap: 6px; }
-  .telemetry-item b { color: var(--text-0); font-weight: 500; }
-  .pulse-green {
-    width: 8px; height: 8px; border-radius: 50%; background: #00ff88;
-    box-shadow: 0 0 12px #00ff88; animation: pulseDot 1.8s infinite;
-  }
+  .cmd-item-badge { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-2); }
 </style>
 </head>
 <body>
 
-<div class="layer-bg"></div>
-<div class="layer-gradient"></div>
-<canvas id="particles"></canvas>
-<div class="cursor-glow" id="cursorGlow"></div>
+<!-- ATMOSPHERE & TECHNICAL GRID BACKGROUND (ZERO NOISE) -->
+<div class="bg-atmosphere"></div>
+<div class="bg-grid"></div>
+<div class="mouse-spotlight" id="mouseSpotlight"></div>
 
+<!-- NAVIGATION -->
 <nav id="nav">
-  <div class="logo">ND<span>.</span></div>
+  <div class="logo">
+    <div class="logo-mark">ND</div>
+    <span>Nii Darko</span>
+  </div>
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
-    <li><a href="#stack">Stack</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#projects">Projects</a></li>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#projects">Work &amp; Case Studies</a></li>
+    <li><a href="#methodology">Process</a></li>
     <li><a href="#design">Design</a></li>
-    <li><a href="#now">Now</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
-  <div style="display:flex; align-items:center; gap:12px;">
-    <button class="nav-cmd-btn" id="cmdKTrigger" title="Open Command Search Palette"><span style="font-size:0.85rem">🔍</span> Search <kbd>⌘K</kbd></button>
-    <a href="#contact" class="nav-cta">LET'S TALK</a>
+  <div class="nav-actions">
+    <button class="nav-cmd-btn" id="cmdKTrigger" title="Open Command Palette (⌘K / Ctrl+K)">
+      <span>🔍</span> Search <kbd>⌘K</kbd>
+    </button>
+    <a href="#contact" class="nav-cta">Let's Talk →</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
   </div>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
 </nav>
 
-<!-- HERO -->
+<!-- HERO SECTION -->
 <section class="hero section">
   <div class="hero-grid">
     <div>
-      <div class="telemetry-bar reveal">
-        <div class="telemetry-item"><span class="pulse-green"></span> <span>MISSION:</span> <b>OPERATIONAL</b></div>
-        <div class="telemetry-item"><span>ENGINE:</span> <b>FULL-STACK ARCHITECTURE</b></div>
-        <div class="telemetry-item"><span>LIVE SAAS:</span> <b>4 PLATFORMS</b></div>
-        <div class="telemetry-item"><span>STACK:</span> <b>DJANGO · NEXT.JS · FLUTTER</b></div>
-      </div>
-      <div class="eyebrow reveal">FULL-STACK ENGINEER · ACCRA, GHANA</div>
-      <h1 class="reveal">I build production software <span class="grad" id="heroTypewriter">solo</span><span class="cursor-blink">|</span> — backend, frontend, and mobile.</h1>
-      <p class="reveal">12+ years teaching Computing and Mathematics. Years architecting and shipping real SaaS products end to end. I work in Django, Next.js, and Flutter — and I ship things that get used.</p>
+      <div class="eyebrow reveal">FULL-STACK SYSTEMS ENGINEER · ACCRA, GHANA</div>
+      <h1 class="reveal">I architect and ship <em>production software solo</em> — from database to mobile app.</h1>
+      <p class="reveal">
+        <strong>12+ years of mathematical and computing rigor</strong> combined with deep full-stack execution. I specialize in Django REST, Next.js, Flutter, and African payment/offline systems — shipping products that run in production and generate real business value.
+      </p>
       <div class="hero-ctas reveal">
-        <a href="#projects" class="btn btn-primary">See the work →</a>
-        <button class="btn copy-email-btn" title="Copy email address to clipboard">📋 Copy Email: darkosammy2@gmail.com</button>
-        <a href="#contact" class="btn btn-ghost">Work with me</a>
+        <a href="#projects" class="btn btn-primary">Explore Case Studies →</a>
+        <button class="btn btn-copy-email copy-email-btn" title="Copy email address to clipboard">
+          📋 darkosammy2@gmail.com
+        </button>
+        <a href="https://wa.me/233542232515?text=Hi%20Nii,%20I%20reviewed%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project" target="_blank" rel="noopener" class="btn btn-ghost">
+          💬 WhatsApp
+        </a>
       </div>
     </div>
-    <div class="glass status-panel levitate reveal" style="text-align:center; padding:28px 24px;">
-      <div style="position:relative; width:180px; height:180px; margin:0 auto 20px; border-radius:50%; padding:4px; background:linear-gradient(135deg, var(--blue), var(--purple), var(--magenta)); box-shadow:0 0 30px rgba(0,242,255,0.4);">
-        <img src="Nii Darko.png" alt="Nii Darko — Full-Stack Engineer" style="width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; border:3px solid var(--bg-0);" />
-        <span style="position:absolute; bottom:6px; right:6px; width:20px; height:20px; border-radius:50%; background:#00ff88; border:3px solid var(--bg-0); box-shadow:0 0 14px #00ff88;" title="Available for work"></span>
+
+    <!-- PROFILE BADGE -->
+    <div class="card profile-badge-card reveal">
+      <div class="profile-img-wrap">
+        <img src="Nii Darko.png" alt="Nii Darko — Full-Stack Systems Engineer" />
+        <span class="live-status-dot" title="Available for engineering contracts &amp; roles"></span>
       </div>
-      <h3 style="font-family:var(--font-display); font-size:1.4rem; font-weight:700; margin-bottom:4px; color:var(--text-0);">Nii Darko</h3>
-      <div style="font-family:var(--font-mono); font-size:0.78rem; color:var(--blue); letter-spacing:0.05em; text-transform:uppercase; margin-bottom:16px;">FULL-STACK ENGINEER &amp; DESIGNER</div>
-      <div class="line"><span>ROLE</span><b>FOUNDER &amp; ENGINEER</b></div>
-      <div class="line"><span>STACK</span><b>DJANGO / NEXT.JS / FLUTTER</b></div>
-      <div class="line"><span>BUILDING</span><b>4 SAAS &amp; CLIENT SYSTEMS</b></div>
-      <div class="line"><span>LOCATION</span><b>ACCRA, GHANA</b></div>
+      <h3 class="profile-name">Nii Darko</h3>
+      <div class="profile-title">Full-Stack Systems Engineer</div>
+      <div class="profile-table">
+        <div class="profile-row"><span>EXPERIENCE</span><b>12+ Yrs Logic &amp; Computing</b></div>
+        <div class="profile-row"><span>PRIMARY STACK</span><b>Django · Next.js · Flutter</b></div>
+        <div class="profile-row"><span>PRODUCTION SYSTEMS</span><b>4 Live Client &amp; SaaS Apps</b></div>
+        <div class="profile-row"><span>LOCATION</span><b>Accra, Ghana (Global Remote)</b></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HARD-METRIC TELEMETRY BAR (borrowed from igaurav.site) -->
+  <div class="telemetry-grid reveal">
+    <div class="telemetry-cell">
+      <div class="telemetry-num">12<span>+ Yrs</span></div>
+      <div class="telemetry-lbl">Mathematical &amp; Systems Logic</div>
+    </div>
+    <div class="telemetry-cell">
+      <div class="telemetry-num">4<span> SaaS</span></div>
+      <div class="telemetry-lbl">Shipped in Production Solo</div>
+    </div>
+    <div class="telemetry-cell">
+      <div class="telemetry-num">100<span>%</span></div>
+      <div class="telemetry-lbl">End-to-End Stack Ownership</div>
+    </div>
+    <div class="telemetry-cell">
+      <div class="telemetry-num">&lt;100<span>ms</span></div>
+      <div class="telemetry-lbl">POS &amp; Sync Architecture</div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ABOUT: THE EDUCATOR ADVANTAGE -->
 <section class="section" id="about">
-  <div class="eyebrow reveal">ABOUT</div>
-  <h2 class="headline reveal">From the classroom to the codebase.</h2>
+  <div class="eyebrow reveal">FIRST-PRINCIPLES BACKGROUND</div>
+  <h2 class="headline reveal">From the <em>classroom</em> to the codebase.</h2>
   <div class="about-grid">
-    <div class="reveal">
-      <p>I've spent over a decade teaching Computing and Mathematics to JHS students — which means over a decade of explaining complex systems simply, debugging confusion in real time, and staying patient when nothing works on the first try. Turns out that's exactly the skill set software needs.</p>
-      <p>Outside the classroom, I design and ship full SaaS products solo — <strong>architecture, backend, frontend, mobile, payments, all of it.</strong> I'm not interested in tutorials. I'm interested in things that run in production and make money.</p>
-      <p>Right now I'm balancing a full teaching schedule with building multiple products in parallel — because waiting for "the right time" was never going to ship anything.</p>
+    <div class="about-content reveal">
+      <p>
+        I have spent over a decade teaching <strong>Computing and Mathematics to JHS students</strong>. In the classroom, there is no room for hand-waving: you must break down complex algorithms into intuitive first principles, debug confusion in real time, and build rock-solid foundational thinking.
+      </p>
+      <p>
+        That exact mindset translates directly into software architecture. When I design a database schema, an offline-first POS sync mechanism, or a multi-tenant payment routing flow, I build for <strong>clarity, zero ambiguity, and deterministic reliability</strong>.
+      </p>
+      <p>
+        Outside the classroom, I take ideas from blank repositories to paying customers — handling everything from PostgreSQL database indexing and REST APIs to responsive Next.js frontends and offline Flutter mobile applications.
+      </p>
     </div>
-    <div class="glass facts reveal">
-      <div class="fact"><span class="num">12+ yrs</span><span class="label">Teaching Computing & Math</span></div>
-      <div class="fact"><span class="num">Multiple</span><span class="label">SaaS products shipped solo</span></div>
-      <div class="fact"><span class="num">4-in-1</span><span class="label">Backend / Frontend / Mobile / Design</span></div>
-      <div class="fact"><span class="num">Accra</span><span class="label">Based in Ghana, building for Ghana</span></div>
+
+    <div class="pillar-list reveal">
+      <div class="card pillar-card">
+        <div class="pillar-icon">01</div>
+        <div>
+          <h4>First-Principles Rigor</h4>
+          <p>Mathematical grounding ensures clean architectural boundaries, zero technical debt shortcuts, and scalable abstractions.</p>
+        </div>
+      </div>
+      <div class="card pillar-card">
+        <div class="pillar-icon">02</div>
+        <div>
+          <h4>Full-Lifecycle Ownership</h4>
+          <p>Capable of delivering the entire product solo: UX design, backend schemas, frontend interfaces, mobile apps, and cloud deployment.</p>
+        </div>
+      </div>
+      <div class="card pillar-card">
+        <div class="pillar-icon">03</div>
+        <div>
+          <h4>Real African Market Resilience</h4>
+          <p>Engineered for erratic connectivity and local payment channels (MTN MoMo, Telecel Cash, Paystack, offline SQLite sync).</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- STACK -->
-<section class="section" id="stack">
-  <div class="eyebrow reveal">TECH STACK</div>
-  <h2 class="headline reveal">The stack I build with.</h2>
-  <p class="lede reveal">No tutorial-hopping. These are the tools I use to take a product from blank repo to paying customers.</p>
-  <div class="stack-grid">
-    <div class="glass stack-card reveal">
-      <h3>Backend</h3>
-      <div class="skill-row" data-pct="92"><div class="skill-top"><span>Django / DRF</span><span>92%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
-      <div class="skill-row" data-pct="88"><div class="skill-top"><span>PostgreSQL</span><span>88%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
-      <div class="skill-row" data-pct="80"><div class="skill-top"><span>Redis / WebSockets</span><span>80%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+<!-- INTERACTIVE ARCHITECTURE & DISCIPLINES -->
+<section class="section" id="architecture">
+  <div class="eyebrow reveal">SYSTEMS &amp; DISCIPLINES</div>
+  <h2 class="headline reveal">Technical <em>architecture</em> &amp; core stack.</h2>
+  <p class="lede reveal">No vanity percentages. Here is how I architect and execute real production software across disciplines.</p>
+
+  <div class="disc-tabs reveal" id="discTabs">
+    <button class="disc-tab active" data-tab="backend"><span>01</span> Backend &amp; Distributed Systems</button>
+    <button class="disc-tab" data-tab="frontend"><span>02</span> Frontend &amp; Web Applications</button>
+    <button class="disc-tab" data-tab="mobile"><span>03</span> Mobile &amp; Hardware I/O</button>
+    <button class="disc-tab" data-tab="infrastructure"><span>04</span> Payments &amp; African Infrastructure</button>
+  </div>
+
+  <!-- TAB 01: BACKEND -->
+  <div class="card disc-panel show reveal" id="panel-backend">
+    <div class="disc-header">
+      <div>
+        <h3>Backend &amp; Distributed Systems</h3>
+        <p>Architected with Django REST Framework &amp; PostgreSQL. Focused on schema normalization, multi-tenant isolation, and resilient caching.</p>
+      </div>
     </div>
-    <div class="glass stack-card reveal">
-      <h3>Frontend</h3>
-      <div class="skill-row" data-pct="90"><div class="skill-top"><span>Next.js / React</span><span>90%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
-      <div class="skill-row" data-pct="85"><div class="skill-top"><span>TypeScript</span><span>85%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
-      <div class="skill-row" data-pct="82"><div class="skill-top"><span>Tailwind CSS</span><span>82%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+    <div class="disc-pills">
+      <span class="disc-pill">Django 5 / DRF</span>
+      <span class="disc-pill">PostgreSQL &amp; Indexing</span>
+      <span class="disc-pill">Redis Caching</span>
+      <span class="disc-pill">Celery Task Queues</span>
+      <span class="disc-pill">JWT &amp; 2FA Security</span>
+      <span class="disc-pill">Multi-Tenant Architecture</span>
     </div>
-    <div class="glass stack-card reveal">
-      <h3>Mobile</h3>
-      <div class="skill-row" data-pct="84"><div class="skill-top"><span>Flutter / Dart</span><span>84%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
-      <div class="skill-row" data-pct="78"><div class="skill-top"><span>Bluetooth / Hardware I/O</span><span>78%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
-    </div>
-    <div class="glass stack-card levitate-slow reveal" style="grid-column: span 2;">
-      <div class="mockup-bar">
+    <div class="disc-code-box">
+      <div class="disc-code-bar">
         <div class="mockup-dots"><span class="mockup-dot red"></span><span class="mockup-dot yellow"></span><span class="mockup-dot green"></span></div>
-        <span class="mockup-url">sys://build-log</span>
-        <span>BASH</span>
+        <span>architecture://backend/dwaso_sync_engine.py</span>
+        <span>PYTHON / DJANGO</span>
       </div>
-      <div style="padding: 20px; font-family: var(--font-mono); font-size: 0.8rem; color: #00f2ff; line-height: 1.7;">
-        <div><span style="color:#8a2be2">$</span> system init --mode=production</div>
-        <div style="color:#00ff88">✔ System Architecture: Django REST Framework + PostgreSQL initialized</div>
-        <div style="color:#00ff88">✔ Frontend Interface: Next.js 14 App Router + WebGL Particles ready</div>
-        <div style="color:#00ff88">✔ Mobile Engine: Flutter Cross-Platform sync enabled</div>
-        <div style="color:var(--text-1)">[INFO] 12+ years education background loaded — complex problem solving 100% active.</div>
+      <pre class="disc-code-content"><code># Multi-Tenant Offline Sync Resolver with Conflict Management
+class POSSyncResolver:
+    @transaction.atomic
+    def process_offline_batch(self, tenant_id, device_id, transactions_payload):
+        tenant = Tenant.objects.select_for_update().get(id=tenant_id)
+        synced_records = []
+        for tx in transactions_payload:
+            # Deterministic idempotency key verification
+            if TransactionLedger.objects.filter(idempotency_key=tx['idempotency_key']).exists():
+                continue
+            record = TransactionLedger.objects.create(
+                tenant=tenant, device_id=device_id,
+                amount=tx['amount'], payment_channel=tx['channel'],
+                timestamp=tx['client_timestamp'], status='SETTLED'
+            )
+            # Trigger background inventory reconciliation via Celery
+            reconcile_inventory_batch.delay(tenant_id, tx['items'])
+            synced_records.append(record.id)
+        return {"status": "SUCCESS", "synced_count": len(synced_records)}</code></pre>
+    </div>
+  </div>
+
+  <!-- TAB 02: FRONTEND -->
+  <div class="card disc-panel" id="panel-frontend">
+    <div class="disc-header">
+      <div>
+        <h3>Modern Frontend &amp; Real-Time Web</h3>
+        <p>Component-driven user experiences in Next.js 14+ App Router, React Server Components, and TypeScript. Optimized for sub-second page loads.</p>
       </div>
+    </div>
+    <div class="disc-pills">
+      <span class="disc-pill">Next.js 14/15 App Router</span>
+      <span class="disc-pill">React Server Components</span>
+      <span class="disc-pill">TypeScript</span>
+      <span class="disc-pill">Tailwind CSS</span>
+      <span class="disc-pill">Zustand State Management</span>
+      <span class="disc-pill">WebSockets</span>
+    </div>
+    <div class="disc-code-box">
+      <div class="disc-code-bar">
+        <div class="mockup-dots"><span class="mockup-dot red"></span><span class="mockup-dot yellow"></span><span class="mockup-dot green"></span></div>
+        <span>app/(dashboard)/pos/checkout/page.tsx</span>
+        <span>TYPESCRIPT / NEXT.JS</span>
+      </div>
+      <pre class="disc-code-content"><code>// Real-time POS Cart State with Optimistic UI & Webhook Telemetry
+export function POSCheckoutEngine({ storeId }: { storeId: string }) {
+  const { cart, total, processPayment } = usePOSStore();
+  const [status, setStatus] = useState&lt;'idle' | 'processing' | 'printed'&gt;('idle');
+
+  const handleCheckout = async (paymentType: 'CASH' | 'MOMO') => {
+    setStatus('processing');
+    const res = await processPayment({ storeId, items: cart, total, paymentType });
+    if (res.ok) {
+      await ThermalPrinterBridge.printReceipt(res.receiptPayload);
+      setStatus('printed');
+    }
+  };
+
+  return &lt;POSCartInterface total={total} onCheckout={handleCheckout} status={status} /&gt;;
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- TAB 03: MOBILE & HARDWARE -->
+  <div class="card disc-panel" id="panel-mobile">
+    <div class="disc-header">
+      <div>
+        <h3>Mobile Engineering &amp; Hardware I/O</h3>
+        <p>Cross-platform mobile apps built with Flutter &amp; Dart. Engineered for offline-first SQLite persistence and Bluetooth ESC/POS thermal printer bridges.</p>
+      </div>
+    </div>
+    <div class="disc-pills">
+      <span class="disc-pill">Flutter &amp; Dart</span>
+      <span class="disc-pill">Offline-First SQLite</span>
+      <span class="disc-pill">ESC/POS Thermal Printing</span>
+      <span class="disc-pill">Bluetooth Classic / BLE</span>
+      <span class="disc-pill">Android Native Packaging</span>
+      <span class="disc-pill">Hardware Barcode Scanner I/O</span>
+    </div>
+    <div class="disc-code-box">
+      <div class="disc-code-bar">
+        <div class="mockup-dots"><span class="mockup-dot red"></span><span class="mockup-dot yellow"></span><span class="mockup-dot green"></span></div>
+        <span>lib/services/printer_bluetooth_service.dart</span>
+        <span>DART / FLUTTER</span>
+      </div>
+      <pre class="disc-code-content"><code>// Direct Bluetooth ESC/POS Thermal Printer Protocol Implementation
+class ThermalPrinterService {
+  final BluetoothPrinterManager _manager = BluetoothPrinterManager();
+
+  Future&lt;bool&gt; printCustomerReceipt(ReceiptData receipt) async {
+    final List&lt;int&gt; bytes = [];
+    final generator = Generator(PaperSize.mm58, await CapabilityProfile.load());
+    
+    bytes.addAll(generator.text(receipt.storeName, styles: PosStyles(align: PosAlign.center, bold: true)));
+    bytes.addAll(generator.hr());
+    for (var item in receipt.items) {
+      bytes.addAll(generator.row([
+        PosColumn(text: item.name, width: 8),
+        PosColumn(text: "GH₵${item.price}", width: 4, styles: PosStyles(align: PosAlign.right)),
+      ]));
+    }
+    bytes.addAll(generator.cut());
+    return await _manager.writeBytes(bytes);
+  }
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- TAB 04: PAYMENTS -->
+  <div class="card disc-panel" id="panel-infrastructure">
+    <div class="disc-header">
+      <div>
+        <h3>Payments &amp; African Digital Infrastructure</h3>
+        <p>Direct integrations with Paystack, MTN Mobile Money, Telecel Cash, and Arkesel SMS. Automated webhook reconciliation and escrow splits.</p>
+      </div>
+    </div>
+    <div class="disc-pills">
+      <span class="disc-pill">Paystack API &amp; Webhooks</span>
+      <span class="disc-pill">MTN MoMo &amp; Telecel Cash</span>
+      <span class="disc-pill">Arkesel SMS Gateway</span>
+      <span class="disc-pill">Subaccount Split Payments</span>
+      <span class="disc-pill">Automated Invoicing</span>
+    </div>
+    <div class="disc-code-box">
+      <div class="disc-code-bar">
+        <div class="mockup-dots"><span class="mockup-dot red"></span><span class="mockup-dot yellow"></span><span class="mockup-dot green"></span></div>
+        <span>apps/payments/paystack_webhook_handler.py</span>
+        <span>PYTHON / DJANGO</span>
+      </div>
+      <pre class="disc-code-content"><code># Verified HMAC-SHA512 Webhook Engine with Split Settlements
+@csrf_exempt
+def paystack_webhook_receiver(request):
+    signature = request.headers.get('x-paystack-signature')
+    computed_hash = hmac.new(settings.PAYSTACK_SECRET_KEY.encode('utf-8'), request.body, hashlib.sha512).hexdigest()
+    if signature != computed_hash:
+        return HttpResponse(status=400)
+    
+    event_data = json.loads(request.body)
+    if event_data['event'] == 'charge.success':
+        reference = event_data['data']['reference']
+        settle_invoice_and_notify_sms.delay(reference, event_data['data']['customer']['email'])
+    return HttpResponse(status=200)</code></pre>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="section" id="services">
-  <div class="eyebrow reveal">SERVICES</div>
-  <h2 class="headline reveal">What I can build for you.</h2>
-  <div class="services-grid">
-    <div class="glass service-card reveal">
-      <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3fd8ff" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
-      <h3>Full-Stack SaaS</h3>
-      <p>From database schema to deployed UI — Django/DRF + Next.js, built to scale from day one, not bolted on later.</p>
-    </div>
-    <div class="glass service-card reveal">
-      <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a657ff" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="10" y1="19" x2="14" y2="19"/></svg></div>
-      <h3>Mobile Apps</h3>
-      <p>Cross-platform apps with Flutter — POS systems, business tools, anything that needs to run offline-first.</p>
-    </div>
-    <div class="glass service-card reveal">
-      <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff4fc9" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg></div>
-      <h3>Payments &amp; Messaging</h3>
-      <p>Paystack, MoMo, Hubtel, Arkesel — wired in correctly the first time, built for the African market specifically.</p>
-    </div>
-    <div class="glass service-card reveal">
-      <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3fd8ff" stroke-width="1.8"><path d="M4 19l5-10 4 6 3-4 4 8"/></svg></div>
-      <h3>Architecture &amp; MVPs</h3>
-      <p>Solo founder? I'll architect your product end to end, then help you ship a real first version fast.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
+<!-- PROJECTS & CASE STUDIES -->
 <section class="section" id="projects">
-  <div class="eyebrow reveal">SELECTED WORK</div>
-  <h2 class="headline reveal">Things I've actually shipped.</h2>
-  
-  <div class="project-filters reveal" id="projectFilters">
-    <button class="project-filter-btn active" data-proj-cat="all">All Projects <span>(7)</span></button>
-    <button class="project-filter-btn" data-proj-cat="saas">SaaS Platforms</button>
-    <button class="project-filter-btn" data-proj-cat="client">Client Systems</button>
-    <button class="project-filter-btn" data-proj-cat="stealth">Stealth &amp; In-Build</button>
+  <div class="eyebrow reveal">SELECTED PRODUCTION SYSTEMS</div>
+  <h2 class="headline reveal">Things I've <em>actually shipped</em> to paying clients.</h2>
+  <p class="lede reveal">Every system below was architected and built to solve real operational bottlenecks in retail, education, and professional services.</p>
+
+  <div class="proj-filters reveal" id="projectFilters">
+    <button class="proj-filter-btn active" data-proj-cat="all">All Systems (7)</button>
+    <button class="proj-filter-btn" data-proj-cat="saas">SaaS Platforms</button>
+    <button class="proj-filter-btn" data-proj-cat="client">Client Systems</button>
+    <button class="proj-filter-btn" data-proj-cat="stealth">Stealth &amp; In-Build</button>
   </div>
 
   <div class="projects-grid">
-    <div class="glass project-card reveal" data-proj-cat="saas">
-      <div class="mockup-bar">
+    <!-- DWASOPOS -->
+    <div class="card project-card reveal" data-proj-cat="saas">
+      <div class="project-header-bar">
         <div class="mockup-dots"><span class="mockup-dot red"></span><span class="mockup-dot yellow"></span><span class="mockup-dot green"></span></div>
-        <span class="mockup-url">dwasopos.app</span>
-        <span></span>
+        <span>dwasopos.app</span>
+        <span>PRODUCTION SAAS</span>
       </div>
-      <div class="project-top"><span class="badge live-pulse">LIVE</span><span class="mark">DW</span></div>
       <div class="project-body">
-        <h3>DwasoPOS</h3>
-        <p>A multi-platform POS system — desktop, web, and mobile — built for Ghanaian retail businesses. Real-time sync, offline-first, first client already live in Ghana.</p>
-        <div class="tags"><span class="tag">Django</span><span class="tag">Next.js</span><span class="tag">Flutter</span><span class="tag">PostgreSQL</span></div>
-        <a href="#contact" class="project-link">Ask me about it →</a>
-      </div>
-    </div>
-    <div class="glass project-card reveal" data-proj-cat="saas">
-      <div class="project-top"><span class="badge live-pulse">LIVE</span><span class="mark">FP</span></div>
-      <div class="project-body">
-        <h3>FinalPreps</h3>
-        <p>A BECE exam-prep SaaS for Ghanaian schools — multi-tenant "School Edition" architecture with revenue-sharing built directly into the payment flow.</p>
-        <div class="tags"><span class="tag">Django</span><span class="tag">Paystack</span><span class="tag">Multi-tenant</span></div>
-        <a href="https://finalpreps.com" target="_blank" rel="noopener" class="project-link">finalpreps.com →</a>
-      </div>
-    </div>
-    <div class="glass project-card reveal" data-proj-cat="client">
-      <div class="project-top"><span class="badge live-pulse">LIVE</span><span class="mark">P2A</span></div>
-      <div class="project-body">
-        <h3>Pure 2A &amp; Associates</h3>
-        <p>An enterprise platform for a chartered accounting and consultancy firm — AI financial consultant, a secure 2FA-protected client portal, and a full insights/publishing hub.</p>
-        <div class="tags"><span class="tag">Next.js 14</span><span class="tag">Django REST</span><span class="tag">GPT-4o</span></div>
-        <a href="https://pure2a.com" target="_blank" rel="noopener" class="project-link">pure2a.com →</a>
+        <div class="project-top-line">
+          <h3 class="project-title">DwasoPOS</h3>
+          <span class="badge-live">LIVE IN PRODUCTION</span>
+        </div>
+        <p class="project-desc">
+          Multi-platform POS platform (desktop, web, and mobile) engineered for Ghanaian retail businesses. Features offline-first SQLite synchronization, sub-100ms Bluetooth thermal receipt printing, and real-time inventory ledger.
+        </p>
+        <div class="project-metric-box">
+          <span>Impact:</span> First retail store live in Ghana · 100% offline checkout continuity during power/network outages.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Django REST</span>
+          <span class="project-tag">Next.js</span>
+          <span class="project-tag">Flutter</span>
+          <span class="project-tag">PostgreSQL</span>
+          <span class="project-tag">Bluetooth ESC/POS</span>
+        </div>
+        <div class="project-link-row">
+          <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-2);">SaaS Architecture</span>
+          <a href="#contact" class="project-action-link">Request Demo / Source Breakdown →</a>
+        </div>
       </div>
     </div>
-    <div class="glass project-card reveal" data-proj-cat="client">
-      <div class="project-top"><span class="badge live-pulse">LIVE</span><span class="mark">SX</span></div>
+
+    <!-- FINALPREPS -->
+    <div class="card project-card reveal" data-proj-cat="saas">
+      <div class="project-header-bar">
+        <div class="mockup-dots"><span class="mockup-dot red"></span><span class="mockup-dot yellow"></span><span class="mockup-dot green"></span></div>
+        <span>finalpreps.com</span>
+        <span>EDTECH SAAS</span>
+      </div>
       <div class="project-body">
-        <h3>Sellux Plaster Ltd</h3>
-        <p>A hybrid e-commerce and bespoke-quotation platform for an architectural finishing company — material catalogue, custom design requests, and a before/after project showcase.</p>
-        <div class="tags"><span class="tag">Django</span><span class="tag">Paystack Ghana</span><span class="tag">E-commerce</span></div>
-        <a href="https://selluxplaster.com" target="_blank" rel="noopener" class="project-link">selluxplaster.com →</a>
+        <div class="project-top-line">
+          <h3 class="project-title">FinalPreps</h3>
+          <span class="badge-live">LIVE PLATFORM</span>
+        </div>
+        <p class="project-desc">
+          BECE exam-prep SaaS for Ghanaian schools. Multi-tenant "School Edition" architecture with automated revenue-sharing built directly into the Paystack subscription checkout flow.
+        </p>
+        <div class="project-metric-box">
+          <span>Impact:</span> Full school multi-tenancy · Instant automated exam scoring &amp; question bank analytics.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Django</span>
+          <span class="project-tag">Paystack Split</span>
+          <span class="project-tag">Multi-tenant</span>
+          <span class="project-tag">PostgreSQL</span>
+        </div>
+        <div class="project-link-row">
+          <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-2);">EdTech Platform</span>
+          <a href="https://finalpreps.com" target="_blank" rel="noopener" class="project-action-link">Visit finalpreps.com →</a>
+        </div>
       </div>
     </div>
-    <div class="glass project-card reveal" data-proj-cat="client">
-      <div class="project-top"><span class="badge live-pulse">LIVE</span><span class="mark">DF</span></div>
+
+    <!-- PURE 2A -->
+    <div class="card project-card reveal" data-proj-cat="client">
+      <div class="project-header-bar">
+        <div class="mockup-dots"><span class="mockup-dot red"></span><span class="mockup-dot yellow"></span><span class="mockup-dot green"></span></div>
+        <span>pure2a.com</span>
+        <span>ENTERPRISE CONSULTING</span>
+      </div>
       <div class="project-body">
-        <h3>deFrimps Services</h3>
-        <p>A manufacturing-as-a-service platform for a luxury printing business — interactive 3D product previews and a dynamic pricing calculator with WhatsApp ordering built in.</p>
-        <div class="tags"><span class="tag">MERN</span><span class="tag">React Three Fiber</span><span class="tag">WhatsApp</span></div>
-        <a href="https://defrimps.com" target="_blank" rel="noopener" class="project-link">defrimps.com →</a>
+        <div class="project-top-line">
+          <h3 class="project-title">Pure 2A &amp; Associates</h3>
+          <span class="badge-live">LIVE PLATFORM</span>
+        </div>
+        <p class="project-desc">
+          Enterprise portal for a chartered accounting &amp; tax consultancy firm. Features an integrated AI Financial Consultant (GPT-4o), 2FA-secured client document portal, and an automated publishing hub.
+        </p>
+        <div class="project-metric-box">
+          <span>Impact:</span> Secure client onboarding · 2FA document exchange · Custom AI insights bot.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Next.js 14</span>
+          <span class="project-tag">Django REST</span>
+          <span class="project-tag">OpenAI GPT-4o</span>
+          <span class="project-tag">2FA Security</span>
+        </div>
+        <div class="project-link-row">
+          <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-2);">Consultancy Hub</span>
+          <a href="https://pure2a.com" target="_blank" rel="noopener" class="project-action-link">Visit pure2a.com →</a>
+        </div>
       </div>
     </div>
-    <div class="glass project-card reveal" data-proj-cat="stealth">
-      <div class="project-top"><span class="badge">IN BUILD</span><span class="mark">LD</span></div>
+
+    <!-- SELLUX PLASTER -->
+    <div class="card project-card reveal" data-proj-cat="client">
+      <div class="project-header-bar">
+        <div class="mockup-dots"><span class="mockup-dot red"></span><span class="mockup-dot yellow"></span><span class="mockup-dot green"></span></div>
+        <span>selluxplaster.com</span>
+        <span>E-COMMERCE &amp; QUOTES</span>
+      </div>
       <div class="project-body">
-        <h3>Local Dwaso</h3>
-        <p>A grocery e-commerce platform built for same-day delivery across Accra — buyer, vendor, and admin roles, loyalty points, and live order tracking.</p>
-        <div class="tags"><span class="tag">Django</span><span class="tag">Next.js</span><span class="tag">Flutter</span></div>
-        <a href="#contact" class="project-link">Ask me about it →</a>
+        <div class="project-top-line">
+          <h3 class="project-title">Sellux Plaster Ltd</h3>
+          <span class="badge-live">LIVE PLATFORM</span>
+        </div>
+        <p class="project-desc">
+          Hybrid e-commerce and bespoke quotation platform for an architectural finishing enterprise. Features dynamic project calculators, a comprehensive material catalogue, and Paystack Ghana payment integration.
+        </p>
+        <div class="project-metric-box">
+          <span>Impact:</span> Automated custom quotation generator · Seamless online orders &amp; Paystack processing.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Django</span>
+          <span class="project-tag">Paystack Ghana</span>
+          <span class="project-tag">Dynamic Quotations</span>
+        </div>
+        <div class="project-link-row">
+          <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-2);">Commercial Platform</span>
+          <a href="https://selluxplaster.com" target="_blank" rel="noopener" class="project-action-link">Visit selluxplaster.com →</a>
+        </div>
       </div>
     </div>
-    <div class="glass project-card reveal" data-proj-cat="stealth">
-      <div class="project-top"><span class="badge">IN STEALTH</span><span class="mark">??</span></div>
+
+    <!-- DEFRIMPS SERVICES -->
+    <div class="card project-card reveal" data-proj-cat="client">
+      <div class="project-header-bar">
+        <div class="mockup-dots"><span class="mockup-dot red"></span><span class="mockup-dot yellow"></span><span class="mockup-dot green"></span></div>
+        <span>defrimps.com</span>
+        <span>3D MANUFACTURING</span>
+      </div>
       <div class="project-body">
-        <h3>Confidential Project</h3>
-        <p>A global SaaS platform currently in active development. Details are under NDA for now — if you're a serious dev or partner, reach out directly.</p>
-        <div class="tags"><span class="tag">Django</span><span class="tag">Next.js</span><span class="tag">Stealth</span></div>
-        <a href="#contact" class="project-link">Get in touch →</a>
+        <div class="project-top-line">
+          <h3 class="project-title">deFrimps Services</h3>
+          <span class="badge-live">LIVE PLATFORM</span>
+        </div>
+        <p class="project-desc">
+          Manufacturing-as-a-service web application for a luxury printing brand. Includes interactive 3D product previews (React Three Fiber) and dynamic quantity-tier pricing with WhatsApp ordering automation.
+        </p>
+        <div class="project-metric-box">
+          <span>Impact:</span> Interactive 3D visualization · Instant WhatsApp quote-to-order pipeline.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">React Three Fiber</span>
+          <span class="project-tag">Node.js</span>
+          <span class="project-tag">WhatsApp API</span>
+        </div>
+        <div class="project-link-row">
+          <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-2);">3D Web App</span>
+          <a href="https://defrimps.com" target="_blank" rel="noopener" class="project-action-link">Visit defrimps.com →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOCAL DWASO (IN BUILD) -->
+    <div class="card project-card reveal" data-proj-cat="stealth">
+      <div class="project-header-bar">
+        <div class="mockup-dots"><span class="mockup-dot red"></span><span class="mockup-dot yellow"></span><span class="mockup-dot green"></span></div>
+        <span>localdwaso.app</span>
+        <span>E-COMMERCE &amp; LOGISTICS</span>
+      </div>
+      <div class="project-body">
+        <div class="project-top-line">
+          <h3 class="project-title">Local Dwaso</h3>
+          <span class="badge-build">IN ACTIVE BUILD</span>
+        </div>
+        <p class="project-desc">
+          Grocery &amp; fresh produce marketplace built for same-day delivery across Accra. Architecture includes vendor dashboards, rider dispatch geolocation, loyalty points, and live order tracking.
+        </p>
+        <div class="project-metric-box">
+          <span>Status:</span> Multi-vendor backend and Flutter mobile customer client currently in staging.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Django REST</span>
+          <span class="project-tag">Next.js</span>
+          <span class="project-tag">Flutter</span>
+          <span class="project-tag">Geolocation</span>
+        </div>
+        <div class="project-link-row">
+          <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-2);">Marketplace</span>
+          <a href="#contact" class="project-action-link">Inquire About Staging →</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- METHODOLOGY & PROCESS -->
+<section class="section" id="methodology">
+  <div class="eyebrow reveal">EXECUTION PLAYBOOK</div>
+  <h2 class="headline reveal">How I take products from <em>zero to production</em>.</h2>
+  <p class="lede reveal">Predictable milestones, rigorous testing, and clean software architecture without guesswork.</p>
 
-<!-- DESIGN WORK -->
+  <div class="process-grid">
+    <div class="card process-card reveal">
+      <div class="process-step-num">PHASE 01</div>
+      <h3>Architecture &amp; Schemas</h3>
+      <p>Data modeling, API contracts, PostgreSQL normalization, and multi-tenant isolation designed right before writing UI code.</p>
+    </div>
+    <div class="card process-card reveal">
+      <div class="process-step-num">PHASE 02</div>
+      <h3>Milestone Sprints</h3>
+      <p>Rapid iterative development with functional staging releases delivered in 1-2 week sprints. No phantom development.</p>
+    </div>
+    <div class="card process-card reveal">
+      <div class="process-step-num">PHASE 03</div>
+      <h3>Resilience &amp; Testing</h3>
+      <p>Payment webhooks, offline-first syncing, edge-case failure recovery, and mobile hardware I/O stress testing.</p>
+    </div>
+    <div class="card process-card reveal">
+      <div class="process-step-num">PHASE 04</div>
+      <h3>Deploy &amp; Scale</h3>
+      <p>Production cloud configuration, automated backups, SSL/DNS setup, and ongoing performance telemetry.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN WORK & CANVAS -->
 <section class="section" id="design">
-  <div class="eyebrow reveal">DESIGN WORK</div>
-  <h2 class="headline reveal">Before the code, there was the canvas.</h2>
-  <p class="lede reveal">Graphic design background — Canva, Adobe Illustrator, Inkscape. Flyers, logos, book covers, and catalogues built for real clients alongside the dev work.</p>
-  <div class="design-tabs reveal">
-    <button class="design-tab active" data-cat="Flyers">Flyers & Ads <span>(57)</span></button>
-      <button class="design-tab" data-cat="BookCovers">Book Covers <span>(5)</span></button>
-      <button class="design-tab" data-cat="Logos">Logos <span>(10)</span></button>
-      <button class="design-tab" data-cat="Catalogues">Catalogues <span>(1)</span></button>
-      <button class="design-tab" data-cat="Proposals">Proposals <span>(1)</span></button>
-  </div>
-  <div class="design-grid reveal">
-    <a href="Practice Maths2.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="BookCovers"><img src="Practice Maths2.jpg" alt="Math Workbook" loading="lazy" decoding="async"><span class="design-tile-label">Math Workbook</span></a>
-      <a href="Practice Maths1.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="BookCovers"><img src="Practice Maths1.jpg" alt="Past Questions" loading="lazy" decoding="async"><span class="design-tile-label">Past Questions</span></a>
-      <a href="Sellux Cover.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="BookCovers"><img src="Sellux Cover.jpg" alt="Catalogue Cover" loading="lazy" decoding="async"><span class="design-tile-label">Catalogue Cover</span></a>
-      <a href="The Overall Look.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="BookCovers"><img src="The Overall Look.jpg" alt="Design Book" loading="lazy" decoding="async"><span class="design-tile-label">Design Book</span></a>
-      <a href="canva-gallery/Elites_Maths_cover.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="BookCovers"><img src="canva-gallery/Elites_Maths_cover.jpg" alt="Elites_Maths_cover" loading="lazy" decoding="async"><span class="design-tile-label">Elites_Maths_cover</span></a>
-      <a href="Q1.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="Q1.jpg" alt="Logo 1" loading="lazy" decoding="async"><span class="design-tile-label">Logo 1</span></a>
-      <a href="DKlassics.PNG" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="DKlassics.PNG" alt="DKlassics" loading="lazy" decoding="async"><span class="design-tile-label">DKlassics</span></a>
-      <a href="Final1.png" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="Final1.png" alt="Final Logo" loading="lazy" decoding="async"><span class="design-tile-label">Final Logo</span></a>
-      <a href="g52.png" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="g52.png" alt="G52" loading="lazy" decoding="async"><span class="design-tile-label">G52</span></a>
-      <a href="Best.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="Best.jpg" alt="Best Logo" loading="lazy" decoding="async"><span class="design-tile-label">Best Logo</span></a>
-      <a href="IMG-20250517-WA0023.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="IMG-20250517-WA0023.jpg" alt="Logo 6" loading="lazy" decoding="async"><span class="design-tile-label">Logo 6</span></a>
-      <a href="canva-gallery/ChrisNaa_logo.png" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="canva-gallery/ChrisNaa_logo.png" alt="ChrisNaa_logo" loading="lazy" decoding="async"><span class="design-tile-label">ChrisNaa_logo</span></a>
-      <a href="canva-gallery/ChrisNaa_logo1.png" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="canva-gallery/ChrisNaa_logo1.png" alt="ChrisNaa_logo1" loading="lazy" decoding="async"><span class="design-tile-label">ChrisNaa_logo1</span></a>
-      <a href="canva-gallery/InsightW3b_logo.png" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="canva-gallery/InsightW3b_logo.png" alt="InsightW3b_logo" loading="lazy" decoding="async"><span class="design-tile-label">InsightW3b_logo</span></a>
-      <a href="canva-gallery/Links_logo.jpeg" target="_blank" rel="noopener" class="design-tile" data-cat="Logos"><img src="canva-gallery/Links_logo.jpeg" alt="Links_logo" loading="lazy" decoding="async"><span class="design-tile-label">Links_logo</span></a>
-      <a href="Sellux Plaster Catalogue.pdf" target="_blank" rel="noopener" class="design-tile" data-cat="Catalogues"><img src="Sellux Cover.jpg" alt="Catalogue PDF" loading="lazy" decoding="async"><span class="design-tile-label">Catalogue PDF</span></a>
-      <a href="Proposal.pdf" target="_blank" rel="noopener" class="design-tile" data-cat="Proposals"><img src="IMG-20250517-WA0023.jpg" alt="Proposal PDF" loading="lazy" decoding="async"><span class="design-tile-label">Proposal PDF</span></a>
-      <a href="Beginner1.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Beginner1.jpg" alt="Workshop Ad" loading="lazy" decoding="async"><span class="design-tile-label">Workshop Ad</span></a>
-      <a href="FB_IMG_1762892741072.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="FB_IMG_1762892741072.jpg" alt="Notice 1" loading="lazy" decoding="async"><span class="design-tile-label">Notice 1</span></a>
-      <a href="FB_IMG_1762892752613.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="FB_IMG_1762892752613.jpg" alt="Notice 2" loading="lazy" decoding="async"><span class="design-tile-label">Notice 2</span></a>
-      <a href="3M Final2.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="3M Final2.png" alt="3M Final" loading="lazy" decoding="async"><span class="design-tile-label">3M Final</span></a>
-      <a href="FB_IMG_1762892805105.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="FB_IMG_1762892805105.jpg" alt="Notice 3" loading="lazy" decoding="async"><span class="design-tile-label">Notice 3</span></a>
-      <a href="Queenzlook Sept3.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Queenzlook Sept3.jpg" alt="Queenzlook Sept" loading="lazy" decoding="async"><span class="design-tile-label">Queenzlook Sept</span></a>
-      <a href="Queenzlook flyer.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Queenzlook flyer.png" alt="Queenzlook Flyer" loading="lazy" decoding="async"><span class="design-tile-label">Queenzlook Flyer</span></a>
-      <a href="Flyer.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Flyer.png" alt="Promo Flyer" loading="lazy" decoding="async"><span class="design-tile-label">Promo Flyer</span></a>
-      <a href="Queenzlook.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Queenzlook.png" alt="Queenzlook" loading="lazy" decoding="async"><span class="design-tile-label">Queenzlook</span></a>
-      <a href="Kasoa2.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Kasoa2.jpg" alt="Kasoa Interview" loading="lazy" decoding="async"><span class="design-tile-label">Kasoa Interview</span></a>
-      <a href="Hiring1.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Hiring1.jpg" alt="Hiring Ad" loading="lazy" decoding="async"><span class="design-tile-label">Hiring Ad</span></a>
-      <a href="PriceListA4.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="PriceListA4.jpg" alt="Price List" loading="lazy" decoding="async"><span class="design-tile-label">Price List</span></a>
-      <a href="canva-gallery/Carpenter Service.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Carpenter Service.jpg" alt="Carpenter Service" loading="lazy" decoding="async"><span class="design-tile-label">Carpenter Service</span></a>
-      <a href="canva-gallery/ChrisNaa_Fashion.mp4" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><video src="canva-gallery/ChrisNaa_Fashion.mp4" muted playsinline preload="metadata"></video><span class="design-tile-label">ChrisNaa_Fashion</span></a>
-      <a href="canva-gallery/deFrimps (1).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/deFrimps (1).png" alt="deFrimps (1)" loading="lazy" decoding="async"><span class="design-tile-label">deFrimps (1)</span></a>
-      <a href="canva-gallery/deFrimps (2).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/deFrimps (2).png" alt="deFrimps (2)" loading="lazy" decoding="async"><span class="design-tile-label">deFrimps (2)</span></a>
-      <a href="canva-gallery/electronic-discount.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/electronic-discount.jpg" alt="electronic-discount" loading="lazy" decoding="async"><span class="design-tile-label">electronic-discount</span></a>
-      <a href="canva-gallery/Finalpreps Ad3 (1).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Finalpreps Ad3 (1).png" alt="Finalpreps Ad3 (1)" loading="lazy" decoding="async"><span class="design-tile-label">Finalpreps Ad3 (1)</span></a>
-      <a href="canva-gallery/grg.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/grg.png" alt="grg" loading="lazy" decoding="async"><span class="design-tile-label">grg</span></a>
-      <a href="canva-gallery/insightw3b-training-3.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/insightw3b-training-3.jpg" alt="insightw3b-training-3" loading="lazy" decoding="async"><span class="design-tile-label">insightw3b-training-3</span></a>
-      <a href="canva-gallery/insightw3b-training-4.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/insightw3b-training-4.jpg" alt="insightw3b-training-4" loading="lazy" decoding="async"><span class="design-tile-label">insightw3b-training-4</span></a>
-      <a href="canva-gallery/insightw3b.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/insightw3b.jpg" alt="insightw3b" loading="lazy" decoding="async"><span class="design-tile-label">insightw3b</span></a>
-      <a href="canva-gallery/Launching.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Launching.png" alt="Launching" loading="lazy" decoding="async"><span class="design-tile-label">Launching</span></a>
-      <a href="canva-gallery/Links (3).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Links (3).png" alt="Links (3)" loading="lazy" decoding="async"><span class="design-tile-label">Links (3)</span></a>
-      <a href="canva-gallery/modern-web-design.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/modern-web-design.jpg" alt="modern-web-design" loading="lazy" decoding="async"><span class="design-tile-label">modern-web-design</span></a>
-      <a href="canva-gallery/NAA.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/NAA.png" alt="NAA" loading="lazy" decoding="async"><span class="design-tile-label">NAA</span></a>
-      <a href="canva-gallery/Naa1.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Naa1.png" alt="Naa1" loading="lazy" decoding="async"><span class="design-tile-label">Naa1</span></a>
-      <a href="canva-gallery/Oria1.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Oria1.png" alt="Oria1" loading="lazy" decoding="async"><span class="design-tile-label">Oria1</span></a>
-      <a href="canva-gallery/Queenzlook Banner 1.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Queenzlook Banner 1.jpg" alt="Queenzlook Banner 1" loading="lazy" decoding="async"><span class="design-tile-label">Queenzlook Banner 1</span></a>
-      <a href="canva-gallery/RichMens.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/RichMens.jpg" alt="RichMens" loading="lazy" decoding="async"><span class="design-tile-label">RichMens</span></a>
-      <a href="canva-gallery/Sandals.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Sandals.jpg" alt="Sandals" loading="lazy" decoding="async"><span class="design-tile-label">Sandals</span></a>
-      <a href="canva-gallery/Slipper.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Slipper.jpg" alt="Slipper" loading="lazy" decoding="async"><span class="design-tile-label">Slipper</span></a>
-      <a href="canva-gallery/software-training.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/software-training.jpg" alt="software-training" loading="lazy" decoding="async"><span class="design-tile-label">software-training</span></a>
-      <a href="canva-gallery/Web and Mobile.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Web and Mobile.jpg" alt="Web and Mobile" loading="lazy" decoding="async"><span class="design-tile-label">Web and Mobile</span></a>
-      <a href="canva-gallery/Web dev.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Web dev.jpg" alt="Web dev" loading="lazy" decoding="async"><span class="design-tile-label">Web dev</span></a>
-      <a href="canva-gallery/web-dev-1.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/web-dev-1.jpg" alt="web-dev-1" loading="lazy" decoding="async"><span class="design-tile-label">web-dev-1</span></a>
-      <a href="canva-gallery/web-dev1-1.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/web-dev1-1.jpg" alt="web-dev1-1" loading="lazy" decoding="async"><span class="design-tile-label">web-dev1-1</span></a>
-      <a href="canva-gallery/Website Development.jpg" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Website Development.jpg" alt="Website Development" loading="lazy" decoding="async"><span class="design-tile-label">Website Development</span></a>
-      <a href="Afra K.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Afra K.png" alt="Afra K" loading="lazy" decoding="async"><span class="design-tile-label">Afra K</span></a>
-      <a href="Afra K1.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Afra K1.png" alt="Afra K1" loading="lazy" decoding="async"><span class="design-tile-label">Afra K1</span></a>
-      <a href="AFRA K2.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="AFRA K2.png" alt="AFRA K2" loading="lazy" decoding="async"><span class="design-tile-label">AFRA K2</span></a>
-      <a href="AFRA K3.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="AFRA K3.png" alt="AFRA K3" loading="lazy" decoding="async"><span class="design-tile-label">AFRA K3</span></a>
-      <a href="Afrak4.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Afrak4.png" alt="Afrak4" loading="lazy" decoding="async"><span class="design-tile-label">Afrak4</span></a>
-      <a href="Albert.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Albert.png" alt="Albert" loading="lazy" decoding="async"><span class="design-tile-label">Albert</span></a>
-      <a href="Albert1 (1).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Albert1 (1).png" alt="Albert1 (1)" loading="lazy" decoding="async"><span class="design-tile-label">Albert1 (1)</span></a>
-      <a href="Albert2.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Albert2.png" alt="Albert2" loading="lazy" decoding="async"><span class="design-tile-label">Albert2</span></a>
-      <a href="Albert3 (1).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Albert3 (1).png" alt="Albert3 (1)" loading="lazy" decoding="async"><span class="design-tile-label">Albert3 (1)</span></a>
-      <a href="Albert3.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Albert3.png" alt="Albert3" loading="lazy" decoding="async"><span class="design-tile-label">Albert3</span></a>
-      <a href="Bless House (4).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Bless House (4).png" alt="Bless House (4)" loading="lazy" decoding="async"><span class="design-tile-label">Bless House (4)</span></a>
-      <a href="Bless House (7).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Bless House (7).png" alt="Bless House (7)" loading="lazy" decoding="async"><span class="design-tile-label">Bless House (7)</span></a>
-      <a href="Fashion Week.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Fashion Week.png" alt="Fashion Week" loading="lazy" decoding="async"><span class="design-tile-label">Fashion Week</span></a>
-      <a href="nd (1).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="nd (1).png" alt="nd (1)" loading="lazy" decoding="async"><span class="design-tile-label">nd (1)</span></a>
-      <a href="Red and Pink Playful Strawberry Product Label (1).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Red and Pink Playful Strawberry Product Label (1).png" alt="Strawberry Label" loading="lazy" decoding="async"><span class="design-tile-label">Strawberry Label</span></a>
-      <a href="Royal Heritage Citation of Honour Certificate A3.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Royal Heritage Citation of Honour Certificate A3.png" alt="Royal Heritage Citation" loading="lazy" decoding="async"><span class="design-tile-label">Royal Heritage Citation</span></a>
-      <a href="Sandy (1).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Sandy (1).png" alt="Sandy (1)" loading="lazy" decoding="async"><span class="design-tile-label">Sandy (1)</span></a>
-      <a href="Sandy.png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="Sandy.png" alt="Sandy" loading="lazy" decoding="async"><span class="design-tile-label">Sandy</span></a>
-      <a href="White and Black Modern Happy Birthday Your Story (2).png" target="_blank" rel="noopener" class="design-tile" data-cat="Flyers"><img src="White and Black Modern Happy Birthday Your Story (2).png" alt="Happy Birthday Story" loading="lazy" decoding="async"><span class="design-tile-label">Happy Birthday Story</span></a>
-  </div>
-  <p class="design-note">Showing local design files — host this page in the same folder as your image assets (including the <code>canva-gallery/</code> subfolder) for these to render.</p>
-</section>
+  <div class="eyebrow reveal">BRAND &amp; VISUAL CRAFT</div>
+  <h2 class="headline reveal">Before the code, there was the <em>canvas</em>.</h2>
+  <p class="lede reveal">Graphic design background — Canva, Adobe Illustrator, and Inkscape. Flyers, identity systems, book covers, and catalogues built for real clients.</p>
 
-<!-- NOW -->
-<section class="section" id="now">
-  <div class="eyebrow reveal">RIGHT NOW</div>
-  <h2 class="headline reveal">What I'm actively working on.</h2>
-  <div class="glass now-panel reveal">
-    <div class="now-grid">
-      <div class="now-item"><span class="now-tag build">BUILDING</span><p>A multi-platform POS system for Ghanaian retail businesses — desktop, web, mobile.</p></div>
-      <div class="now-item"><span class="now-tag build">BUILDING</span><p>A global SaaS platform, currently in stealth.</p></div>
-      <div class="now-item"><span class="now-tag teach">TEACHING</span><p>Computing & Mathematics, JHS level — 12+ years running, still going.</p></div>
-    </div>
+  <div class="design-tabs reveal" id="designTabs">
+    <button class="design-tab active" data-cat="Flyers">Flyers &amp; Ads <span>(57)</span></button>
+    <button class="design-tab" data-cat="BookCovers">Book Covers <span>(5)</span></button>
+    <button class="design-tab" data-cat="Logos">Logos <span>(10)</span></button>
+    <button class="design-tab" data-cat="Catalogues">Catalogues <span>(1)</span></button>
+    <button class="design-tab" data-cat="Proposals">Proposals <span>(1)</span></button>
+  </div>
+
+  <div class="design-grid reveal" id="designGrid">
+    <!-- BOOK COVERS -->
+    <a href="Practice Maths2.jpg" class="design-tile" data-cat="BookCovers"><img src="Practice Maths2.jpg" alt="Math Workbook" loading="lazy"><span class="design-tile-label">Math Workbook</span></a>
+    <a href="Practice Maths1.jpg" class="design-tile" data-cat="BookCovers"><img src="Practice Maths1.jpg" alt="Past Questions" loading="lazy"><span class="design-tile-label">Past Questions</span></a>
+    <a href="Sellux Cover.jpg" class="design-tile" data-cat="BookCovers"><img src="Sellux Cover.jpg" alt="Catalogue Cover" loading="lazy"><span class="design-tile-label">Catalogue Cover</span></a>
+    <a href="The Overall Look.jpg" class="design-tile" data-cat="BookCovers"><img src="The Overall Look.jpg" alt="Design Book" loading="lazy"><span class="design-tile-label">Design Book</span></a>
+    <a href="canva-gallery/Elites_Maths_cover.jpg" class="design-tile" data-cat="BookCovers"><img src="canva-gallery/Elites_Maths_cover.jpg" alt="Elites Maths Cover" loading="lazy"><span class="design-tile-label">Elites Maths Cover</span></a>
+
+    <!-- LOGOS -->
+    <a href="Q1.jpg" class="design-tile" data-cat="Logos"><img src="Q1.jpg" alt="Logo 1" loading="lazy"><span class="design-tile-label">Logo 1</span></a>
+    <a href="DKlassics.PNG" class="design-tile" data-cat="Logos"><img src="DKlassics.PNG" alt="DKlassics" loading="lazy"><span class="design-tile-label">DKlassics</span></a>
+    <a href="Final1.png" class="design-tile" data-cat="Logos"><img src="Final1.png" alt="Final Logo" loading="lazy"><span class="design-tile-label">Final Logo</span></a>
+    <a href="g52.png" class="design-tile" data-cat="Logos"><img src="g52.png" alt="G52" loading="lazy"><span class="design-tile-label">G52</span></a>
+    <a href="Best.jpg" class="design-tile" data-cat="Logos"><img src="Best.jpg" alt="Best Logo" loading="lazy"><span class="design-tile-label">Best Logo</span></a>
+    <a href="IMG-20250517-WA0023.jpg" class="design-tile" data-cat="Logos"><img src="IMG-20250517-WA0023.jpg" alt="Logo 6" loading="lazy"><span class="design-tile-label">Logo 6</span></a>
+    <a href="canva-gallery/ChrisNaa_logo.png" class="design-tile" data-cat="Logos"><img src="canva-gallery/ChrisNaa_logo.png" alt="ChrisNaa Logo" loading="lazy"><span class="design-tile-label">ChrisNaa Logo</span></a>
+    <a href="canva-gallery/ChrisNaa_logo1.png" class="design-tile" data-cat="Logos"><img src="canva-gallery/ChrisNaa_logo1.png" alt="ChrisNaa Logo Alt" loading="lazy"><span class="design-tile-label">ChrisNaa Logo Alt</span></a>
+    <a href="canva-gallery/InsightW3b_logo.png" class="design-tile" data-cat="Logos"><img src="canva-gallery/InsightW3b_logo.png" alt="InsightW3b Logo" loading="lazy"><span class="design-tile-label">InsightW3b Logo</span></a>
+    <a href="canva-gallery/Links_logo.jpeg" class="design-tile" data-cat="Logos"><img src="canva-gallery/Links_logo.jpeg" alt="Links Logo" loading="lazy"><span class="design-tile-label">Links Logo</span></a>
+
+    <!-- CATALOGUES & PROPOSALS -->
+    <a href="Sellux Plaster Catalogue.pdf" class="design-tile" data-cat="Catalogues"><img src="Sellux Cover.jpg" alt="Catalogue PDF" loading="lazy"><span class="design-tile-label">Catalogue PDF</span></a>
+    <a href="Proposal.pdf" class="design-tile" data-cat="Proposals"><img src="IMG-20250517-WA0023.jpg" alt="Proposal PDF" loading="lazy"><span class="design-tile-label">Proposal PDF</span></a>
+
+    <!-- FLYERS & ADS -->
+    <a href="Beginner1.jpg" class="design-tile" data-cat="Flyers"><img src="Beginner1.jpg" alt="Workshop Ad" loading="lazy"><span class="design-tile-label">Workshop Ad</span></a>
+    <a href="FB_IMG_1762892741072.jpg" class="design-tile" data-cat="Flyers"><img src="FB_IMG_1762892741072.jpg" alt="Notice 1" loading="lazy"><span class="design-tile-label">Notice 1</span></a>
+    <a href="FB_IMG_1762892752613.jpg" class="design-tile" data-cat="Flyers"><img src="FB_IMG_1762892752613.jpg" alt="Notice 2" loading="lazy"><span class="design-tile-label">Notice 2</span></a>
+    <a href="3M Final2.png" class="design-tile" data-cat="Flyers"><img src="3M Final2.png" alt="3M Final" loading="lazy"><span class="design-tile-label">3M Final</span></a>
+    <a href="FB_IMG_1762892805105.jpg" class="design-tile" data-cat="Flyers"><img src="FB_IMG_1762892805105.jpg" alt="Notice 3" loading="lazy"><span class="design-tile-label">Notice 3</span></a>
+    <a href="Queenzlook Sept3.jpg" class="design-tile" data-cat="Flyers"><img src="Queenzlook Sept3.jpg" alt="Queenzlook Sept" loading="lazy"><span class="design-tile-label">Queenzlook Sept</span></a>
+    <a href="Queenzlook flyer.png" class="design-tile" data-cat="Flyers"><img src="Queenzlook flyer.png" alt="Queenzlook Flyer" loading="lazy"><span class="design-tile-label">Queenzlook Flyer</span></a>
+    <a href="Flyer.png" class="design-tile" data-cat="Flyers"><img src="Flyer.png" alt="Promo Flyer" loading="lazy"><span class="design-tile-label">Promo Flyer</span></a>
+    <a href="Queenzlook.png" class="design-tile" data-cat="Flyers"><img src="Queenzlook.png" alt="Queenzlook" loading="lazy"><span class="design-tile-label">Queenzlook</span></a>
+    <a href="Kasoa2.jpg" class="design-tile" data-cat="Flyers"><img src="Kasoa2.jpg" alt="Kasoa Interview" loading="lazy"><span class="design-tile-label">Kasoa Interview</span></a>
+    <a href="Hiring1.jpg" class="design-tile" data-cat="Flyers"><img src="Hiring1.jpg" alt="Hiring Ad" loading="lazy"><span class="design-tile-label">Hiring Ad</span></a>
+    <a href="PriceListA4.jpg" class="design-tile" data-cat="Flyers"><img src="PriceListA4.jpg" alt="Price List" loading="lazy"><span class="design-tile-label">Price List</span></a>
+    <a href="canva-gallery/Carpenter Service.jpg" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Carpenter Service.jpg" alt="Carpenter Service" loading="lazy"><span class="design-tile-label">Carpenter Service</span></a>
+    <a href="canva-gallery/ChrisNaa_Fashion.mp4" class="design-tile" data-cat="Flyers"><video src="canva-gallery/ChrisNaa_Fashion.mp4" muted playsinline preload="metadata"></video><span class="design-tile-label">ChrisNaa Fashion (Video)</span></a>
+    <a href="canva-gallery/deFrimps (1).png" class="design-tile" data-cat="Flyers"><img src="canva-gallery/deFrimps (1).png" alt="deFrimps 1" loading="lazy"><span class="design-tile-label">deFrimps 1</span></a>
+    <a href="canva-gallery/deFrimps (2).png" class="design-tile" data-cat="Flyers"><img src="canva-gallery/deFrimps (2).png" alt="deFrimps 2" loading="lazy"><span class="design-tile-label">deFrimps 2</span></a>
+    <a href="canva-gallery/Finalpreps Ad3 (1).png" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Finalpreps Ad3 (1).png" alt="Finalpreps Ad" loading="lazy"><span class="design-tile-label">Finalpreps Ad</span></a>
+    <a href="canva-gallery/insightw3b-training-3.jpg" class="design-tile" data-cat="Flyers"><img src="canva-gallery/insightw3b-training-3.jpg" alt="Insight Training" loading="lazy"><span class="design-tile-label">Insight Training</span></a>
+    <a href="canva-gallery/modern-web-design.jpg" class="design-tile" data-cat="Flyers"><img src="canva-gallery/modern-web-design.jpg" alt="Modern Web Design" loading="lazy"><span class="design-tile-label">Modern Web Design</span></a>
+    <a href="canva-gallery/Web and Mobile.jpg" class="design-tile" data-cat="Flyers"><img src="canva-gallery/Web and Mobile.jpg" alt="Web & Mobile" loading="lazy"><span class="design-tile-label">Web & Mobile</span></a>
+    <a href="Afra K.png" class="design-tile" data-cat="Flyers"><img src="Afra K.png" alt="Afra K" loading="lazy"><span class="design-tile-label">Afra K</span></a>
+    <a href="Albert.png" class="design-tile" data-cat="Flyers"><img src="Albert.png" alt="Albert" loading="lazy"><span class="design-tile-label">Albert</span></a>
+    <a href="Bless House (4).png" class="design-tile" data-cat="Flyers"><img src="Bless House (4).png" alt="Bless House" loading="lazy"><span class="design-tile-label">Bless House</span></a>
+    <a href="Sandy.png" class="design-tile" data-cat="Flyers"><img src="Sandy.png" alt="Sandy" loading="lazy"><span class="design-tile-label">Sandy</span></a>
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- CONTACT SECTION -->
 <section class="section" id="contact">
-  <div class="glass contact-panel reveal">
-    <h2>Let's build something.</h2>
-    <p>Open to select freelance work, technical co-founder conversations, and genuinely interesting problems. If it's real, reach out.</p>
+  <div class="card contact-panel reveal">
+    <div class="eyebrow" style="margin: 0 auto 16px;">LET'S BUILD TOGETHER</div>
+    <h2>Ready to ship something <em>exceptional</em>?</h2>
+    <p>
+      Open to full-time engineering roles, technical co-founder conversations, and high-impact contracting engagements. Let's discuss your product roadmap.
+    </p>
     <div class="contact-links">
-      <button class="btn btn-primary copy-email-btn" title="Copy email address">✉️ darkosammy2@gmail.com</button>
-      <a href="https://wa.me/233542232515" target="_blank" rel="noopener" class="btn btn-ghost">WhatsApp</a>
-      <a href="https://github.com/NiiDk" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+      <button class="btn btn-primary copy-email-btn" title="Copy email address">
+        ✉️ darkosammy2@gmail.com
+      </button>
+      <a href="https://wa.me/233542232515?text=Hi%20Nii,%20I'd%20like%20to%20discuss%20an%20engineering%20project" target="_blank" rel="noopener" class="btn btn-ghost">
+        💬 WhatsApp (+233 54 223 2515)
+      </a>
+      <a href="https://github.com/NiiDk" target="_blank" rel="noopener" class="btn btn-ghost">
+        💻 GitHub (@NiiDk)
+      </a>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <span>© 2026 Nii Darko</span>
-  <span>Built solo, like everything else.</span>
+  <span>© 2026 Nii Darko — Full-Stack Systems Engineer</span>
+  <span>Architected and built solo from Accra, Ghana 🇬🇭</span>
 </footer>
 
 <!-- FLOATING BACK TO TOP BUTTON -->
@@ -996,240 +1301,47 @@
       <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
       <div class="lightbox-media-container" id="lightboxMediaContainer"></div>
       <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">&#10095;</button>
-    <!-- COMMAND PALETTE SEARCH MODAL -->
+    </div>
+  </div>
+</div>
+
+<!-- COMMAND PALETTE SEARCH MODAL -->
 <div class="cmd-overlay" id="cmdPalette" aria-hidden="true">
   <div class="cmd-card">
     <div class="cmd-search-bar">
-      <span style="color:var(--blue); font-size:1.1rem;">🔍</span>
-      <input type="text" id="cmdInput" placeholder="Type a command or search (e.g. Django, DwasoPOS, Contact, Email)..." autocomplete="off" />
+      <span style="color:var(--cyan); font-size:1.1rem;">🔍</span>
+      <input type="text" id="cmdInput" placeholder="Type a command or search (e.g. DwasoPOS, Django, WhatsApp, Contact)..." autocomplete="off" />
       <span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--text-2); background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:4px;">ESC to close</span>
     </div>
     <div class="cmd-results" id="cmdResults"></div>
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- JAVASCRIPT LOGIC (PERFORMANCE OPTIMIZED) -->
 <script>
-  // ---------- DESIGN GALLERY FILTER ----------
-  const designTabs = document.querySelectorAll('.design-tab');
-  const designTiles = document.querySelectorAll('.design-tile');
-  function setDesignCat(cat) {
-    designTabs.forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
-    designTiles.forEach(tile => tile.classList.toggle('show', tile.dataset.cat === cat));
+  // ---------- SOFT MOUSE SPOTLIGHT ----------
+  const spotlight = document.getElementById('mouseSpotlight');
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    window.addEventListener('mousemove', (e) => {
+      spotlight.style.opacity = '1';
+      spotlight.style.left = e.clientX + 'px';
+      spotlight.style.top = e.clientY + 'px';
+    });
   }
-  designTabs.forEach(tab => tab.addEventListener('click', () => setDesignCat(tab.dataset.cat)));
-  if (designTabs.length) setDesignCat(designTabs[0].dataset.cat);
 
-  // ---------- NAV ----------
+  // ---------- NAV SCROLL & MOBILE TOGGLE ----------
   const nav = document.getElementById('nav');
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
+
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 30);
-  });
-  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
-
-  // ---------- SCROLL REVEAL ----------
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 60);
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  revealEls.forEach(el => io.observe(el));
-
-  // ---------- SKILL BARS ----------
-  const skillRows = document.querySelectorAll('.skill-row');
-  const skillIO = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const pct = entry.target.getAttribute('data-pct');
-        entry.target.querySelector('.bar-fill').style.width = pct + '%';
-        skillIO.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.4 });
-  skillRows.forEach(el => skillIO.observe(el));
-
-  // ---------- CURSOR GLOW (desktop only) ----------
-  const glow = document.getElementById('cursorGlow');
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    window.addEventListener('mousemove', (e) => {
-      glow.style.opacity = '1';
-      glow.style.left = e.clientX + 'px';
-      glow.style.top = e.clientY + 'px';
-    });
-  }
-
-  // ---------- THREE.JS BACKGROUND ----------
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const canvas = document.getElementById('particles');
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 60;
-
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  // Particle network
-  const particleCount = window.innerWidth < 700 ? 60 : 140;
-  const positions = new Float32Array(particleCount * 3);
-  for (let i = 0; i < particleCount; i++) {
-    positions[i * 3] = (Math.random() - 0.5) * 140;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 90;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 80;
-  }
-  const particleGeo = new THREE.BufferGeometry();
-  particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  const particleMat = new THREE.PointsMaterial({ color: 0x3fd8ff, size: 0.6, transparent: true, opacity: 0.55 });
-  const particles = new THREE.Points(particleGeo, particleMat);
-  scene.add(particles);
-
-  // Connecting lines
-  const linePositions = [];
-  for (let i = 0; i < particleCount; i++) {
-    let nearestDist = Infinity, nearestIdx = -1;
-    for (let j = 0; j < particleCount; j++) {
-      if (i === j) continue;
-      const dx = positions[i*3] - positions[j*3];
-      const dy = positions[i*3+1] - positions[j*3+1];
-      const dz = positions[i*3+2] - positions[j*3+2];
-      const d = dx*dx + dy*dy + dz*dz;
-      if (d < nearestDist) { nearestDist = d; nearestIdx = j; }
-    }
-    if (nearestIdx !== -1 && Math.sqrt(nearestDist) < 28) {
-      linePositions.push(positions[i*3], positions[i*3+1], positions[i*3+2]);
-      linePositions.push(positions[nearestIdx*3], positions[nearestIdx*3+1], positions[nearestIdx*3+2]);
-    }
-  }
-  const lineGeo = new THREE.BufferGeometry();
-  lineGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(linePositions), 3));
-  const lineMat = new THREE.LineBasicMaterial({ color: 0xa657ff, transparent: true, opacity: 0.12 });
-  const lines = new THREE.LineSegments(lineGeo, lineMat);
-  scene.add(lines);
-
-  // Floating wireframe geometry
-  const shapes = [];
-  const geoTypes = [
-    new THREE.IcosahedronGeometry(6, 0),
-    new THREE.OctahedronGeometry(5, 0),
-    new THREE.TetrahedronGeometry(5.5, 0),
-    new THREE.IcosahedronGeometry(4, 0)
-  ];
-  const shapeColors = [0x3fd8ff, 0xa657ff, 0xff4fc9, 0x3fd8ff];
-  geoTypes.forEach((geo, i) => {
-    const mat = new THREE.MeshBasicMaterial({ color: shapeColors[i], wireframe: true, transparent: true, opacity: 0.35 });
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set(
-      (Math.random() - 0.5) * 100,
-      (Math.random() - 0.5) * 60,
-      (Math.random() - 0.5) * 40 - 10
-    );
-    scene.add(mesh);
-    shapes.push(mesh);
+    nav.classList.toggle('scrolled', window.scrollY > 20);
   });
 
-  let mouseX = 0, mouseY = 0;
-  window.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX / window.innerWidth - 0.5);
-    mouseY = (e.clientY / window.innerHeight - 0.5);
-  });
-
-  function animate() {
-    requestAnimationFrame(animate);
-    if (!reduceMotion) {
-      particles.rotation.y += 0.0006;
-      lines.rotation.y += 0.0006;
-      shapes.forEach((s, i) => {
-        s.rotation.x += 0.0018 + i * 0.0004;
-        s.rotation.y += 0.0022 + i * 0.0003;
-      });
-      camera.position.x += (mouseX * 8 - camera.position.x) * 0.02;
-      camera.position.y += (-mouseY * 8 - camera.position.y) * 0.02;
-      camera.lookAt(0, 0, 0);
-    }
-    renderer.render(scene, camera);
+  if (navToggle) {
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
   }
-  animate();
-
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-
-  // ---------- TYPEWRITER EFFECT ----------
-  const typewriterEl = document.getElementById('heroTypewriter');
-  if (typewriterEl) {
-    const words = ['solo', 'end-to-end', 'for scale', 'built to ship'];
-    let wordIdx = 0, charIdx = words[0].length, isDeleting = true;
-    function typeLoop() {
-      const currentWord = words[wordIdx];
-      if (isDeleting) {
-        charIdx--;
-        typewriterEl.textContent = currentWord.substring(0, charIdx);
-        if (charIdx === 0) {
-          isDeleting = false;
-          wordIdx = (wordIdx + 1) % words.length;
-          setTimeout(typeLoop, 400);
-          return;
-        }
-      } else {
-        charIdx++;
-        typewriterEl.textContent = currentWord.substring(0, charIdx);
-        if (charIdx === currentWord.length) {
-          isDeleting = true;
-          setTimeout(typeLoop, 2600);
-          return;
-        }
-      }
-      setTimeout(typeLoop, isDeleting ? 40 : 90);
-    }
-    setTimeout(typeLoop, 3000);
-  }
-
-  // ---------- COPY EMAIL & TOAST ----------
-  const toast = document.getElementById('toastNotice');
-  function showToast(msg) {
-    if (!toast) return;
-    toast.querySelector('.toast-msg').textContent = msg;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2800);
-  }
-  document.querySelectorAll('.copy-email-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      navigator.clipboard.writeText('darkosammy2@gmail.com').then(() => {
-        showToast('darkosammy2@gmail.com copied to clipboard!');
-      }).catch(() => {
-        showToast('Direct email: darkosammy2@gmail.com');
-      });
-    });
-  });
-
-  // ---------- PROJECT FILTERS ----------
-  const projFilterBtns = document.querySelectorAll('.project-filter-btn');
-  const projCards = document.querySelectorAll('.project-card');
-  projFilterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      projFilterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const cat = btn.dataset.projCat;
-      projCards.forEach(card => {
-        if (cat === 'all' || card.dataset.projCat === cat) {
-          card.style.display = 'flex';
-          card.classList.add('visible');
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
 
   // ---------- SCROLLSPY & BACK TO TOP ----------
   const backToTopBtn = document.getElementById('backToTop');
@@ -1243,7 +1355,7 @@
     }
     let currentSecId = '';
     sections.forEach(sec => {
-      const top = sec.offsetTop - 120;
+      const top = sec.offsetTop - 140;
       const height = sec.offsetHeight;
       if (scrollY >= top && scrollY < top + height) {
         currentSecId = sec.getAttribute('id');
@@ -1255,10 +1367,73 @@
   });
 
   if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
+
+  // ---------- SCROLL REVEAL OBSERVER ----------
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 40);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // ---------- INTERACTIVE DISCIPLINES TABS ----------
+  const discTabs = document.querySelectorAll('.disc-tab');
+  const discPanels = {
+    backend: document.getElementById('panel-backend'),
+    frontend: document.getElementById('panel-frontend'),
+    mobile: document.getElementById('panel-mobile'),
+    infrastructure: document.getElementById('panel-infrastructure')
+  };
+
+  discTabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      discTabs.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tabKey = btn.dataset.tab;
+      Object.keys(discPanels).forEach(key => {
+        if (discPanels[key]) {
+          discPanels[key].classList.toggle('show', key === tabKey);
+        }
+      });
+    });
+  });
+
+  // ---------- PROJECT CATEGORY FILTERS ----------
+  const projFilterBtns = document.querySelectorAll('.proj-filter-btn');
+  const projCards = document.querySelectorAll('.project-card');
+
+  projFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      projFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.projCat;
+      projCards.forEach(card => {
+        if (cat === 'all' || card.dataset.projCat === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // ---------- DESIGN GALLERY CATEGORY TABS ----------
+  const designTabs = document.querySelectorAll('.design-tab');
+  const designTiles = document.querySelectorAll('.design-tile');
+
+  function setDesignCat(cat) {
+    designTabs.forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+    designTiles.forEach(tile => tile.classList.toggle('show', tile.dataset.cat === cat));
+  }
+
+  designTabs.forEach(tab => tab.addEventListener('click', () => setDesignCat(tab.dataset.cat)));
+  if (designTabs.length) setDesignCat('Flyers');
 
   // ---------- LIGHTBOX MODAL ----------
   const lightboxModal = document.getElementById('lightboxModal');
@@ -1328,24 +1503,23 @@
     if (e.key === 'ArrowRight') updateLightboxContent((currentTileIndex + 1) % activeTilesList.length);
   });
 
-  // ---------- SPOTLIGHT & 3D TILT PHYSICS ----------
-  document.querySelectorAll('.glass').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
+  // ---------- COPY EMAIL & TOAST ----------
+  const toast = document.getElementById('toastNotice');
+  function showToast(msg) {
+    if (!toast) return;
+    toast.querySelector('.toast-msg').textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2800);
+  }
 
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -6;
-      const rotateY = ((x - centerX) / centerX) * 6;
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+  document.querySelectorAll('.copy-email-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigator.clipboard.writeText('darkosammy2@gmail.com').then(() => {
+        showToast('darkosammy2@gmail.com copied to clipboard!');
+      }).catch(() => {
+        showToast('Direct email: darkosammy2@gmail.com');
+      });
     });
   });
 
@@ -1356,15 +1530,15 @@
   const cmdKTrigger = document.getElementById('cmdKTrigger');
 
   const cmdData = [
-    { title: 'DwasoPOS — Retail POS Platform', group: 'Projects', action: () => { location.href = '#projects'; } },
-    { title: 'FinalPreps — BECE Exam SaaS', group: 'Projects', action: () => { location.href = '#projects'; } },
-    { title: 'Pure 2A & Associates Platform', group: 'Projects', action: () => { location.href = '#projects'; } },
-    { title: 'Sellux Plaster Ltd Platform', group: 'Projects', action: () => { location.href = '#projects'; } },
-    { title: 'deFrimps Services Platform', group: 'Projects', action: () => { location.href = '#projects'; } },
-    { title: 'Django & DRF Backend Stack', group: 'Stack', action: () => { location.href = '#stack'; } },
-    { title: 'Next.js & React Frontend Stack', group: 'Stack', action: () => { location.href = '#stack'; } },
-    { title: 'Flutter & Dart Mobile Stack', group: 'Stack', action: () => { location.href = '#stack'; } },
-    { title: 'Paystack & MoMo Integrations', group: 'Stack', action: () => { location.href = '#stack'; } },
+    { title: 'DwasoPOS — Offline-First Retail SaaS', group: 'Case Studies', action: () => { location.href = '#projects'; } },
+    { title: 'FinalPreps — BECE Exam-Prep SaaS', group: 'Case Studies', action: () => { location.href = '#projects'; } },
+    { title: 'Pure 2A & Associates Consulting Portal', group: 'Case Studies', action: () => { location.href = '#projects'; } },
+    { title: 'Sellux Plaster Ltd E-Commerce & Quotes', group: 'Case Studies', action: () => { location.href = '#projects'; } },
+    { title: 'deFrimps Services 3D Luxury Printing', group: 'Case Studies', action: () => { location.href = '#projects'; } },
+    { title: 'Backend & Django Architecture', group: 'Architecture', action: () => { location.href = '#architecture'; discTabs[0].click(); } },
+    { title: 'Next.js & Frontend Applications', group: 'Architecture', action: () => { location.href = '#architecture'; discTabs[1].click(); } },
+    { title: 'Flutter Mobile & Bluetooth POS Hardware', group: 'Architecture', action: () => { location.href = '#architecture'; discTabs[2].click(); } },
+    { title: 'Paystack, MoMo & African Payments', group: 'Architecture', action: () => { location.href = '#architecture'; discTabs[3].click(); } },
     { title: 'View Design Gallery (Flyers/Logos)', group: 'Design', action: () => { location.href = '#design'; } },
     { title: 'Copy Email Address (darkosammy2@gmail.com)', group: 'Quick Actions', action: () => { showToast('darkosammy2@gmail.com copied to clipboard!'); navigator.clipboard.writeText('darkosammy2@gmail.com'); } },
     { title: 'Open WhatsApp Chat (+233 54 223 2515)', group: 'Quick Actions', action: () => { window.open('https://wa.me/233542232515', '_blank'); } },
@@ -1378,7 +1552,7 @@
     const query = filterText.toLowerCase().trim();
     const filtered = cmdData.filter(item => item.title.toLowerCase().includes(query) || item.group.toLowerCase().includes(query));
     if (!filtered.length) {
-      cmdResults.innerHTML = `<div style="padding:20px; text-align:center; color:var(--text-2); font-family:var(--font-mono); font-size:0.85rem;">No matching commands found.</div>`;
+      cmdResults.innerHTML = `<div style="padding:20px; text-align:center; color:var(--text-2); font-family:var(--font-mono); font-size:0.85rem;">No matching results found.</div>`;
       return;
     }
 
