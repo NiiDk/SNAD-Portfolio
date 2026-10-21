@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engineering Offline-First POS Systems in Ghana | Samuel Nii Amu Darko</title><meta name="description" content="Designing local storage and synchronisation around interrupted internet connections.">
+<meta name="theme-color" content="#f6f5f1"><meta property="og:title" content="Engineering Offline-First POS Systems in Ghana | Samuel Nii Amu Darko"><meta property="og:description" content="Designing local storage and synchronisation around interrupted internet connections."><meta property="og:type" content="website">
+<link rel="icon" href="../assets/images/monogram.svg" type="image/svg+xml">
+<script src="../assets/js/theme.js"></script><link rel="stylesheet" href="../assets/css/portfolio.css"><script src="../assets/js/portfolio.js" defer></script>
+<noscript><style>.theme-toggle,.menu-toggle{display:none!important}@media(max-width:600px){.mobile-nav{display:flex;grid-column:1/-1;flex-wrap:wrap;gap:10px 22px;padding:0 0 18px}.mobile-nav a{padding:8px 0}}</style></noscript>
+</head><body class=""><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap"><nav class="desktop-nav" aria-label="Main navigation"><a href="../index.html">Home</a><a href="../about.html">About</a><a href="../projects.html">Work</a><a href="../articles.html" aria-current="page">Writing</a><a href="../contact.html">Contact</a></nav>
+<a class="monogram" href="../index.html" aria-label="Samuel Darko, home">SD<span>.</span></a>
+<div class="header-actions"><a class="social-link" href="https://github.com/NiiDk" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a><a class="social-link" href="mailto:darkosammy2@gmail.com">Email <span aria-hidden="true">↗</span></a>
+<button class="theme-toggle icon-button" type="button" aria-label="Switch to dark theme" title="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button>
+<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu <span aria-hidden="true">☰</span></button></div>
+<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation"><a href="../index.html">Home</a><a href="../about.html">About</a><a href="../projects.html">Work</a><a href="../articles.html" aria-current="page">Writing</a><a href="../contact.html">Contact</a></nav></header>
+<main id="main" class="wrap" tabindex="-1"><div class="reading-column"><a class="back-link" href="../articles.html">← All writing</a><header class="article-header"><p class="eyebrow">Systems Architecture</p><h1>Engineering Offline-First POS Systems in Ghana</h1><p>Samuel Nii Amu Darko · Feb 18, 2026</p></header><article class="prose">
+                    <p>In Accra, assuming 100% network connectivity is an architectural failure before writing the first line of code. When a checkout counter has three customers waiting and cellular towers drop, the cash register must never freeze.</p>
+                    <h4>1. Local-First Ledger with SQLite</h4>
+                    <p>Every transaction in DwasoPOS is written locally first with a UUIDv4 idempotency key before attempting any cloud sync. The client UI marks the sale settled instantaneously.</p>
+                    <blockquote>"Offline is not an error state; it is a normal operating condition."</blockquote>
+                    <h4>2. Background Reconciler with Conflict Resolution</h4>
+                    <p>When connectivity resumes, transactions are batched to the Django backend. A PostgreSQL select_for_update lock ensures inventory counts are decremented deterministically without race conditions.</p>
+                  </article><div class="article-end"><p>Have a question or a different perspective?</p><a class="text-link" href="../contact.html">Let’s talk <span aria-hidden="true">↗</span></a></div></div></main>
+<footer class="site-footer wrap"><a href="../index.html">Samuel Nii Amu Darko<span>Developer. Designer. Educator.</span></a><p>Accra, Ghana</p><a href="mailto:darkosammy2@gmail.com">Let’s talk <span aria-hidden="true">↗</span></a><small>© 2026 Samuel Nii Amu Darko</small></footer>
+</body></html>

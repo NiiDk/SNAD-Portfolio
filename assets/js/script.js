@@ -79,6 +79,7 @@ const projectModalCategory = document.querySelector("[data-project-modal-categor
 const projectModalDesc = document.querySelector("[data-project-modal-desc]");
 const projectModalTags = document.querySelector("[data-project-modal-tags]");
 const projectModalLiveBtn = document.querySelector("[data-project-modal-live]");
+const projectModalCodeBtn = document.querySelector("[data-project-modal-code]");
 
 function closeProjectModal() {
   if (projectModalContainer && overlay) {
@@ -125,55 +126,84 @@ if (overlay) {
 }
 
 // -------------------------------------------------------------
-// Project click handling (opens project detail modal)
+// Project detail modal open function
+// -------------------------------------------------------------
+function openProjectModal(item) {
+  const title = item.dataset.title || item.querySelector(".project-title")?.innerText || "Project";
+  const category = item.dataset.category || item.querySelector(".project-category")?.innerText || "Project";
+  const desc = item.dataset.desc || "Detailed engineering case study and production architecture.";
+  const tags = item.dataset.tags ? item.dataset.tags.split(",") : [];
+  const mediaSrc = item.dataset.media || item.querySelector("img")?.src || "";
+  const isVideo = mediaSrc.endsWith(".mp4") || mediaSrc.endsWith(".webm") || item.dataset.isVideo === "true";
+  const liveUrl = item.dataset.live || "";
+  const codeUrl = item.dataset.code || "";
+
+  if (projectModalTitle) projectModalTitle.textContent = title;
+  if (projectModalCategory) projectModalCategory.textContent = category.toUpperCase();
+  if (projectModalDesc) projectModalDesc.textContent = desc;
+
+  if (projectModalTags) {
+    projectModalTags.innerHTML = tags.map(t => `<span class="tag-pill">${t.trim()}</span>`).join("");
+  }
+
+  if (projectModalMedia) {
+    if (isVideo) {
+      projectModalMedia.innerHTML = `<video src="${mediaSrc}" controls autoplay loop style="width:100%; border-radius:10px;"></video>`;
+    } else {
+      projectModalMedia.innerHTML = `<img src="${mediaSrc}" alt="${title}" style="width:100%; border-radius:10px;">`;
+    }
+  }
+
+  if (projectModalLiveBtn) {
+    if (liveUrl && liveUrl !== "#") {
+      projectModalLiveBtn.style.display = "inline-flex";
+      projectModalLiveBtn.href = liveUrl;
+      projectModalLiveBtn.target = "_blank";
+      const cleanUrl = liveUrl.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+      projectModalLiveBtn.innerHTML = `<span class="live-beacon"></span><ion-icon name="open-outline"></ion-icon><span>Visit ${cleanUrl} ↗</span>`;
+    } else {
+      projectModalLiveBtn.style.display = "none";
+    }
+  }
+
+  if (projectModalCodeBtn) {
+    if (codeUrl && codeUrl !== "#") {
+      projectModalCodeBtn.style.display = "inline-flex";
+      projectModalCodeBtn.href = codeUrl;
+      projectModalCodeBtn.target = "_blank";
+    } else {
+      projectModalCodeBtn.style.display = "none";
+    }
+  }
+
+  if (projectModalContainer && overlay) {
+    projectModalContainer.classList.add("active");
+    overlay.classList.add("active");
+  }
+}
+
+// -------------------------------------------------------------
+// Project click handling (Modal triggers vs Direct Hyperlinks)
 // -------------------------------------------------------------
 const projectItems = document.querySelectorAll("[data-filter-item]");
 
 projectItems.forEach(item => {
-  const link = item.querySelector("a");
-  if (!link) return;
+  // Elements that explicitly open the detail modal
+  const openTriggers = item.querySelectorAll("[data-project-open], .project-img, .project-title");
+  openTriggers.forEach(el => {
+    el.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openProjectModal(item);
+    });
+  });
 
-  link.addEventListener("click", function (e) {
-    e.preventDefault();
-
-    const title = item.dataset.title || item.querySelector(".project-title")?.innerText || "Project";
-    const category = item.dataset.category || item.querySelector(".project-category")?.innerText || "Project";
-    const desc = item.dataset.desc || "Detailed engineering case study and production architecture.";
-    const tags = item.dataset.tags ? item.dataset.tags.split(",") : [];
-    const mediaSrc = item.dataset.media || item.querySelector("img")?.src || "";
-    const isVideo = mediaSrc.endsWith(".mp4") || mediaSrc.endsWith(".webm") || item.dataset.isVideo === "true";
-    const liveUrl = item.dataset.live || "";
-
-    if (projectModalTitle) projectModalTitle.textContent = title;
-    if (projectModalCategory) projectModalCategory.textContent = category.toUpperCase();
-    if (projectModalDesc) projectModalDesc.textContent = desc;
-
-    if (projectModalTags) {
-      projectModalTags.innerHTML = tags.map(t => `<span class="tag-pill">${t.trim()}</span>`).join("");
-    }
-
-    if (projectModalMedia) {
-      if (isVideo) {
-        projectModalMedia.innerHTML = `<video src="${mediaSrc}" controls autoplay loop style="width:100%; border-radius:10px;"></video>`;
-      } else {
-        projectModalMedia.innerHTML = `<img src="${mediaSrc}" alt="${title}" style="width:100%; border-radius:10px;">`;
-      }
-    }
-
-    if (projectModalLiveBtn) {
-      if (liveUrl && liveUrl !== "#") {
-        projectModalLiveBtn.style.display = "inline-flex";
-        projectModalLiveBtn.href = liveUrl;
-        projectModalLiveBtn.target = "_blank";
-      } else {
-        projectModalLiveBtn.style.display = "none";
-      }
-    }
-
-    if (projectModalContainer && overlay) {
-      projectModalContainer.classList.add("active");
-      overlay.classList.add("active");
-    }
+  // Ensure direct external hyperlinks navigate without being blocked
+  const directLinks = item.querySelectorAll(".project-direct-btn, .project-actions a");
+  directLinks.forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
   });
 });
 

@@ -441,9 +441,14 @@ main {
   margin-bottom: 2px;
 }
 
-.contact-info :is(.contact-link, time, address) {
-  color: var(--white-2);
+.contact-info :is(.contact-link, time, address, span) {
+  color: #ffffff;
   font-size: var(--fs-7);
+}
+
+.contact-info span,
+.contact-info .contact-value {
+  color: #ffffff !important;
 }
 
 .contact-info address { font-style: normal; }
@@ -970,7 +975,11 @@ main {
   100% { transform: scale(1); }
 }
 
-.project-item > a { width: 100%; }
+.project-item > a,
+.project-item .project-card {
+  width: 100%;
+  display: block;
+}
 
 .project-img {
   position: relative;
@@ -981,6 +990,7 @@ main {
   overflow: hidden;
   margin-bottom: 15px;
   display: block;
+  cursor: pointer;
 }
 
 .project-img::before {
@@ -995,7 +1005,8 @@ main {
   transition: var(--transition-1);
 }
 
-.project-item > a:hover .project-img::before { background: hsla(0, 0%, 0%, 0.5); }
+.project-item > a:hover .project-img::before,
+.project-item .project-card:hover .project-img::before { background: hsla(0, 0%, 0%, 0.5); }
 
 .project-item-icon-box {
   --scale: 0.8;
@@ -1014,7 +1025,8 @@ main {
   transition: var(--transition-1);
 }
 
-.project-item > a:hover .project-item-icon-box {
+.project-item > a:hover .project-item-icon-box,
+.project-item .project-card:hover .project-item-icon-box {
   --scale: 1;
   opacity: 1;
 }
@@ -1032,7 +1044,9 @@ main {
 }
 
 .project-item > a:hover img,
-.project-item > a:hover video { transform: scale(1.08); }
+.project-item > a:hover video,
+.project-item .project-card:hover img,
+.project-item .project-card:hover video { transform: scale(1.08); }
 
 .project-title,
 .project-category { margin-left: 10px; }
@@ -1850,19 +1864,25 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .sidebar {
     position: sticky;
-    top: 60px;
-    max-height: max-content;
-    height: 100%;
+    top: 25px;
+    max-height: calc(100vh - 40px);
+    height: auto;
     margin-bottom: 0;
-    padding-top: 60px;
+    padding: 30px 18px 20px;
     z-index: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .sidebar::-webkit-scrollbar {
+    display: none;
   }
 
   .sidebar-info { flex-direction: column; }
 
   .avatar-box {
-    width: 150px;
-    height: 150px;
+    width: 115px;
+    height: 115px;
   }
   .avatar-box img {
     width: 100%;
@@ -1872,10 +1892,10 @@ textarea.form-input::-webkit-resizer { display: none; }
   .info-content .name {
     white-space: normal;
     text-align: center;
-    font-size: 19px;
+    font-size: 18px;
     font-weight: var(--fw-600);
     line-height: 1.25;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   .info-content .title { margin: auto; }
@@ -1887,7 +1907,7 @@ textarea.form-input::-webkit-resizer { display: none; }
     visibility: visible;
   }
 
-  .contacts-list { grid-template-columns: 1fr; }
+  .contacts-list { grid-template-columns: 1fr; gap: 12px; }
 
   .contact-info :is(.contact-link) {
     white-space: normal;
@@ -1896,7 +1916,7 @@ textarea.form-input::-webkit-resizer { display: none; }
     line-height: 1.35;
   }
 
-  .contact-info :is(.contact-link, time, address) {
+  .contact-info :is(.contact-link, time, address, span) {
     --fs-7: 14px;
     font-weight: var(--fw-300);
   }
@@ -2196,3 +2216,354 @@ textarea.form-input::-webkit-resizer { display: none; }
   color: var(--orange-yellow-crayola);
   font-size: 20px;
 }
+
+/*-----------------------------------*\
+  #PROJECT HYPERLINKS & ACTIONS
+\*-----------------------------------*/
+
+.project-title {
+  cursor: pointer;
+  transition: var(--transition-1);
+}
+
+.project-title:hover {
+  color: var(--orange-yellow-crayola);
+}
+
+/* Floating status & live badges on project images */
+.project-img-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(18, 18, 19, 0.90);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #10b981;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 3;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+.project-img-badge.pos-badge {
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.5);
+}
+
+.project-img-badge.staging-badge {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.5);
+}
+
+.project-img-badge.social-badge {
+  color: #ff5c8a;
+  border-color: rgba(255, 92, 138, 0.5);
+}
+
+.project-img-badge.fb-badge {
+  color: #60a5fa;
+  border-color: rgba(96, 165, 250, 0.5);
+}
+
+.badge-pulse-dot {
+  width: 7px;
+  height: 7px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulseBeacon 1.8s infinite;
+  display: inline-block;
+}
+
+.pos-badge .badge-pulse-dot {
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+@keyframes pulseBeacon {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+/* Action row for live buttons and details on cards */
+.project-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 18px 0 0 10px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Base button */
+.project-direct-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 12px;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  line-height: 1.2;
+  letter-spacing: 0.2px;
+}
+
+.project-direct-btn span {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Primary Live Website Button (COMMANDING HERO FULL-WIDTH CTA) */
+.project-direct-btn.live {
+  width: 100% !important;
+  background: linear-gradient(135deg, #ffd700 0%, #ffae19 50%, #f59e0b 100%) !important;
+  color: #0b0b0c !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  padding: 12px 22px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 22px rgba(255, 215, 0, 0.5), 0 0 12px rgba(245, 158, 11, 0.35) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
+  letter-spacing: 0.3px !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-direct-btn.live::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-25deg);
+  transition: 0.65s;
+}
+
+.project-direct-btn.live:hover::after {
+  left: 150%;
+}
+
+.project-direct-btn.live:hover {
+  background: linear-gradient(135deg, #fff3a8 0%, #ffbe33 50%, #fbbf24 100%) !important;
+  color: #000000 !important;
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 30px rgba(255, 215, 0, 0.8), 0 0 20px rgba(245, 158, 11, 0.6) !important;
+}
+
+.project-direct-btn.live .live-beacon {
+  width: 9px;
+  height: 9px;
+  background: #059669;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #059669;
+  animation: pulseBeacon 1.6s infinite ease-in-out;
+  display: inline-block;
+  margin-right: 2px;
+  flex-shrink: 0;
+}
+
+.project-direct-btn.live ion-icon {
+  font-size: 17px !important;
+  --ionicon-stroke-width: 48px;
+}
+
+/* WhatsApp Demo Button (COMMANDING HERO FULL-WIDTH CTA) */
+.project-direct-btn.whatsapp {
+  width: 100% !important;
+  background: linear-gradient(135deg, #25d366 0%, #10b981 100%) !important;
+  color: #ffffff !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  padding: 12px 22px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 22px rgba(37, 211, 102, 0.45) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+  letter-spacing: 0.3px !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-direct-btn.whatsapp:hover {
+  background: linear-gradient(135deg, #2ee06e 0%, #17a091 100%) !important;
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.7) !important;
+}
+
+.project-direct-btn.whatsapp ion-icon {
+  font-size: 17px !important;
+}
+
+/* Social & TikTok Buttons (COMMANDING HERO FULL-WIDTH CTA) */
+.project-direct-btn.social {
+  width: 100% !important;
+  background: linear-gradient(135deg, #ff0050 0%, #00f2fe 100%) !important;
+  color: #ffffff !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  padding: 12px 22px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 22px rgba(255, 0, 80, 0.4) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.project-direct-btn.social:hover {
+  background: linear-gradient(135deg, #ff1a66 0%, #1ae8fe 100%) !important;
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 30px rgba(255, 0, 80, 0.65) !important;
+}
+
+.project-direct-btn.social ion-icon {
+  font-size: 17px !important;
+}
+
+/* Facebook Button (COMMANDING HERO FULL-WIDTH CTA) */
+.project-direct-btn.facebook {
+  width: 100% !important;
+  background: linear-gradient(135deg, #1877f2 0%, #0d5bbd 100%) !important;
+  color: #ffffff !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  padding: 12px 22px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 22px rgba(24, 119, 242, 0.45) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.project-direct-btn.facebook:hover {
+  background: linear-gradient(135deg, #2985f8 0%, #106ad6 100%) !important;
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 30px rgba(24, 119, 242, 0.7) !important;
+}
+
+.project-direct-btn.facebook ion-icon {
+  font-size: 17px !important;
+}
+
+/* Secondary Buttons: Details, Code, Previews */
+.project-direct-btn.preview,
+.project-direct-btn.code {
+  flex: 1 1 120px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--light-gray);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 10px 14px;
+  font-size: 12.5px;
+  font-weight: 500;
+  border-radius: 10px;
+}
+
+.project-direct-btn.preview:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white-1);
+  border-color: var(--orange-yellow-crayola);
+  transform: translateY(-2px);
+}
+
+.project-direct-btn.code {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--white-2);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.project-direct-btn.code:hover {
+  background: var(--jet);
+  color: var(--orange-yellow-crayola);
+  border-color: rgba(255, 219, 112, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Solo button in actions takes full width */
+.project-actions > .project-direct-btn:only-child {
+  width: 100%;
+}
+
+/* Modal Live Button Enhancement */
+.btn-modal-primary {
+  flex: 1 1 220px;
+  background: linear-gradient(135deg, #ffd700 0%, #ffae19 50%, #e69500 100%) !important;
+  color: #0b0b0c !important;
+  font-weight: 700 !important;
+  font-size: 14.5px !important;
+  padding: 14px 26px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 6px 26px rgba(255, 215, 0, 0.55), 0 0 15px rgba(245, 158, 11, 0.35) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
+  letter-spacing: 0.3px;
+  justify-content: center;
+}
+
+.btn-modal-primary:hover {
+  background: linear-gradient(135deg, #fff3a8 0%, #ffbe33 50%, #fbbf24 100%) !important;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 34px rgba(255, 215, 0, 0.8), 0 0 20px rgba(245, 158, 11, 0.5) !important;
+}
+
+.btn-modal-primary .live-beacon {
+  width: 8px;
+  height: 8px;
+  background: #059669;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #059669;
+  animation: pulseBeacon 1.6s infinite ease-in-out;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+/* Inline clickable hyperlinks for body copy and resumes */
+.inline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--orange-yellow-crayola);
+  font-weight: var(--fw-500);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(255, 219, 112, 0.4);
+  transition: var(--transition-1);
+}
+
+.inline-link:hover {
+  color: var(--white-1);
+  text-decoration-color: var(--white-1);
+}
+
+.inline-link ion-icon {
+  font-size: 12px;
+}
+
+/* Client logos as clickable links */
+.clients-item a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
