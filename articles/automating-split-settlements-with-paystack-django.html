@@ -15,9 +15,72 @@
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu <span aria-hidden="true">☰</span></button></div>
 <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation"><a href="../index.html">Home</a><a href="../about.html">About</a><a href="../projects.html">Work</a><a href="../articles.html" aria-current="page">Writing</a><a href="../contact.html">Contact</a></nav></header>
 <main id="main" class="wrap" tabindex="-1"><div class="reading-column"><a class="back-link" href="../articles.html">← All writing</a><header class="article-header"><p class="eyebrow">African Fintech</p><h1>Automating Split Settlements with Paystack &amp; Django</h1><p>Samuel Nii Amu Darko · 14 Oct 2025</p></header><article class="prose">
-                    <p>For educational platforms like FinalPreps, schools earn a percentage of every student exam subscription. Using Paystack subaccounts allows automated ledger splits at transaction time.</p>
-                    <h4>HMAC-SHA512 Security</h4>
-                    <p>Never trust unauthenticated webhooks. Calculating the HMAC hash against your secret key verifies the payload originated directly from Paystack before triggering Celery SMS workers.</p>
+                    <p>FinalPreps sells exam-preparation subscriptions to students, and the schools that enrol them earn a percentage of every subscription. That money needs to reach each school without anyone working out the split by hand at the end of the month. Paystack subaccounts split each payment at the moment it is made. The application's job is to set the split up correctly, confirm each payment is genuine, record what happened and tell the people involved.</p>
+                    <h4>One subaccount per school</h4>
+                    <p>Each school is created as a Paystack subaccount linked to the school's own settlement account. When a student starts a payment, the request names the school's subaccount, and Paystack divides the money between the platform and the school when it settles.</p>
+                    <pre><code>import requests
+from django.conf import settings
+
+def start_payment(subscription):
+    response = requests.post(
+        "https://api.paystack.co/transaction/initialize",
+        headers={"Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}"},
+        json={
+            "email": subscription.student.email,
+            "amount": subscription.price_pesewas,
+            "currency": "GHS",
+            "reference": str(subscription.reference),
+            "subaccount": subscription.school.paystack_subaccount_code,
+            "bearer": "account",
+        },
+        timeout=15,
+    )
+    response.raise_for_status()
+    return response.json()["data"]["authorization_url"]</code></pre>
+                    <p>Two settings are easy to get backwards. A subaccount's <code>percentage_charge</code> is the share the main account keeps, not the share the school receives. And <code>bearer</code> decides who pays Paystack's fee: <code>"account"</code> means the platform absorbs it, <code>"subaccount"</code> means it comes out of the school's share. Both are worth confirming with each school before the first payment.</p>
+                    <h4>Amounts are whole numbers of pesewas</h4>
+                    <p>Paystack takes amounts in the smallest unit of the currency, so GHS 50.00 is sent as <code>5000</code>. Storing money as integer pesewas everywhere avoids the rounding errors that floating-point numbers introduce. When the platform's share is calculated locally for reporting, it should use integer arithmetic and a stated rounding rule, so that the school's share and the platform's share always add up to the full amount.</p>
+                    <h4>Verify every webhook</h4>
+                    <p>Paystack reports a successful payment by sending a webhook to the application. Anyone can send a request to that URL, so a webhook must not be trusted until its signature has been checked. Paystack signs the raw request body with HMAC-SHA512 using the account's secret key and sends the result in the <code>X-Paystack-Signature</code> header. The application computes the same hash and compares the two before doing anything else, including queueing any Celery task.</p>
+                    <pre><code>import hashlib
+import hmac
+import json
+
+from django.conf import settings
+from django.http import HttpResponse, HttpResponseForbidden
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+
+@csrf_exempt
+@require_POST
+def paystack_webhook(request):
+    expected = hmac.new(
+        settings.PAYSTACK_SECRET_KEY.encode(), request.body, hashlib.sha512
+    ).hexdigest()
+    received = request.headers.get("X-Paystack-Signature", "")
+    if not hmac.compare_digest(expected, received):
+        return HttpResponseForbidden()
+
+    event = json.loads(request.body)
+    if event["event"] == "charge.success":
+        record_payment.delay(event["data"]["reference"])
+    return HttpResponse(status=200)</code></pre>
+                    <p>The hash has to be computed over <code>request.body</code> exactly as it arrived. Parsing the JSON and serialising it again can change spacing or key order, and the signature will no longer match. <code>hmac.compare_digest</code> compares in constant time, so the check does not leak information through how long it takes.</p>
+                    <h4>Expect the same event twice</h4>
+                    <p>If the application does not answer with a 200 status, Paystack sends the webhook again later, and duplicates can also arrive for ordinary network reasons. The handler above replies quickly and leaves the real work to a background task, and that task must be safe to run more than once for the same payment:</p>
+                    <ul>
+                    <li>Make the payment reference unique in the database, so a second insert for the same reference fails instead of creating a second payment.</li>
+                    <li>Before activating a subscription, call Paystack's verify endpoint for that reference and check that the status is <code>success</code> and that the amount and currency match what was expected.</li>
+                    <li>Activate the subscription only if it is not already active.</li>
+                    </ul>
+                    <h4>Keep a ledger of the split</h4>
+                    <p>Paystack moves the money, but the application should still keep its own record of each payment: the gross amount, the platform's share, the school's share, Paystack's fee from the webhook data, and the payment reference. With that table, a statement for any school over any period is a database query, and the totals can be checked against Paystack's settlement reports when a school asks about a payment.</p>
+                    <h4>Send the SMS after the payment is saved</h4>
+                    <p>Customers get an SMS confirmation through Arkesel, sent by a Celery worker. Two rules keep that reliable. The task is queued only after the database transaction that records the payment has committed, using Django's <code>transaction.on_commit</code>, so no message goes out for a payment that was rolled back. And the task retries with increasing delays if the SMS provider does not respond, instead of failing silently:</p>
+                    <pre><code>@shared_task(autoretry_for=(requests.RequestException,), retry_backoff=True, max_retries=5)
+def send_payment_sms(payment_id):
+    ...</code></pre>
+                    <p>None of this is specific to education. Any platform that collects money on behalf of several businesses needs the same four parts: a correct split, verified webhooks, processing that is safe to repeat, and a ledger that can be checked.</p>
                   </article><div class="article-end"><p>Have a question or a different perspective?</p><a class="text-link" href="../contact.html">Let’s talk <span aria-hidden="true">↗</span></a></div></div></main>
 <footer class="site-footer wrap"><a href="../index.html">Samuel Nii Amu Darko<span>Full-Stack Developer · E-commerce · Digital Marketing</span></a><p>Kasoa, Ghana</p><a href="mailto:darkosammy2@gmail.com">Let’s talk <span aria-hidden="true">↗</span></a><small>© 2026 Samuel Nii Amu Darko</small></footer>
 </body></html>

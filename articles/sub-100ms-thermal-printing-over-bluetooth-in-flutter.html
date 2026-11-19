@@ -15,9 +15,53 @@
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu <span aria-hidden="true">☰</span></button></div>
 <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation"><a href="../index.html">Home</a><a href="../about.html">About</a><a href="../projects.html">Work</a><a href="../articles.html" aria-current="page">Writing</a><a href="../contact.html">Contact</a></nav></header>
 <main id="main" class="wrap" tabindex="-1"><div class="reading-column"><a class="back-link" href="../articles.html">← All writing</a><header class="article-header"><p class="eyebrow">Mobile &amp; Hardware</p><h1>Thermal receipt printing with Flutter and Bluetooth</h1><p>Samuel Nii Amu Darko · 28 Nov 2025</p></header><article class="prose">
-                    <p>Most retail thermal printers use the ESC/POS standard originally created by Epson. While heavy plugins try to render receipt bitmaps, generating raw byte arrays for text, bold tags, and paper cuts can reduce rendering overhead.</p>
-                    <h4>Packet Chunking for BLE Stability</h4>
-                    <p>Bluetooth Low Energy has an MTU limit (often 20 to 512 bytes). Chunking the ESC/POS byte buffer into 100-byte packets with small micro-delays can help improve transmission reliability.</p>
+                    <p>Most receipt printers in shops use ESC/POS, a command language Epson introduced and most thermal printer makers now support in some form. A Flutter point-of-sale app can talk to these printers directly over Bluetooth. This note covers what to send, how to lay out a receipt, and how to get the bytes across a Bluetooth link without losing any.</p>
+                    <h4>Bytes instead of bitmaps</h4>
+                    <p>Many printing plugins draw the whole receipt as an image and send it to the printer as raster data. That handles any layout, but it makes every receipt large. A 58 mm printer is usually 384 dots wide, so each row of the image is 48 bytes, and a receipt a few hundred rows tall becomes tens of kilobytes. Over Bluetooth, that takes noticeable time.</p>
+                    <p>Text mode is much smaller. Plain characters go across as one byte each, and formatting is a few control bytes placed in front of the text:</p>
+                    <pre><code>import 'dart:convert';
+
+const esc = 0x1B;
+const gs = 0x1D;
+
+final receipt = &lt;int&gt;[
+  esc, 0x40,             // ESC @    reset the printer
+  esc, 0x61, 0x01,       // ESC a 1  centre
+  esc, 0x45, 0x01,       // ESC E 1  bold on
+  ...ascii.encode('SHOP NAME\n'),
+  esc, 0x45, 0x00,       // ESC E 0  bold off
+  esc, 0x61, 0x00,       // ESC a 0  align left
+  ...ascii.encode('Bread x2               GHS 24.00\n'),
+  ...ascii.encode('Milk x1                GHS 18.50\n'),
+  0x0A, 0x0A, 0x0A,      // feed the paper past the tear bar
+  gs, 0x56, 0x42, 0x00,  // GS V 66 0  partial cut, where supported
+];</code></pre>
+                    <p>Keeping a logo as a small image and printing everything else as text gives most of the visual benefit of raster printing at a fraction of the size.</p>
+                    <h4>Lay out for the paper width</h4>
+                    <p>With the default font, a 58 mm printer fits 32 characters on a line and an 80 mm printer fits 48. Receipts look tidy when every line is built to that width: the item name padded or cut on the left, the amount right-aligned at the end.</p>
+                    <pre><code>String line(String name, String amount, {int width = 32}) {
+  final space = width - amount.length - 1;
+  final left = name.length &gt; space ? name.substring(0, space) : name.padRight(space);
+  return '$left $amount\n';
+}</code></pre>
+                    <h4>The cedi sign</h4>
+                    <p>Receipt printers do not understand UTF-8. They print from a built-in code page, a table that maps each byte to one character, and the common code pages do not include ₵. Sending the three UTF-8 bytes for the cedi sign prints three unrelated characters instead. Writing amounts as <code>GHS 24.00</code> avoids the problem. If the sign is essential, it has to be printed as a small image.</p>
+                    <h4>Bluetooth Classic or Bluetooth Low Energy</h4>
+                    <p>Check which kind of Bluetooth the printer uses before choosing a plugin. Many low-cost receipt printers use Bluetooth Classic with the Serial Port Profile, where the app opens a socket and writes bytes much as it would to a serial cable. Others use Bluetooth Low Energy (BLE), where data is written to a characteristic in small packets. Code written for one will not connect to the other.</p>
+                    <h4>Chunking for BLE</h4>
+                    <p>BLE limits how much can be written in a single packet. The limit comes from the MTU, which starts at 23 bytes, leaving 20 bytes for data, and can be raised by negotiation to as much as 517. Android apps can request a larger MTU; iOS negotiates it automatically. A whole receipt written in one call will fail or be cut short.</p>
+                    <p>Sending the buffer in chunks no larger than the negotiated MTU minus three bytes of overhead, with a short pause between writes, also stops the printer's small input buffer from overflowing. With the <code>flutter_blue_plus</code> package it looks like this:</p>
+                    <pre><code>Future&lt;void&gt; sendInChunks(BluetoothCharacteristic printer, List&lt;int&gt; data, int mtu) async {
+  final size = mtu - 3;
+  for (var i = 0; i &lt; data.length; i += size) {
+    final end = i + size &lt; data.length ? i + size : data.length;
+    await printer.write(data.sublist(i, end), withoutResponse: true);
+    await Future.delayed(const Duration(milliseconds: 10));
+  }
+}</code></pre>
+                    <p>The pause is a trade-off. Too short and some printers drop bytes, which shows up as missing letters or a receipt that stops halfway. Too long and printing feels slow. The right value depends on the printer, so it is worth making it a setting rather than a constant.</p>
+                    <h4>Test on the real printer</h4>
+                    <p>Cheap printers vary in which commands they support. Some ignore the cut command, some only do a full cut, some use different code pages. Before supporting a model, print a test receipt that uses every command the app sends, including the longest item name and the largest amount you expect, and check it on paper.</p>
                   </article><div class="article-end"><p>Have a question or a different perspective?</p><a class="text-link" href="../contact.html">Let’s talk <span aria-hidden="true">↗</span></a></div></div></main>
 <footer class="site-footer wrap"><a href="../index.html">Samuel Nii Amu Darko<span>Full-Stack Developer · E-commerce · Digital Marketing</span></a><p>Kasoa, Ghana</p><a href="mailto:darkosammy2@gmail.com">Let’s talk <span aria-hidden="true">↗</span></a><small>© 2026 Samuel Nii Amu Darko</small></footer>
 </body></html>

@@ -970,6 +970,36 @@ p{
   padding:12px 25px;
   font-size:23px
 }
+.prose ul{
+  margin:0 0 25px;
+  padding-left:1.3em
+}
+.prose li{
+  margin-bottom:10px
+}
+.prose code{
+  font-family:ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;
+  font-size:.85em;
+  background:var(--surface);
+  border-radius:4px;
+  padding:.1em .35em
+}
+.prose pre{
+  margin:0 0 28px;
+  padding:20px 22px;
+  overflow-x:auto;
+  border-radius:8px;
+  background:var(--panel);
+  color:var(--panel-text);
+  font-size:14px;
+  line-height:1.65
+}
+.prose pre code{
+  font-size:inherit;
+  background:none;
+  padding:0;
+  color:inherit
+}
 .article-end{
   border-top:1px solid var(--line);
   margin-top:50px;
@@ -1890,6 +1920,10 @@ p{
   .prose blockquote{
     font-size:20px;
     padding-left:18px
+  }
+  .prose pre{
+    padding:16px;
+    font-size:12.5px
   }
   .reading-column{
     padding-bottom:50px

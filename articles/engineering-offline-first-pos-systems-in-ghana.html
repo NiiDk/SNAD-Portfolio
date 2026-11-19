@@ -15,12 +15,41 @@
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu <span aria-hidden="true">☰</span></button></div>
 <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation"><a href="../index.html">Home</a><a href="../about.html">About</a><a href="../projects.html">Work</a><a href="../articles.html" aria-current="page">Writing</a><a href="../contact.html">Contact</a></nav></header>
 <main id="main" class="wrap" tabindex="-1"><div class="reading-column"><a class="back-link" href="../articles.html">← All writing</a><header class="article-header"><p class="eyebrow">Systems Architecture</p><h1>Engineering Offline-First POS Systems in Ghana</h1><p>Samuel Nii Amu Darko · 18 Feb 2026</p></header><article class="prose">
-                    <p>In Accra, assuming 100% network connectivity is an architectural failure before writing the first line of code. When a checkout counter has three customers waiting and cellular towers drop, the cash register must never freeze.</p>
-                    <h4>1. Local-First Ledger with SQLite</h4>
-                    <p>Every transaction in Dwaso ERP is written locally first with a UUIDv4 idempotency key before attempting any cloud sync. The client UI marks the sale settled instantaneously.</p>
-                    <blockquote>"Offline is not an error state; it is a normal operating condition."</blockquote>
-                    <h4>2. Background Reconciler with Conflict Resolution</h4>
-                    <p>When connectivity resumes, transactions are batched to the Django backend. A PostgreSQL select_for_update lock ensures inventory counts are decremented deterministically without race conditions.</p>
+                    <p>A point-of-sale system that needs the internet to finish a sale will stop working at the worst possible time. Mobile data drops, a router restarts, a power cut takes the network down while the till keeps running on its battery. When customers are waiting at the counter, none of that should stop a sale.</p>
+                    <p>Dwaso ERP is built on the assumption that the connection will drop during trading hours. This note covers three decisions that follow from that: where a sale is written first, how it reaches the server, and what the server does when stock figures disagree.</p>
+                    <h4>1. Write the sale on the device first</h4>
+                    <p>Every transaction in Dwaso ERP is written to a local SQLite database before the app tries to contact the server. The sale gets a UUIDv4 when it is created on the device, and that ID stays with it through every attempt to upload it. As soon as the local write succeeds, the interface marks the sale as settled. Printing the receipt and starting the next sale do not wait for the network.</p>
+                    <p>Creating the ID on the device is what makes the rest possible. If the server handed out IDs, a sale made offline would have no identity until it synced. A sale that reached the server but whose reply was lost on the way back would also look exactly like a new sale when the device tried again.</p>
+                    <blockquote>Offline is not an error state; it is a normal operating condition.</blockquote>
+                    <p>That idea affects the interface as much as the database. A dropped connection should not produce an error message at the till, because the cashier cannot fix it. What the cashier does need is a quiet indication of how many sales are still waiting to upload, so that nobody switches the device off or clears its storage before those sales reach the server.</p>
+                    <h4>2. Upload in batches, and make retries safe</h4>
+                    <p>Sales that have not been uploaded wait in a local queue in the order they happened. When the device is back online, a background process sends them to the Django backend in batches. Batching matters on a weak mobile connection: every separate request pays for its own round trip before any data moves, so twenty sales in one request finish much sooner than twenty requests.</p>
+                    <p>The server has to accept the same batch more than once without counting anything twice. Because each sale carries its UUID, the database can treat that ID as unique. If a batch is resent after a lost reply, the sales already recorded are skipped and only the new ones are applied.</p>
+                    <h4>3. Apply stock changes under a lock</h4>
+                    <p>Stock is where offline selling gets difficult. Two tills can each sell the last unit of an item while both are offline, and neither knows about the other until they sync. If their batches arrive at the same moment, two requests could read the same starting quantity and both write back a wrong figure.</p>
+                    <p>To prevent that, the backend applies each sale inside a database transaction and locks the affected product rows with PostgreSQL's <code>SELECT … FOR UPDATE</code>, through Django's <code>select_for_update()</code>. A second request touching the same products waits until the first has committed, so stock is decremented one sale at a time in a predictable order. A simplified version:</p>
+                    <pre><code>from django.db import IntegrityError, transaction
+
+def apply_sale(payload):
+    try:
+        with transaction.atomic():
+            sale = Sale.objects.create(id=payload["id"], device=payload["device"])
+            ids = sorted({line["product_id"] for line in payload["lines"]})
+            products = {
+                p.id: p
+                for p in Product.objects.select_for_update().filter(id__in=ids).order_by("id")
+            }
+            for line in payload["lines"]:
+                product = products[line["product_id"]]
+                product.stock -= line["quantity"]
+                product.save(update_fields=["stock"])
+                SaleLine.objects.create(sale=sale, product=product, quantity=line["quantity"])
+    except IntegrityError:
+        pass  # this sale's UUID was already recorded on an earlier attempt</code></pre>
+                    <p>Two details in that code matter. The products are locked in ID order, so two requests that need the same items always queue in the same sequence instead of each holding a lock the other is waiting for. And the duplicate check relies on the database's unique constraint rather than a separate lookup, which would leave a gap between checking and inserting.</p>
+                    <p>One more rule: the server should not reject an offline sale because stock has gone below zero. By the time the sale arrives, the customer has paid and left with the item. The right response is to record the sale, let the figure go negative, and flag the product so someone can count the shelf and correct it.</p>
+                    <h4>Testing it</h4>
+                    <p>A simple test covers most of this. Put a device in aeroplane mode, make ten sales, switch the connection back on, and check that the server ends up with exactly ten sales and the right stock figures. Then repeat it with the connection cut halfway through an upload, and with two devices selling the same item while both are offline.</p>
                   </article><div class="article-end"><p>Have a question or a different perspective?</p><a class="text-link" href="../contact.html">Let’s talk <span aria-hidden="true">↗</span></a></div></div></main>
 <footer class="site-footer wrap"><a href="../index.html">Samuel Nii Amu Darko<span>Full-Stack Developer · E-commerce · Digital Marketing</span></a><p>Kasoa, Ghana</p><a href="mailto:darkosammy2@gmail.com">Let’s talk <span aria-hidden="true">↗</span></a><small>© 2026 Samuel Nii Amu Darko</small></footer>
 </body></html>

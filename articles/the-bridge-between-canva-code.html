@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Bridge Between Canva &amp; Code | Samuel Nii Amu Darko</title><meta name="description" content="Why visual hierarchy, typographic scales, and colour psychology directly inform clean frontend component architectures.">
-<meta name="theme-color" content="#f6f5f1"><meta property="og:title" content="The Bridge Between Canva &amp; Code | Samuel Nii Amu Darko"><meta property="og:description" content="Why visual hierarchy, typographic scales, and colour psychology directly inform clean frontend component architectures."><meta property="og:type" content="website">
+<title>The Bridge Between Canva &amp; Code | Samuel Nii Amu Darko</title><meta name="description" content="How visual hierarchy, type scales, spacing and colour roles carry over from a design tool into CSS.">
+<meta name="theme-color" content="#f6f5f1"><meta property="og:title" content="The Bridge Between Canva &amp; Code | Samuel Nii Amu Darko"><meta property="og:description" content="How visual hierarchy, type scales, spacing and colour roles carry over from a design tool into CSS."><meta property="og:type" content="website">
 <link rel="icon" href="../assets/images/monogram.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;550;600;650&amp;family=Manrope:wght@700;750;800&amp;display=swap">
@@ -15,7 +15,28 @@
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu <span aria-hidden="true">☰</span></button></div>
 <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation"><a href="../index.html">Home</a><a href="../about.html">About</a><a href="../projects.html">Work</a><a href="../articles.html" aria-current="page">Writing</a><a href="../contact.html">Contact</a></nav></header>
 <main id="main" class="wrap" tabindex="-1"><div class="reading-column"><a class="back-link" href="../articles.html">← All writing</a><header class="article-header"><p class="eyebrow">UI/UX &amp; Design</p><h1>The Bridge Between Canva &amp; Code</h1><p>Samuel Nii Amu Darko · 20 Jun 2025</p></header><article class="prose">
-                    <p>Developers who understand typographic contrast, baseline grids, and spatial rhythm write cleaner CSS and build interfaces that users intuitively trust.</p>
+                    <p>A lot of my design work happens in Canva: flyers, book covers, price lists and social media posts. A lot of my development work is CSS. The same decisions sit underneath both, and making them deliberately in one makes the other easier. Developers who understand typographic contrast, spacing and colour write CSS that is easier to maintain, because each decision is made once and reused instead of being made again for every element.</p>
+                    <h4>Decide what is read first</h4>
+                    <p>A flyer has a few seconds to be understood. Before choosing a font or a colour, it helps to decide the order in which things should be read. On the Queenzlook roll-up banner, the brand name comes first, then the list of services, then the location and phone number at the bottom. Size, weight, colour and position all serve that order.</p>
+                    <p>An interface works the same way: the page title, then the main action, then the supporting detail. When everything on a screen is bold, large or brightly coloured, nothing stands out and the visitor has to work out the order alone.</p>
+                    <h4>Use a type scale, not a size per element</h4>
+                    <p>In a design tool it is easy to set each text box to whatever size looks right at the time. After a while a design has fifteen slightly different sizes and no clear relationship between them. A type scale fixes this by choosing a ratio and using only the sizes it produces. With a ratio of 1.25:</p>
+                    <pre><code>:root {
+  --step-0: 1rem;      /* body text */
+  --step-1: 1.25rem;
+  --step-2: 1.563rem;
+  --step-3: 1.953rem;
+  --step-4: 2.441rem;  /* page titles */
+}</code></pre>
+                    <p>In CSS, these become the only font sizes in the stylesheet. Headings can scale with the screen using <code>clamp()</code>, so a title is large on a laptop and still fits on a phone without a separate rule for every screen size.</p>
+                    <h4>Spacing from one unit</h4>
+                    <p>Canva's alignment guides make it easy to line things up by eye. In code, alignment holds up better when all spacing comes from one base unit, such as 4 or 8 pixels, and its multiples. Gaps between related items are small and gaps between sections are large, so the spacing itself tells the reader which items belong together.</p>
+                    <p>A strict baseline grid, where every line of text sits on a shared horizontal grid, is hard to keep in CSS because images and mixed font sizes push lines off it. A consistent line height and a spacing scale built on the same unit give most of the benefit with far less effort.</p>
+                    <h4>Colour by role</h4>
+                    <p>A flyer usually works with a brand colour, one accent and a few neutrals. A website needs the same restraint, with colours defined by role rather than by name: background, text, muted text, lines, accent. On this site those roles are CSS variables, which is what lets the whole site switch between light and dark themes by changing a handful of values.</p>
+                    <p>Roles also make contrast easier to manage. This site's accent is #FF5E4E. It is used as it is for lines, underlines and buttons, but small coral text on the light background uses a darker #C8372A, because the brighter shade does not have enough contrast to be read comfortably at small sizes.</p>
+                    <h4>Moving a design into code</h4>
+                    <p>When a design made in Canva becomes a web page, the first step is to write down the decisions already made: the font sizes, colours and spacing values the design uses. Those become variables, and the components come after. Starting with components and picking values along the way recreates the problem of fifteen slightly different sizes, this time in code.</p>
                   </article><div class="article-end"><p>Have a question or a different perspective?</p><a class="text-link" href="../contact.html">Let’s talk <span aria-hidden="true">↗</span></a></div></div></main>
 <footer class="site-footer wrap"><a href="../index.html">Samuel Nii Amu Darko<span>Full-Stack Developer · E-commerce · Digital Marketing</span></a><p>Kasoa, Ghana</p><a href="mailto:darkosammy2@gmail.com">Let’s talk <span aria-hidden="true">↗</span></a><small>© 2026 Samuel Nii Amu Darko</small></footer>
 </body></html>
