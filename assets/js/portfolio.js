@@ -81,6 +81,13 @@ if (copyButton) {
     }
   });
 }
+const localTime = document.querySelector('.local-time');
+if (localTime) {
+  const clock = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Accra' });
+  const tick = () => { localTime.textContent = ` · ${clock.format(new Date())} now`; };
+  tick();
+  setInterval(tick, 30000);
+}
 const printButton = document.querySelector('.print-button');
 if (printButton) {
   printButton.hidden = false;
