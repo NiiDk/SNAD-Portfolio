@@ -373,7 +373,7 @@ p{
   border:1px solid var(--line);
   border-radius:13px;
   padding:28px;
-  box-shadow:5px 5px 0 var(--text)
+  box-shadow:5px 5px 0 var(--accent)
 }
 .feature-picture{
   min-width:0;
@@ -761,7 +761,7 @@ p{
   padding:16px;
   border:1px solid var(--line);
   border-radius:10px;
-  box-shadow:5px 5px 0 var(--text)
+  box-shadow:5px 5px 0 var(--accent)
 }
 .about-photo img{
   aspect-ratio:4/4.6;
@@ -1684,7 +1684,7 @@ p{
     gap:10px;
     padding:16px;
     border-radius:8px;
-    box-shadow:3px 3px 0 var(--text)
+    box-shadow:3px 3px 0 var(--accent)
   }
   .feature-picture{
     min-height:260px
