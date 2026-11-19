@@ -475,6 +475,9 @@ p{
 .tone-3{
   background:#e8e4ee
 }
+.work-card{position:relative}
+.card-heading h2 a::after{content:'';position:absolute;inset:0}
+.project-picture,.circle-link{position:relative;z-index:1}
 .card-heading{
   display:flex;
   justify-content:space-between;
