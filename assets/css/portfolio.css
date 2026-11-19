@@ -4,8 +4,8 @@
   --muted:#62635d;
   --line:#d5d5cb;
   --surface:#eeeee7;
-  --gold:#8b6518;
-  --yellow:#d6b563;
+  --accent-text:#c8372a;
+  --accent:#ff5e4e;
   --button:#242520;
   --button-text:#fff;
   --panel:#1d1e1a;
@@ -22,8 +22,8 @@
   --muted:#b6b7ae;
   --line:#41433b;
   --surface:#252721;
-  --gold:#d6b563;
-  --yellow:#d6b563;
+  --accent-text:#ff5e4e;
+  --accent:#ff5e4e;
   --button:#eeeae0;
   --button-text:#1d1e1a;
   --panel:#252721;
@@ -86,11 +86,11 @@ button[hidden],[hidden]{
   display:none!important
 }
 a:focus-visible,button:focus-visible{
-  outline:3px solid var(--gold);
+  outline:3px solid var(--accent-text);
   outline-offset:5px
 }
 ::selection{
-  background:var(--yellow);
+  background:var(--accent);
   color:#20211e
 }
 p{
@@ -109,7 +109,7 @@ p{
   color:var(--muted)
 }
 .gold-dot{
-  color:var(--gold)
+  color:var(--accent-text)
 }
 .text-link{
   font-weight:600;
@@ -139,7 +139,7 @@ p{
 }
 .button:hover{
   transform:translateY(-2px);
-  box-shadow:4px 4px 0 var(--yellow)
+  box-shadow:4px 4px 0 var(--accent)
 }
 .button span,.text-link span{
   font-size:21px
@@ -195,10 +195,10 @@ p{
   right:0;
   bottom:7px;
   height:2px;
-  background:var(--gold)
+  background:var(--accent-text)
 }
 .desktop-nav a:hover{
-  color:var(--gold)
+  color:var(--accent-text)
 }
 .monogram{
   font:800 25px var(--heading);
@@ -212,7 +212,7 @@ p{
   align-items:center
 }
 .monogram span{
-  color:var(--gold);
+  color:var(--accent-text);
   letter-spacing:0
 }
 .header-actions{
@@ -270,11 +270,12 @@ p{
   position:absolute;
   z-index:-1;
   inset:15px -15px -15px 15px;
-  border:1px solid var(--yellow)
+  border:1px solid var(--accent)
 }
 .hero-portrait img{
   width:100%;
-  height:490px;
+  height:auto;
+  aspect-ratio:900/1176;
   object-fit:cover;
   object-position:center 40%;
   border-radius:2px
@@ -308,12 +309,12 @@ p{
   display:inline-block;
   width:26px;
   height:2px;
-  background:var(--gold);
+  background:var(--accent-text);
   flex-shrink:0
 }
 .accent-word{
   text-decoration:underline;
-  text-decoration-color:var(--yellow);
+  text-decoration-color:var(--accent);
   text-decoration-thickness:5px;
   text-underline-offset:10px
 }
@@ -875,7 +876,7 @@ p{
   height:38px;
   font-size:76px;
   line-height:1;
-  color:var(--gold)
+  color:var(--accent-text)
 }
 .article-list{
   padding-bottom:25px
@@ -899,7 +900,7 @@ p{
 }
 .article-number{
   font:500 22px var(--heading);
-  color:var(--gold)
+  color:var(--accent-text)
 }
 .article-date{
   font-size:12px;
@@ -964,7 +965,7 @@ p{
   letter-spacing:-.03em
 }
 .prose blockquote{
-  border-left:3px solid var(--gold);
+  border-left:3px solid var(--accent-text);
   margin:30px 0;
   padding:12px 25px;
   font-size:23px
@@ -1002,7 +1003,7 @@ p{
   margin:16px 0 30px
 }
 .contact-email:hover{
-  color:var(--yellow)
+  color:var(--accent)
 }
 .contact-actions{
   display:flex;
@@ -1010,8 +1011,8 @@ p{
   gap:12px
 }
 .contact-card .button{
-  background:var(--yellow);
-  border-color:var(--yellow);
+  background:var(--accent);
+  border-color:var(--accent);
   color:#1d1e1a
 }
 .contact-card .copy-email{
@@ -1053,7 +1054,7 @@ p{
 .contact-brief li::before{
   content:counter(brief,decimal-leading-zero);
   font:700 13px var(--heading);
-  color:var(--yellow);
+  color:var(--accent);
   padding-top:3px
 }
 .contact-side{
@@ -1102,7 +1103,7 @@ p{
   border:1px solid var(--line);
   display:grid;
   place-items:center;
-  color:var(--gold)
+  color:var(--accent-text)
 }
 .contact-icon svg{
   width:20px;
@@ -1335,9 +1336,6 @@ p{
     padding-top:65px;
     padding-bottom:80px
   }
-  .hero-portrait img{
-    height:530px
-  }
 }
 @media(max-width:1100px){
   .wrap{
@@ -1351,9 +1349,6 @@ p{
   }
   .hero{
     gap:7%
-  }
-  .hero-portrait img{
-    height:470px
   }
   .hero-copy h1{
     font-size:51px
@@ -1413,9 +1408,6 @@ p{
   .hero{
     gap:6%;
     padding-top:35px
-  }
-  .hero-portrait img{
-    height:420px
   }
   .hero-portrait figcaption{
     flex-direction:column;
@@ -1577,7 +1569,7 @@ p{
     font-size:15px
   }
   .mobile-nav a[aria-current=page]{
-    color:var(--gold);
+    color:var(--accent-text);
     font-weight:650
   }
   .hero{
