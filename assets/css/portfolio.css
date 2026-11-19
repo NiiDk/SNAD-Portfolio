@@ -552,7 +552,19 @@ p{
   border-block:1px solid var(--line);
   display:grid;
   grid-template-columns:1fr 2fr;
-  gap:60px
+  gap:60px;
+  position:relative;
+  overflow:hidden
+}
+.about-portrait{
+  position:absolute;
+  right:0;
+  bottom:0;
+  width:340px;
+  height:auto;
+  opacity:.08;
+  pointer-events:none;
+  object-fit:contain
 }
 .about-note h2{
   font-size:38px;
@@ -1472,6 +1484,9 @@ p{
   }
   .about-note div>p{
     font-size:15px
+  }
+  .about-portrait{
+    width:220px
   }
   .contact-banner{
     display:block;
