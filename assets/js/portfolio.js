@@ -91,11 +91,33 @@ const galleryFilters = document.querySelector('.gallery-filters');
 if (galleryFilters) {
   const tiles = [...document.querySelectorAll('.gallery-tile')];
   const gButtons = [...galleryFilters.querySelectorAll('button')];
+  const moreButton = document.querySelector('.gallery-more');
+  const previewCount = 12;
+  let category = 'all';
+  let expanded = false;
+  function applyGallery() {
+    let shown = 0;
+    tiles.forEach(tile => {
+      const match = category === 'all' || tile.dataset.galleryCat === category;
+      const visible = match && (expanded || category !== 'all' || shown < previewCount);
+      if (visible) shown++;
+      tile.classList.toggle('is-match', match);
+      tile.hidden = !visible;
+    });
+    moreButton.hidden = expanded || category !== 'all' || tiles.length <= previewCount;
+  }
+  moreButton.textContent = `Show all ${tiles.length} pieces`;
+  moreButton.addEventListener('click', () => {
+    expanded = true;
+    applyGallery();
+    tiles[previewCount].focus();
+  });
   gButtons.forEach(btn => btn.addEventListener('click', () => {
-    const cat = btn.dataset.galleryFilter;
+    category = btn.dataset.galleryFilter;
     gButtons.forEach(b => b.classList.toggle('active', b === btn));
-    tiles.forEach(tile => { tile.hidden = cat !== 'all' && tile.dataset.galleryCat !== cat; });
+    applyGallery();
   }));
+  applyGallery();
 }
 
 const lightbox = document.getElementById('lightbox');
@@ -105,7 +127,7 @@ if (lightbox) {
   const lbCaption = lightbox.querySelector('.lightbox-caption');
   let items = [];
   let current = 0;
-  function getVisibleTiles() { return [...document.querySelectorAll('.gallery-tile:not([hidden])')]; }
+  function getVisibleTiles() { return [...document.querySelectorAll('.gallery-tile.is-match')]; }
   function showItem(index) {
     items = getVisibleTiles();
     if (!items.length) return;
