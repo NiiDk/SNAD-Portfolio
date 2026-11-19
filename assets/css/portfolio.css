@@ -435,6 +435,37 @@ p{
 .project-picture:hover img{
   transform:scale(1.035)
 }
+.browser-frame{
+  padding-top:52px
+}
+.browser-frame::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:32px;
+  background:rgba(0,0,0,.06);
+  border-radius:8px 8px 0 0
+}
+.browser-frame::after{
+  content:'';
+  position:absolute;
+  top:11px;left:16px;
+  width:10px;height:10px;
+  border-radius:50%;
+  background:rgba(0,0,0,.12);
+  box-shadow:16px 0 0 rgba(0,0,0,.12),32px 0 0 rgba(0,0,0,.12)
+}
+.browser-frame img{
+  border-radius:2px;
+  box-shadow:0 1px 4px rgba(0,0,0,.08)
+}
+:root[data-theme=dark] .browser-frame::before{
+  background:rgba(255,255,255,.06)
+}
+:root[data-theme=dark] .browser-frame::after{
+  background:rgba(255,255,255,.12);
+  box-shadow:16px 0 0 rgba(255,255,255,.12),32px 0 0 rgba(255,255,255,.12)
+}
 .tone-1{
   background:#e6e9ed
 }
@@ -1064,6 +1095,9 @@ p{
   .project-picture{
     padding:20px
   }
+  .browser-frame{
+    padding-top:42px
+  }
   .card-heading h2{
     font-size:23px
   }
@@ -1274,6 +1308,20 @@ p{
   .project-picture{
     aspect-ratio:1.15;
     padding:23px
+  }
+  .browser-frame{
+    padding-top:44px
+  }
+  .browser-frame::before{
+    height:28px
+  }
+  .browser-frame::after{
+    top:9px;left:14px;
+    width:8px;height:8px;
+    box-shadow:14px 0 0 rgba(0,0,0,.12),28px 0 0 rgba(0,0,0,.12)
+  }
+  :root[data-theme=dark] .browser-frame::after{
+    box-shadow:14px 0 0 rgba(255,255,255,.12),28px 0 0 rgba(255,255,255,.12)
   }
   .card-heading{
     margin-top:19px

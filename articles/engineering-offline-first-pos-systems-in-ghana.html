@@ -17,7 +17,7 @@
 <main id="main" class="wrap" tabindex="-1"><div class="reading-column"><a class="back-link" href="../articles.html">← All writing</a><header class="article-header"><p class="eyebrow">Systems Architecture</p><h1>Engineering Offline-First POS Systems in Ghana</h1><p>Samuel Nii Amu Darko · Feb 18, 2026</p></header><article class="prose">
                     <p>In Accra, assuming 100% network connectivity is an architectural failure before writing the first line of code. When a checkout counter has three customers waiting and cellular towers drop, the cash register must never freeze.</p>
                     <h4>1. Local-First Ledger with SQLite</h4>
-                    <p>Every transaction in DwasoPOS is written locally first with a UUIDv4 idempotency key before attempting any cloud sync. The client UI marks the sale settled instantaneously.</p>
+                    <p>Every transaction in Dwaso ERP is written locally first with a UUIDv4 idempotency key before attempting any cloud sync. The client UI marks the sale settled instantaneously.</p>
                     <blockquote>"Offline is not an error state; it is a normal operating condition."</blockquote>
                     <h4>2. Background Reconciler with Conflict Resolution</h4>
                     <p>When connectivity resumes, transactions are batched to the Django backend. A PostgreSQL select_for_update lock ensures inventory counts are decremented deterministically without race conditions.</p>

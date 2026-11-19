@@ -40,6 +40,13 @@ if (filterBar) {
   filterBar.hidden = false;
   const cards = [...document.querySelectorAll('.work-card')];
   const buttons = [...filterBar.querySelectorAll('button')];
+  function toSlug(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''); }
+  const slugMap = {};
+  buttons.forEach(b => { slugMap[toSlug(b.dataset.filter)] = b.dataset.filter; });
+  slugMap['design'] = 'Brand & design';
+  slugMap['software'] = 'Web apps & SaaS';
+  slugMap['websites'] = 'E-commerce';
+  slugMap['media'] = 'Video & social';
   function filter(category) {
     const selected = buttons.some(button => button.dataset.filter === category) ? category : 'All';
     buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === selected)));
@@ -50,11 +57,12 @@ if (filterBar) {
   buttons.forEach(button => button.addEventListener('click', () => {
     const category = button.dataset.filter;
     filter(category);
-    try { history.replaceState(null, '', category === 'All' ? location.pathname : `#${category.toLowerCase()}`); } catch (_) { /* Filtering also works from a local file. */ }
+    try { history.replaceState(null, '', category === 'All' ? location.pathname : '#' + toSlug(category)); } catch (_) {}
   }));
   function readHash() {
-    const match = buttons.find(button => button.dataset.filter.toLowerCase() === location.hash.slice(1));
-    filter(match ? match.dataset.filter : 'All');
+    const hash = decodeURIComponent(location.hash.slice(1)).toLowerCase();
+    const resolved = slugMap[hash] || slugMap[toSlug(hash)];
+    filter(resolved || 'All');
   }
   readHash();
   window.addEventListener('hashchange', readHash);
