@@ -1,0 +1,10 @@
+# Sensitive / private files
+BASIC 9 REPORT.pdf
+Basic 9 T1_25_26 DATA.xlsx
+LINKS  TO CLIENT SOCIAL MEDIA HANDLES.pdf
+gcm-diagnose.log
+
+# System files
+.DS_Store
+Thumbs.db
+*.log
