@@ -552,25 +552,24 @@ p{
   border-block:1px solid var(--line);
   display:grid;
   grid-template-columns:1fr 2fr;
-  gap:60px;
-  position:relative;
-  overflow:hidden
+  align-items:center;
+  gap:60px
 }
 .about-portrait{
-  position:absolute;
-  right:0;
-  bottom:0;
-  width:340px;
+  width:100%;
   height:auto;
-  opacity:.08;
-  pointer-events:none;
-  object-fit:contain
+  border-radius:8px;
+  object-fit:cover;
+  box-shadow:0 0 0 1px var(--line)
 }
 .about-note h2{
   font-size:38px;
   margin-bottom:23px
 }
-.about-note div>p{
+.about-note .eyebrow{
+  margin-bottom:14px
+}
+.about-note div>p:not(.eyebrow){
   color:var(--muted);
   max-width:620px;
   margin-bottom:22px
@@ -1482,11 +1481,11 @@ p{
   .about-note h2{
     font-size:32px
   }
-  .about-note div>p{
+  .about-note div>p:not(.eyebrow){
     font-size:15px
   }
   .about-portrait{
-    width:220px
+    max-width:300px
   }
   .contact-banner{
     display:block;
